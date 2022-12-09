@@ -5,7 +5,7 @@ Collaborative Highway Asset Research: Integrated Sensor-Modeling application (CH
 
 Anaconda enviroment for IE analysis
 
-[ie-env](https://github.com/TFHRCFASTNDElab/ie-env)
+[ie-env](https://github.com/TFHRCFASTNDElab/ie_env)
 
 IE Peak Frequency Analysis
 
