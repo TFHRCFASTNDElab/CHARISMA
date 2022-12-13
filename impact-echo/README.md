@@ -6,7 +6,7 @@ The IE method is a seismic or stress-wave based method used to detect defects in
 
 Inorder to run all of the algorithms developed for Impact Echo, [`ie-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment) environment is required.
 
-We strongly recomend installing  [`ie-env`] in anaconda.
+We strongly recomend installing  `ie-env` in anaconda.
 
 
 ## Peak Frequency Mapping
