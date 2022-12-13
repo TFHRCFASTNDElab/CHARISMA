@@ -11,4 +11,4 @@ We strongly recomend installing  `ie-env` in anaconda.
 
 ## Peak Frequency Mapping
 
-A form of conventional IE data analysis in which we create peak frequency maps, the frequency corresponding to the maximum peak amplitude of each IE frequency spectrum is mapped on to the location of IE test point on the specimen.
+[`Peak Frequency Mapping`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/peak-frequency-mapping) is the conventional form of IE data analysis in which we create peak frequency mapsby calculating the maximum peak amplitude of each IE frequency spectrum and mapping it to the location of IE test point on the specimen.
