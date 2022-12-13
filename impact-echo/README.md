@@ -8,7 +8,7 @@ Additional information about Impact Echo can be found [`here`](https://infotechn
 
 Inorder to run all of the algorithms developed for Impact Echo, [`ie-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment) environment is required.
 
-We strongly recomend installing  `ie-env` in anaconda.
+We strongly recomend installing  [`ie-env`]((https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment)) via anaconda.
 
 
 ## Peak Frequency Mapping
