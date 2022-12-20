@@ -1,6 +1,6 @@
 # GPRpreProcessing
 
-Conventional GPR data analysis consists of creating attenuation maps. The initial steps in this process are time zero correction and migration. Time Zero correction is a very important aspect and an essential factor in order to the position the subsurface tragets, especially those located at shallow depths, at their true position in the depth. Migration is the of transforming the unfocused space-time GPR image to a focused om showing the object's true location and size with corresponding EM reflctivity. This algorithm is written to read and process gpr .DZT files.
+Conventional GPR data analysis consists of creating attenuation maps. The initial steps in this process are time zero correction and migration. Time Zero correction is a very important aspect and an essential factor in order to the position the subsurface tragets, especially those located at shallow depths, at their true position in the depth. Migration is the transformation of the unfocused space-time GPR image to a focused om showing the object's true location and size with corresponding EM reflctivity. This algorithm is written to read and process gpr .DZT files.
 
 
 ## Requirements
