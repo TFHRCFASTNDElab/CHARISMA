@@ -5,7 +5,7 @@ Conventional IE data analysis in the form of peak frequency mapping serves as a 
 
 ## Requirements
 
-We strongly recommend installing  [`ie-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment) via conda.
+We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) via conda.
 
 or install the following dependencies individually. 
 
