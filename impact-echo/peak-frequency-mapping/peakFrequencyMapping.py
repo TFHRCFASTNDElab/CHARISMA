@@ -51,12 +51,18 @@ def peakFrequencyMapping(filelist, f_s, flag):
     index = natsorted(list(set(YLocation)))
     cols = natsorted(list(set(XLocation)))
     fdf = pd.DataFrame(np.reshape(FrequencyVal, (9,28)), index = index, columns = cols)
-    if flag == 1:
+    if flag == 0:
         fig = px.imshow(fdf, text_auto = False, color_continuous_scale = colorscale, zmin=2, zmax=15)
-    elif flag == 2:
+        fig.update_layout(coloraxis_colorbar=dict(len=0.5, thickness=15))
+        io.write_image(fig, 'output.png')
+    elif flag == 1:
         fig = px.imshow(fdf, text_auto = True, color_continuous_scale = colorscale, zmin=2, zmax=15)
-    fig.update_layout(coloraxis_colorbar=dict(len=0.5, thickness=15))
-    io.write_image(fig, 'output.png')
+        fig.update_layout(coloraxis_colorbar=dict(len=0.5, thickness=15))
+        io.write_image(fig, 'output.png')
+    else:
+        print('flag error')
+    
+    
     
     
 if __name__ == "__main__":
