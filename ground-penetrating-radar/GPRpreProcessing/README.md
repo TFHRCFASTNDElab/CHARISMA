@@ -5,7 +5,7 @@ Conventional GPR data analysis consists of creating attenuation maps. The initia
 
 ## Requirements
 
-We strongly recommend installing  [`gpr-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/environment) via conda.
+We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment/) via conda.
 
 or install the following dependencies individually. 
 
