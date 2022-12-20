@@ -40,4 +40,4 @@ python peakFrequencyMapping.py -i /data -f 200 -a 1
 ```
 Output
 
-![Example Radargram](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/impact-echo/peak-frequency-mapping/map.png)
+![Example Radargram](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/impact-echo/peak-frequency-mapping/output.png)
