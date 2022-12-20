@@ -120,7 +120,6 @@ def preProcessing(file, flag):
     data, hdr = readdzt(file)
     df = pd.DataFrame(data)
     time0df, zeroTime = timeZero(df)
-    print(flag)
     if flag == '1':
         fig = go.Figure(data=go.Heatmap(z = time0df, colorscale = 'greys_r'))
         fig.update_yaxes(range=[time0df.shape[0] , 0])
@@ -135,7 +134,7 @@ def preProcessing(file, flag):
         fig = go.Figure(data=go.Heatmap(z = migrated_df, y = migrated_depth_index*39.37, x = profilePos*39.37, colorscale = 'greys_r'), layout = layout)
         fig.update_yaxes(range=[migrated_depth_index[-1]*39.37 , 0])
         
-        io.write_html(fig, 'output.html', include_plotlyjs = 'cdn', include_mathjax = False, auto_open = True)
+        io.write_image(fig, 'output.png')
 
 
 if __name__ == "__main__":
