@@ -30,12 +30,12 @@ required flags:
      OPTION       |      ARGUMENT       |       FUNCTIONALITY
 -i, --input       | folder: /data       |  input folder of IE files
 -f, --frequency   | positive integer    |  sampling frequency in kHz
--a, --annotation  | 1 | 2               |  1 for unannotated map and 2 for annotated map
+-a, --annotation  | 0 | 1               |  0 for unannotated map and 1 for annotated map
 
 ```
 Example
 ```bash
-python peakFrequencyMapping.py -i /data -f 200 -a 2
+python peakFrequencyMapping.py -i /data -f 200 -a 1
 ```
 Output
 
