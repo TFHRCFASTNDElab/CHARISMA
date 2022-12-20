@@ -5,6 +5,7 @@ Collaborative Highway Asset Research: Integrated Sensor-Modeling application (CH
 The NDE technologies we currently support are
 - [`Impact Echo`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo)
 - [`Ground Penetrating Radar`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar)
+- [`Phased Array Ultrasonic Testing`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/phased-array-ultrasonic-testing)
 - [`Ultrasonic Surface Waves`]()
 - [`Electrical Resistivity`]()
 - [`Half Cell Potential`]()

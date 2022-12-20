@@ -4,12 +4,18 @@ Conventional IE data analysis in the form of peak frequency mapping serves as a 
 
 
 ## Requirements
+
+We strongly recommend installing  [`ie-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment) via conda.
+
+or install the following dependencies individually. 
+
 - [`pandas`](https://pandas.pydata.org/)
 - [`numpy`](http://www.numpy.org/)
 - [`scipy`](https://www.scipy.org/)
 - [`matplotlib`](https://matplotlib.org/)
 - [`seaborn`](https://seaborn.pydata.org/)
 - [`natsort`](https://pypi.org/project/natsort/)
+
 
 
 
