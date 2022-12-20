@@ -30,7 +30,7 @@ required flags:
      OPTION       |      ARGUMENT       |       FUNCTIONALITY
 -i, --input       | folder: /data       |  input folder of IE files
 -f, --frequency   | positive integer    |  sampling frequency in kHz
--a, --annotation  | 1 | 0               |  1 for annotated map and 0 for unnannotated map
+-a, --annotation  | 1 | 0               |  1 for unannotated map and 2 for annotated map
 
 ```
 Example
