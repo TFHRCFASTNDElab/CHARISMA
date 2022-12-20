@@ -11,9 +11,8 @@ or install the following dependencies individually.
 
 - [`pandas`](https://pandas.pydata.org/)
 - [`numpy`](http://www.numpy.org/)
+- [`plotly`](https://plotly.com/python/getting-started/)
 - [`scipy`](https://www.scipy.org/)
-- [`matplotlib`](https://matplotlib.org/)
-- [`seaborn`](https://seaborn.pydata.org/)
 - [`natsort`](https://pypi.org/project/natsort/)
 
 
