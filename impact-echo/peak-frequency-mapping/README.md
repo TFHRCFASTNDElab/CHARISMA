@@ -5,15 +5,14 @@ Conventional IE data analysis in the form of peak frequency mapping serves as a 
 
 ## Requirements
 
-We strongly recommend installing  [`ie-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/environment) via conda.
+We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) via conda.
 
 or install the following dependencies individually. 
 
 - [`pandas`](https://pandas.pydata.org/)
 - [`numpy`](http://www.numpy.org/)
+- [`plotly`](https://plotly.com/python/getting-started/)
 - [`scipy`](https://www.scipy.org/)
-- [`matplotlib`](https://matplotlib.org/)
-- [`seaborn`](https://seaborn.pydata.org/)
 - [`natsort`](https://pypi.org/project/natsort/)
 
 
@@ -31,12 +30,12 @@ required flags:
      OPTION       |      ARGUMENT       |       FUNCTIONALITY
 -i, --input       | folder: /data       |  input folder of IE files
 -f, --frequency   | positive integer    |  sampling frequency in kHz
--a, --annotation  | 1 | 0               |  1 for annotated map and 0 for unnannotated map
+-a, --annotation  | 1 | 2               |  1 for unannotated map and 2 for annotated map
 
 ```
 Example
 ```bash
-python peakFrequencyMapping.py -i /data -f 200 -a 1
+python peakFrequencyMapping.py -i /data -f 200 -a 2
 ```
 Output
 
