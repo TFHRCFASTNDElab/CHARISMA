@@ -35,7 +35,7 @@ required flags:
 ```
 Example
 ```bash
-python peakFrequencyMapping.py -i /data -f 200 -a 1
+python peakFrequencyMapping.py -i /data -f 200 -a 2
 ```
 Output
 
