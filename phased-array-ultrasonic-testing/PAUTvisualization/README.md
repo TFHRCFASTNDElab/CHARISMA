@@ -19,18 +19,24 @@ or install the following dependencies individually.
 From a command line:
 
 ```bash
-python peakFrequencyMapping.py -i input -o output -f frequency -a annotation
+python PAUTvisualization.py -i input
 ```
 ```
 required flags:
      OPTION       |      ARGUMENT       |       FUNCTIONALITY
--i, --input       | folder: /data       |  input folder of IE files
--f, --frequency   | positive integer    |  sampling frequency in kHz
--a, --annotation  | 1 | 0               |  1 for annotated map and 0 for unnannotated map
+-i, --input       | file: /data         |  input file
 
 ```
 Example
 ```bash
-python peakFrequencyMapping.py -i /data -f 200 -a 1
+python PAUTvisualization.py -i TP1-NEG1.63.xlxs
 ```
 Output
+
+C-Scan
+
+![Example Radargram](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/phased-array-ultrasonic-testing/PAUTvisualization/cscan.png)
+
+S-Scan
+
+![Example Radargram](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/phased-array-ultrasonic-testing/PAUTvisualization/sscan.png)
