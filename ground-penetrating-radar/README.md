@@ -10,3 +10,7 @@ Additional information about GPR can be found [`here`](https://infotechnology.fh
 Inorder to run all of the algorithms developed for Ground Penetrating Radar, [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) environment is required.
 
 We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) via conda.
+
+
+## GPRpreProcessing
+[`GPR Preprocessing`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/GPRpreProcessing) preform Time Zero correction and Migration (Stolt's) on compatible sources of GPR .dzt files.
