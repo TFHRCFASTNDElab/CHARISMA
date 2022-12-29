@@ -13,4 +13,4 @@ We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTN
 
 ## Peak Frequency Mapping
 
-[`Peak Frequency Mapping`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/peak-frequency-mapping) is the conventional form of IE data analysis in which we create peak frequency mapsby calculating the maximum peak amplitude of each IE frequency spectrum and mapping it to the location of IE test point on the specimen.
+[`Peak Frequency Mapping`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo/peak-frequency-mapping) is the conventional form of IE data analysis in which we create peak frequency maps by calculating the maximum peak amplitude of each IE frequency spectrum and mapping it to the location of IE test point on the specimen.
