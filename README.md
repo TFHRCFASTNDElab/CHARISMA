@@ -6,3 +6,5 @@ The NDE technologies we currently support are
 - [`Impact Echo`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/impact-echo)
 - [`Ground Penetrating Radar`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar)
 - [`Phased Array Ultrasonic Testing`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/phased-array-ultrasonic-testing)
+- [`Electrical Resistivity`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/electrical-resistivity)
+- [`Half Cell Potential`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/half-cell-potential)
