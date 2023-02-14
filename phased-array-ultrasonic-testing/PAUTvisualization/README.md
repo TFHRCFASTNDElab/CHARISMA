@@ -3,7 +3,7 @@
 The algorithm aims to reproduce the A-scans for all the swept angles recorded during PAUT data acquisition for a given length and construct B, C, and corrected S-scans from it. B-scans are the stacked A-scans arranged one after the other with the amplitude of the signals presented in color-coded images. C-scan provides a top-view image where the position of the discontinuities is plotted according to the focal law sequence generating different angles. The s-scan displays the range of the swept angles as defined in the PAUT test setup.
 
 
-This algorithm works for the following format of PAUT data from Olympus Omniscan MX2 Equipment. Take a look at the [`sample file`] for additional information about the data format.(https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/phased-array-ultrasonic-testing/PAUTvisualization/TP1-NEG1.63.xlsx) for additional information about the data format.
+This algorithm works for the following format of PAUT data from Olympus Omniscan MX2 Equipment. Take a look at the [`sample file`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/phased-array-ultrasonic-testing/PAUTvisualization/TP1-NEG1.63.xlsx) for additional information about the data format.
 
 ## Requirements
 
