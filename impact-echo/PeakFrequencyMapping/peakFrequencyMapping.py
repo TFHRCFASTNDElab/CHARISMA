@@ -25,6 +25,9 @@ colorscale = [
     [0.923, 'rgb(0,0,216)'], #14
     [1, 'rgb(0,0,158)'] #15
 ]
+
+# using the ASTM C1383-15(2022) Standard Test Method for Measuring the P-Wave Speed and the Thickness of Concrete Plates Using the Impact-Echo Method
+
 def peakFrequencyMapping(filelist, f_s, flag):
     
     for entry in filelist:
