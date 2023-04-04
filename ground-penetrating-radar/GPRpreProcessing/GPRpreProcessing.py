@@ -14,6 +14,8 @@ import mig_fk
 from plotly import io
 import plotly.graph_objects as go
 
+
+ # Additional details about the header format can be found in the GSSI SIR 3000 Manual pg 55 https://www.geophysical.com/wp-content/uploads/2017/10/GSSI-SIR-3000-Manual.pdf
 def readdzt(filename):
     info = {}
     fid = open(filename,'rb');
