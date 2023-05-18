@@ -9,7 +9,7 @@ Installing
 ``conda env`` allows creating environments using a ``yml`` specification file
 and install all of the dependencies from it. 
 
-To create `ie-env` with conda, run the following command in your root environment:
+To create `charisma-env` with conda, run the following command in your root environment:
 
     conda env create -f charisma-env.yml
 
