@@ -140,6 +140,31 @@ def read_csv(directory):
     df_2 = pd.read_csv(filepath_config)
     
     return df_1, df_2
+
+def config_to_variable(df_2):
+    
+    # Create an empty dictionary to store variables
+    variables_dict = {}
+
+    # Allocate variables for config dataframe (df_2)
+    for index, row in df_2.iterrows():
+        variable_name = row['Unnamed: 0']
+        variable_value = row['config']
+
+        # Assign the variable dynamically using locals()
+        locals()[variable_name] = variable_value
+
+        # Store the variable in the dictionary
+        variables_dict[variable_name] = variable_value
+    
+    # Adjust the wave traveling time as 0 to value (sometimes position has negative value)
+    if 'rhf_position' in variables_dict and variables_dict['rhf_position'] != 0:
+        wave_travel_time = variables_dict['rhf_range'] - variables_dict['rhf_position']
+        variables_dict['rhf_position'] = 0
+        variables_dict['rhf_range'] = wave_travel_time
+
+    # Return the dictionary containing all variables
+    return variables_dict
     
 def Interquartile_Range(df_1, min_value=0.10, max_value=0.90, multiplier=1.5):
     '''
@@ -295,6 +320,7 @@ def Timezero_individual(df_1, rhf_position, rhf_range):
 
     Returns:
     - adjusted_time0data_t : DataFrame after time zero correction
+    - new_rh_nsamp: The number of rows after cut out
     '''
     
     first_peaks_index = []
@@ -303,13 +329,13 @@ def Timezero_individual(df_1, rhf_position, rhf_range):
     time0data_reindex = []
     #Define time space (n) along with depth dimension
     n = np.linspace(rhf_position, rhf_range, df_1.shape[0])
-    #from 0 to scans(column)
+    #from 0 to scans
     for i in range(0, df_1.shape[1]):
         temp = df_1[i]
         temp = minmax_scale(temp, feature_range=(-1, 1))
         peaks, _ = find_peaks(temp, prominence=0.1, distance = 40)
 
-        #first peaks index
+        #first peaks
         first_peaks_index.append(peaks[0])
         
         #time0linspace is the average time zero index in the time space (n)
@@ -323,7 +349,6 @@ def Timezero_individual(df_1, rhf_position, rhf_range):
         
         #reindexed dataframe (without cutting)
         df_reindexed = (new_index, np.array(df_1[i]))
-        
         #reindexed time0data
         time0data_reindex.append(df_reindexed)
         
@@ -346,8 +371,9 @@ def Timezero_individual(df_1, rhf_position, rhf_range):
         adjusted_time0data.append(np.array(df_temp_common_range['Y']))
     adjusted_time0data = pd.DataFrame(adjusted_time0data)
     adjusted_time0data_t = adjusted_time0data.transpose()
+    new_rh_nsamp = adjusted_time0data_t.shape[0]
     
-    return adjusted_time0data_t
+    return adjusted_time0data_t, new_rh_nsamp
 
 def FK_migration(data, rhf_spm, rhf_sps, rhf_position, rhf_range, rh_nsamp, rhf_espr):
     '''
@@ -394,7 +420,7 @@ def FK_migration(data, rhf_spm, rhf_sps, rhf_position, rhf_range, rh_nsamp, rhf_
     return migrated_data, profilePos, dt, dx, velocity
 
 
-def Locate_rebar(migrated_data, rhf_depth, rh_nsamp, amplitude_threshold = 0.70, depth_threshold = 0.15, num_clusters = 14, random_state = 42, midpoint_factor=0.4):
+def Locate_rebar(migrated_data, rhf_depth, rh_nsamp, profilePos, amplitude_threshold = 0.70, depth_threshold = 0.15, num_clusters = 14, random_state = 42, midpoint_factor=0.4):
     '''
     Locates rebar positions in migrated data based on specified parameters.
 
