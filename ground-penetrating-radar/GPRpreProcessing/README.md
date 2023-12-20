@@ -1,40 +1,34 @@
-# GPRpreProcessing
-
-Conventional GPR data analysis consists of creating attenuation maps. The initial steps in this process are time zero correction and migration. Time Zero correction is a very important aspect and an essential factor in order to the position the subsurface tragets, especially those located at shallow depths, at their true position in the depth. Migration is the transformation of the unfocused space-time GPR image to a focused om showing the object's true location and size with corresponding EM reflctivity. This algorithm is written to read and process gpr .DZT files.
+# Case Study: GPR Data Processing for Mapping Rebar Configuration on the Bridge
 
 
-## Requirements
+## Directory Structure
 
-We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment/) via conda.
+- **docs:** Contains detailed markdown files that provide our case studies, guides, and explanations about the project.
 
-or install the following dependencies individually. 
+- **data:** Contains GPR data
 
-- [`pandas`](https://pandas.pydata.org/)
-- [`numpy`](http://www.numpy.org/)
-- [`scipy`](https://www.scipy.org/)
-- [`sklearn`](https://scikit-learn.org/stable/)
-- [`plotly`](https://plotly.com/python/getting-started/)
+- **code:** Contains Python code files.
 
+- **notebooks:** Contains Jupyter notebook files, each representing a case study and analysis.
 
+## Usage
 
-## Instructions to run the scripts
+Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our case study markdown files.
 
-From a command line:
+We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
-```bash
-python GPRpreProcessing.py -i input -f flag
-```
-```
-required flags:
-     OPTION       |      ARGUMENT       |       FUNCTIONALITY
--i, --input       | file: /file.DZT     |  input DZT file
--f, --flag        | positive integer    |  1 for TimeZero Correction and 2 for TimeZero correction and Migration(Stolt's)
+## Case Studies
 
-```
-Example
-```bash
-python GPRpreProcessing.py -i FILE____488.DZT -f 2
-```
-Output
+- **Introduction:** Background and summary of the work.
 
-![Example Radargram](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/GPRpreProcessing/output.png)
+- **Case Study 1:** Rebar configuration on the lab specimen.
+
+- **Case Study 2:** Rebar configuration on the mississippi I-10 bridge.
+
+## License
+
+The CHARISMA is developed by Federal Highway Administration (FHWA) Non-Destructive Evaluation (NDE) Lab.
+
+- For non-commercial use: You are free to use, copy, modify, and distribute the code, as long as it is not used for commercial purposes.
+
+- For commercial use: Please contact FHWA NDE Lab to obtain a commercial license.
