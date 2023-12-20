@@ -1,16 +1,34 @@
-# Ground Penetrating Radar GPR
-
-Ground Penetrating Radar (GPR) is a rapid, nondestructive testing method that can be used to identify and map areas with a high likelihood of corrosion-based deterioration, assess construction quality, determine structural reinforcement layout, and estimate thickness of the deck, overlays, or reinforcement cover.
-
-Additional information about GPR can be found [`here`](https://infotechnology.fhwa.dot.gov/wp-content/themes/nde/inc/mpdf-development/Generatedpdfs/GPRDelaminationandCorrosion.pdf)
+# Case Study: GPR Data Processing for Mapping Rebar Configuration on the Bridge
 
 
-## Installation
+## Directory Structure
 
-Inorder to run all of the algorithms developed for Ground Penetrating Radar, [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) environment is required.
+- **docs:** Contains detailed markdown files that provide our case studies, guides, and explanations about the project.
 
-We strongly recommend installing  [`charisma-env`](https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/environment) via conda.
+- **data:** Contains GPR data
 
+- **code:** Contains Python code files.
 
-## GPRpreProcessing
-[`GPR Preprocessing`](https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/GPRpreProcessing) preform Time Zero correction and Migration (Stolt's) on compatible sources of GPR .dzt files.
+- **notebooks:** Contains Jupyter notebook files, each representing a case study and analysis.
+
+## Usage
+
+Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our case study markdown files.
+
+We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
+
+## Case Studies
+
+- **Introduction:** Background and summary of the work.
+
+- **Case Study 1:** Rebar configuration on the lab specimen.
+
+- **Case Study 2:** Rebar configuration on the mississippi I-10 bridge.
+
+## License
+
+The CHARISMA is developed by Federal Highway Administration (FHWA) Non-Destructive Evaluation (NDE) Lab.
+
+- For non-commercial use: You are free to use, copy, modify, and distribute the code, as long as it is not used for commercial purposes.
+
+- For commercial use: Please contact FHWA NDE Lab to obtain a commercial license.
