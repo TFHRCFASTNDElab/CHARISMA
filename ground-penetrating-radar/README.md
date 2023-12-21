@@ -1,4 +1,4 @@
-# Case Study: GPR Data Processing for Mapping Rebar Configuration on the Bridge
+# Case Study: An application of GPR for rebar identification in reinforced concrete bridge decks
 
 
 ## Directory Structure
@@ -27,7 +27,7 @@ We welcome the opportunity to share our work and receive feedback, bug reports, 
 
 ## License
 
-The CHARISMA is developed by Federal Highway Administration (FHWA) Non-Destructive Evaluation (NDE) Lab.
+The CHARISMA was developed by the Federal Highway Administration (FHWA) Non-Destructive Evaluation (NDE) Lab.
 
 - For non-commercial use: You are free to use, copy, modify, and distribute the code, as long as it is not used for commercial purposes.
 
