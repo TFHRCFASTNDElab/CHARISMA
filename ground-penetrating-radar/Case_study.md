@@ -46,17 +46,17 @@ Figure 2. GPR data acquisition on the bridge (Left) and how GPR B-scan data look
 #### Installing CHARISMA in Python
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend the use of Anaconda to simplify the environment setup. Anaconda is commonly used for managing Python packages in user-defined environments. In other words, it allows you to create isolated environments for different projects, each with its own set of dependencies, without interfering with the system-wide Python installation. This is particularly useful in data science and scientific computing where projects may have different requirements and dependencies. Here in First, download Anaconda in the provided URL.
-URL to download conda: 'https://www.anaconda.com/download'
+URL to download conda: https://www.anaconda.com/download
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend installing our conda environment 'charisma-env' to run the code properly. This environment has all the dependencies from our entire code. Download the 'charisma-env.yml' file from our CHARISMA Github first, open your Anaconda Prompt, and go to your download directory by typing the following command.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend installing our conda environment 'charisma-env' to run the code properly. This environment has all the dependencies from our entire code. Download the `charisma-env.yml` file from our CHARISMA Github first, open your Anaconda Prompt, and go to your download directory by typing the following command.
 
-'cd C:/your_download_path/'
+`cd C:/your_download_path/`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To create and activate 'charisma-env' with conda, run the following command:
-'conda env create -f charisma-env.yml'
-'conda activate charisma-env'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To create and activate `charisma-env` with conda, run the following command:
+`conda env create -f charisma-env.yml`
+`conda activate charisma-env`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After creating and activating the 'charisma-env' environment, specify the environment and install (or launch) Jupyter Notebook from Anaconda Navigator to use our CHARISMA Python package. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After creating and activating the `charisma-env` environment, specify the environment and install (or launch) Jupyter Notebook from Anaconda Navigator to use our CHARISMA Python package. 
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/65c52a82-8f65-4a72-aebb-020334b98795" alt="image">
