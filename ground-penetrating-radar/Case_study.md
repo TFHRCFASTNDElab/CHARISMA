@@ -119,6 +119,7 @@ Figure 6. Plots of multiple A-scans with scan-by-scan method. The red vertical l
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/bb5e629b-58c2-49ad-8a06-d7ddea478369" alt="image">
 </p>
 
-Figure 7. Plots of multiple A-scans with scan-by-scan method, but after cutting out the data that is not in the common range. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. The misalignment at the starting and the ending points of the A-scan profiles is removed.
+Figure 7. Plots containing multiple A-scans using a scan-by-scan approach, with the exclusion of data outside the common range. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. The misalignment issue at the starting and the ending points of the A-scan profiles is solved.
+
 
 
