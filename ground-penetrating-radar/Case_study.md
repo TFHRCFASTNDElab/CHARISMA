@@ -33,7 +33,7 @@ Table 1. Relative Dielectric Permittivity for Different Materials.
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/70f1acb4-2a15-4eae-aef6-498ec6c014fe" alt="image">
 </p>
 
-Figure 1. The definition of A-, B-, and C-scan.[1]
+Figure 1. The definition of A-, B-, and C-scan.(Merkle, Frey, and Reiterer 2021)
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/bde0cf0b-773f-4793-8996-d585ccd7e38f" alt="image">
@@ -75,7 +75,7 @@ Figure 3. Screenshot of launching the Jupyter Notebook under a specific environm
 
 ## Chapter 3. GPR Data from FHWA NDE Lab Specimen
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This chapter focuses on elucidating the procedures employed for processing Ground Penetrating Radar (GPR) data obtained from our laboratory specimen.[2] The structure under examination within our laboratory setting replicates a section of a concrete bridge with embedded reinforcement bars (rebar). Our GPR data processing involves implementing advanced techniques for time-zero correction and F-K migration, ensuring a precise representation of the rebar configuration within the specimen.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This chapter focuses on elucidating the procedures employed for processing Ground Penetrating Radar (GPR) data obtained from our laboratory specimen.(Lin et al. 2018) The structure under examination within our laboratory setting replicates a section of a concrete bridge with embedded reinforcement bars (rebar). Our GPR data processing involves implementing advanced techniques for time-zero correction and F-K migration, ensuring a precise representation of the rebar configuration within the specimen.
 
 #### Step 1. Read the saved CSV files
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We read the saved CSV files to process further. Let’s use the read_csv function to define two Pandas DataFrames. After that, we set each row of configuration data `df_2` as a local variable in Python, using the `config_to_variable` function.
@@ -94,7 +94,7 @@ Figure 3. Screenshot of launching the Jupyter Notebook under a specific environm
 
 #### Step 2. Time-zero correction
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time-zero correction aligns multiple A-scans vertically. When the reflected signal is recorded in the receiver, several factors (thermal drift, electronic instability, cable length differences, or variations in antenna airgap) can cause inconsistent wavelet arrival time.[3] Time-zero correction provides a more accurate depth calculation because it sets the top of the scan to a close approximation of the ground surface.[4] We assume the first positive peak of each A-scan represents the 0 m depth of the ground surface, which is called the “first positive peak” method.[5][6]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time-zero correction aligns multiple A-scans vertically. When the reflected signal is recorded in the receiver, several factors (thermal drift, electronic instability, cable length differences, or variations in antenna airgap) can cause inconsistent wavelet arrival time.(Jol 2008) Time-zero correction provides a more accurate depth calculation because it sets the top of the scan to a close approximation of the ground surface.(GSSI Inc. 2017) We assume the first positive peak of each A-scan represents the 0 m depth of the ground surface, which is called the “first positive peak” method.(Cook et al. 2022)(Yelf 2004)
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/558763e5-ff93-41f4-a056-f9bcf913e8d3" alt="image">
@@ -102,7 +102,7 @@ Figure 3. Screenshot of launching the Jupyter Notebook under a specific environm
 
 Figure 4. Comparison of (a) before time-zero correction and (b) after scan-by-scan time-zero correction on our GPR data.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a couple of methods of time-zero correction, one method is calculating the mean or median value of the first peak’s arrival time for the entire A-scans and cut out the data before the mean or median time.[5] However, this method is not robust since the time-zero position is not perfectly aligned with all the 1st positive peaks of the A-scans (see Figure 5). This method does not correspond with our assumption that the first positive peak of each A-scan represents the 0 m depth of the ground surface.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a couple of methods of time-zero correction, one method is calculating the mean or median value of the first peak’s arrival time for the entire A-scans and cut out the data before the mean or median time.(Cook et al. 2022) However, this method is not robust since the time-zero position is not perfectly aligned with all the 1st positive peaks of the A-scans (see Figure 5). This method does not correspond with our assumption that the first positive peak of each A-scan represents the 0 m depth of the ground surface.
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/03a6088f-0b02-47e2-819b-d9de0ecd277e" alt="image">
@@ -133,9 +133,9 @@ Figure 7. Plots containing multiple A-scans using a scan-by-scan approach, with 
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/de5d0530-65b3-4939-8a1e-60822e756e15" alt="image">
 </p>
 
-Figure 8. Schematic of GPR data acquisition process and hyperbola profile formation on the distance-time plot. Note that the distance is minimal when the object and antenna are vertically aligned.[7] 
+Figure 8. Schematic of GPR data acquisition process and hyperbola profile formation on the distance-time plot. Note that the distance is minimal when the object and antenna are vertically aligned.(Poluha et al. 2017) 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The hyperbola profiles in B-scan can lead to distortions in the radar image. Migration algorithms help correct these distortions, relocating the reflected signals to their correct positions in the subsurface, resulting in a more accurate representation of the buried features. Here we specifically introduce Frequency-Wavenumber (F-K or Stolt) migration.[8] This method has proven to be working well for the constant-velocity propagation media,[9][10] which also fits well with our objective (bridge rebar configuration).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The hyperbola profiles in B-scan can lead to distortions in the radar image. Migration algorithms help correct these distortions, relocating the reflected signals to their correct positions in the subsurface, resulting in a more accurate representation of the buried features. Here we specifically introduce Frequency-Wavenumber (F-K or Stolt) migration.(Stolt 1978) This method has proven to be working well for the constant-velocity propagation media,(Xu, Miller, and Rappaport 2003)(Özdemir et al. 2014) which also fits well with our objective (bridge rebar configuration).
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The F-K migration transforms the GPR B-scan into an artificially created wave map. In other words, this method specifically locates the object by reconstructing the waveforms at object locations. This is done by the Fourier Transform, converting the waves from the time-space domain to the frequency-wavenumber domain. To understand how this process works, we need the wave propagation equation in a media,
 
@@ -234,7 +234,7 @@ Figure 14. Outlier control with IQR method. The `df_1` is the raw data and the `
 
 #### Step 2. Gain
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We observed that the GPR signal isn't sufficiently clear for processing (see Figure 16 (a) and (c)), likely because the first peak amplitude significantly outweighs other signals. This disparity could be attributed to the GPR settings or signal attenuation. To address this issue, we employ a gain function to better highlight the reflected signal. We introduce two methods, namely power gain and exponential gain,[11] to enhance the clarity of the reflected signal. The power gain function is defined as follows,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We observed that the GPR signal isn't sufficiently clear for processing (see Figure 16 (a) and (c)), likely because the first peak amplitude significantly outweighs other signals. This disparity could be attributed to the GPR settings or signal attenuation. To address this issue, we employ a gain function to better highlight the reflected signal. We introduce two methods, namely power gain and exponential gain,(Huber and Hans 2018) to enhance the clarity of the reflected signal. The power gain function is defined as follows,
 
 $$
 x_g(t) = x(t) \cdot t^ \alpha.
@@ -264,7 +264,7 @@ Figure 16. B-scan of the GPR data (a) & (c) before gain and (b) & (d) after gain
 
 #### Step 3. Dewow
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dewow is used to mitigate the effects of low-frequency variations, or "wows," in the GPR signal. The terminology is derived from the nature of the low-frequency variations or oscillations that it aims to mitigate—resembling a slow, undulating motion, akin to the exclamation "wow." Wows can result from various factors, such as uneven ground surfaces or fluctuations in the system. Dewow processing involves filtering or removing these low-frequency components from the GPR signal to enhance the clarity and resolution of subsurface features. This technique helps improve the overall quality of GPR data by reducing unwanted variations. Here we used trinomial dewow[12] to correct the baseline of each A-scan.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dewow is used to mitigate the effects of low-frequency variations, or "wows," in the GPR signal. The terminology is derived from the nature of the low-frequency variations or oscillations that it aims to mitigate—resembling a slow, undulating motion, akin to the exclamation "wow." Wows can result from various factors, such as uneven ground surfaces or fluctuations in the system. Dewow processing involves filtering or removing these low-frequency components from the GPR signal to enhance the clarity and resolution of subsurface features. This technique helps improve the overall quality of GPR data by reducing unwanted variations. Here we used trinomial dewow(Nesbitt et al. 2022) to correct the baseline of each A-scan.
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/b4795435-f0d5-424a-b121-d7a201f7b7df" alt="image">
@@ -319,29 +319,31 @@ Figure 21. The estimated rebar location.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The limitation to our work lies in the F-K migration. It requires the dielectric to be constant for all media, which is hard to assume. Notably, the approximate dielectric value used in F-K migration is from the GPR configuration settings, which are defined by the user. This means if the actual data collector sets the value as default, the migration results can be significantly distorted or underestimated. We are currently working on how to automate to determine the estimated dielectric based only on the migration results.
 
 ## Chapter 5. References
-[1]	D. Merkle, C. Frey, and A. Reiterer, “Fusion of ground penetrating radar and laser scanning for infrastructure mapping,” J. Appl. Geod., vol. 15, no. 1, pp. 31–45, 2021.
+Cook, Samantha N et al. 2022. “Automated Ground-Penetrating-Radar Post-Processing Software in R Programming.”
 
-[2]	S. Lin, D. Meng, H. Choi, S. Shams, and H. Azari, “Laboratory assessment of nine methods for nondestructive evaluation of concrete bridge decks with overlays,” Constr. Build. Mater., vol. 188, pp. 966–982, 2018, doi: 10.1016/j.conbuildmat.2018.08.127.
+Huber, Emanuel, and Guillaume Hans. 2018. “RGPR—An Open-Source Package to Process and Visualize GPR Data.” In 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 1–4.
 
-[3]	H. M. Jol, Ground penetrating radar theory and applications. elsevier, 2008.
+GSSI (Geophysical Survey Systems. Inc. 2017. “RADAN 7 Manual.”
 
-[4]	G. (Geophysical S. S. Inc.), “RADAN 7 manual.” GSSI Nashua, NH, 2017.
+Jol, Harry M. 2008. Ground Penetrating Radar Theory and Applications. elsevier.
 
-[5]	S. N. Cook, M. J. Torres, N. J. Lamie, L. J. Perren, S. M. Slone, and B. J. Jones, “Automated ground-penetrating-radar post-processing software in R programming,” 2022.
+Lin, Shibin et al. 2018. “Laboratory Assessment of Nine Methods for Nondestructive Evaluation of Concrete Bridge Decks with Overlays.” Construction and Building Materials 188: 966–82.
 
-[6]	R. Yelf, “Where is true time zero?,” Proc. Tenth Int. Conf. Gr. Penetrating Radar, GPR 2004, vol. 1, no. February 2004, pp. 279–282, 2004, doi: 10.1109/ICGPR.2004.179979.
+Merkle, Dominik, Carsten Frey, and Alexander Reiterer. 2021. “Fusion of Ground Penetrating Radar and Laser Scanning for Infrastructure Mapping.” Journal of Applied Geodesy 15(1): 31–45.
 
-[7]	B. Poluha, J. L. Porsani, E. R. Almeida, V. R. N. dos Santos, and S. J. Allen, “Depth Estimates of Buried Utility Systems Using the GPR Method: Studies at the IAG/USP Geophysics Test Site,” Int. J. Geosci., vol. 08, no. 05, pp. 726–742, 2017, doi: 10.4236/ijg.2017.85040.
+Nesbitt, Ian et al. 2022. “Readgssi: An Open-Source Tool to Read and Plot GSSI Ground-Penetrating Radar Data.” https://doi.org/10.5281/zenodo.5932420.
 
-[8]	R. H. Stolt, “Migration By Fourier Transform.,” Geophysics, vol. 43, no. 1, pp. 23–48, 1978, doi: 10.1190/1.1440826.
+Özdemir, Caner, Şevket Demirci, Enes Yiǧit, and Betül Yilmaz. 2014. “A Review on Migration Methods in B-Scan Ground Penetrating Radar Imaging.” Mathematical Problems in Engineering 2014.
 
-[9]	X. Xu, E. L. Miller, and C. M. Rappaport, “Minimum entropy regularization in frequency-wavenumber migration to localize subsurface objects,” IEEE Trans. Geosci. Remote Sens., vol. 41, no. 8, pp. 1804–1812, 2003, doi: 10.1109/TGRS.2003.813497.
+Poluha, Bruno et al. 2017. “Depth Estimates of Buried Utility Systems Using the GPR Method: Studies at the IAG/USP Geophysics Test Site.” International Journal of Geosciences 08(05): 726–42.
 
-[10]	C. Özdemir, Ş. Demirci, E. Yiǧit, and B. Yilmaz, “A review on migration methods in b-scan ground penetrating radar imaging,” Math. Probl. Eng., vol. 2014, 2014, doi: 10.1155/2014/280738.
+Stolt, R. H. 1978. “Migration By Fourier Transform.” Geophysics 43(1): 23–48.
 
-[11]	E. Huber and G. Hans, “RGPR—An open-source package to process and visualize GPR data,” in 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 2018, pp. 1–4.
+Xu, Xiaoyin, Eric L. Miller, and Carey M. Rappaport. 2003. “Minimum Entropy Regularization in Frequency-Wavenumber Migration to Localize Subsurface Objects.” IEEE Transactions on Geoscience and Remote Sensing 41(8): 1804–12.
 
-[12]	I. Nesbitt, F.-X. Simon, F. Hoffmann, T. Paulin, and teshaw, “readgssi: an open-source tool to read and plot GSSI ground-penetrating radar data.” Zenodo, Jan. 2022. doi: 10.5281/zenodo.5932420.
+Yelf, Richard. 2004. “Where Is True Time Zero?” Proceedings of the Tenth International Conference Ground Penetrating Radar, GPR 2004 1(February 2004): 279–82.
+
+
 
 
 
