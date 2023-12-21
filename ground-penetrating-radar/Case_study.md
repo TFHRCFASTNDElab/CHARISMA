@@ -90,5 +90,16 @@ Figure 3. Screenshot of launching the Jupyter Notebook under a specific environm
 
 #### Step 2. Time-zero correction
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time-zero correction aligns multiple A-scans vertically. When the reflected signal is recorded in the receiver, several factors (thermal drift, electronic instability, cable length differences, or variations in antenna airgap) can cause inconsistent wavelet arrival time.[3] Time-zero correction provides a more accurate depth calculation because it sets the top of the scan to a close approximation of the ground surface.[4] We assume the first positive peak of each A-scan represents the 0 m depth of the ground surface, which is called as “first positive peak” method.[5][6]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time-zero correction aligns multiple A-scans vertically. When the reflected signal is recorded in the receiver, several factors (thermal drift, electronic instability, cable length differences, or variations in antenna airgap) can cause inconsistent wavelet arrival time.[3] Time-zero correction provides a more accurate depth calculation because it sets the top of the scan to a close approximation of the ground surface.[4] We assume the first positive peak of each A-scan represents the 0 m depth of the ground surface, which is called the “first positive peak” method.[5][6]
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/558763e5-ff93-41f4-a056-f9bcf913e8d3" alt="image">
+</p>
+
+Figure 4. Comparison of (a) before time-zero correction and (b) after scan-by-scan time-zero correction on our GPR data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a couple of methods of time-zero correction, one method is calculating the mean or median value of the first peak’s arrival time for the entire A-scans and cut out the data before the mean or median time.[5] However, this method is not robust since the time-zero position is not perfectly aligned with all the 1st positive peaks of the A-scans (see Figure 5). This method does not correspond with our assumption that the first positive peak of each A-scan represents the 0 m depth of the ground surface.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The other method is “scan-by-scan” which is more reasonable and robust than the mean or median strategy. This method detects the 1st positive peaks of A-scans and processes them individually. However, since the location of the 1st peak is different from each other, the data length is also changed. For example, one A-scan has 1st positive peak at the 127th depth index, the other has the 130th index, and if we align the data based on the time-zero index, the starting and ending points of A-scans mismatch each other (See Figure 6). Thus, we cut out the data indices that are not in the common range. For example, if one of the A-scan ranges [-125, 386] and the other ranges [-135, 376], we are taking the data only in common so that the range of data indices becomes [-125, 376]. Figure 7 shows the result of our scan-by-scan time-zero correction after the index cut out.
+
 
