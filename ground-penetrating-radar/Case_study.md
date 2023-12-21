@@ -217,7 +217,7 @@ Figure 12. Screenshot of obtaining GPR data from FHWA InfoBridge™. Follow the 
 
 Figure 13. Bridge location map of I-10 over CEDAR LAKE ROAD in Mississippi.
 
-## Step 1. Outlier control via interquartile range (IQR) method
+#### Step 1. Outlier control via interquartile range (IQR) method
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the same `read_csv` function from the previous chapter, we are making 2 Pandas DataFrames: GPR data and configuration. We noticed that there are some outlier values on the GPR data, so we removed them by the interquartile range (IQR) method. The IQR method is a statistical technique used to identify and remove outliers from a dataset. It involves calculating the range between the first quartile (Q1) and the third quartile (Q3) of the data distribution. Outliers are then identified and removed based on a specified multiplier of the IQR. This method is effective in addressing skewed or non-normally distributed data by focusing on the central portion of the dataset. A more detailed explanation is in our code description of the `Interquartile_Range`.
 
@@ -228,7 +228,7 @@ Figure 13. Bridge location map of I-10 over CEDAR LAKE ROAD in Mississippi.
 
 Figure 14. Outlier control with IQR method. The `df_1` is the raw data and the `IQR_df_1` is the processed data. The red boxs show how the outlier value changed.
 
-## Step 2. Gain
+#### Step 2. Gain
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We observed that the GPR signal isn't sufficiently clear for processing (see Figure 16 (a) and (c)), likely because the first peak amplitude significantly outweighs other signals. This disparity could be attributed to the GPR settings or signal attenuation. To address this issue, we employ a gain function to better highlight the reflected signal. We introduce two methods, namely power gain and exponential gain,[11] to enhance the clarity of the reflected signal. The power gain function is defined as follows,
 
@@ -257,4 +257,72 @@ Figure 15. A-scan of the GPR data (a) before gain and (b) after gain. The first 
 </p>
 
 Figure 16. B-scan of the GPR data (a) & (c) before gain and (b) & (d) after gain.
+
+#### Step 3. Dewow
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dewow is used to mitigate the effects of low-frequency variations, or "wows," in the GPR signal. The terminology is derived from the nature of the low-frequency variations or oscillations that it aims to mitigate—resembling a slow, undulating motion, akin to the exclamation "wow." Wows can result from various factors, such as uneven ground surfaces or fluctuations in the system. Dewow processing involves filtering or removing these low-frequency components from the GPR signal to enhance the clarity and resolution of subsurface features. This technique helps improve the overall quality of GPR data by reducing unwanted variations. Here we used trinomial dewow[12] to correct the baseline of each A-scan.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/b4795435-f0d5-424a-b121-d7a201f7b7df" alt="image">
+</p>
+
+Figure 17. A-scan of the GPR data (a) before dewow and (b) after dewow. The baseline of the A-scan is corrected.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/4bb46b37-8888-4d32-9704-3c9fe2633e1c" alt="image">
+</p>
+
+Figure 18. B-scan of the GPR data (a) & (c) before dewow and (b) & (d) after dewow.
+
+#### Step 4. Time-Zero Correction
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the processed data, we are applying the scan-by-scan time-zero correction. 
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/7cfbbbdb-abe3-425d-b71c-495e20cc7fe5" alt="image">
+</p>
+
+Figure 19. The results of the scan-by-scan time-zero correction.
+
+#### Step 5. Migration
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We apply F-K migration based on the time-zeroed data.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a4bb2ef6-57a0-4023-a41c-f76a2034fc5d" alt="image">
+</p>
+
+Figure 20. The results of the F-K migration.
+
+#### Step 6. Pinpoint Rebars
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We use the K-means clustering algorithm used in the previous chapter to pinpoint rebar locations.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/0e6e54d1-e78c-4555-887b-3b9c8d7b62f4" alt="image">
+</p>
+
+Figure 21. The estimated rebar location.
+
+#### Step 7. Discussion
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compared to Lab specimens, we encountered a few challenges: firstly, the GPR data had some outliers with very high negative values (400 times larger than the 1st negative peak). Secondly, the amplitude of the 1st positive and negative peak outweighs the reflected signal, showing very unclear results. Lastly, the dielectric constant was not inputted correctly when the data was collected. This resulted in inaccurate migration results, so we estimated the dielectric based on the migration results.
+
+**How we use CHARISMA to solve the problem?**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We successfully processed the actual concrete bridge GPR data by processing the outliers with IQR, applying gain to amplify the reflection signals, adjusting the A-scan baseline with dewow, leveraging the scan-by-scan time-zero correction, F-K migration, and K-means clustering algorithm to pinpoint the rebar locations. It is noteworthy that GPR data processing requires a deep understanding of each data processing method, and the workers should be able to adjust or apply variables or types of the function with respect to the data characteristics.
+
+**What are reminded limitations?**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The limitation to our work lies in the F-K migration. It requires the dielectric to be constant for all media, which is hard to assume. Notably, the approximate dielectric value used in F-K migration is from the GPR configuration settings, which are defined by the user. This means if the actual data collector sets the value as default, the migration results can be significantly distorted or underestimated. We are currently working on how to automate to determine the estimated dielectric based only on the migration results.
+
+## Chapter 5. References
+[1]	D. Merkle, C. Frey, and A. Reiterer, “Fusion of ground penetrating radar and laser scanning for infrastructure mapping,” J. Appl. Geod., vol. 15, no. 1, pp. 31–45, 2021.
+[2]	S. Lin, D. Meng, H. Choi, S. Shams, and H. Azari, “Laboratory assessment of nine methods for nondestructive evaluation of concrete bridge decks with overlays,” Constr. Build. Mater., vol. 188, pp. 966–982, 2018, doi: 10.1016/j.conbuildmat.2018.08.127.
+[3]	H. M. Jol, Ground penetrating radar theory and applications. elsevier, 2008.
+[4]	G. (Geophysical S. S. Inc.), “RADAN 7 manual.” GSSI Nashua, NH, 2017.
+[5]	S. N. Cook, M. J. Torres, N. J. Lamie, L. J. Perren, S. M. Slone, and B. J. Jones, “Automated ground-penetrating-radar post-processing software in R programming,” 2022.
+[6]	R. Yelf, “Where is true time zero?,” Proc. Tenth Int. Conf. Gr. Penetrating Radar, GPR 2004, vol. 1, no. February 2004, pp. 279–282, 2004, doi: 10.1109/ICGPR.2004.179979.
+[7]	B. Poluha, J. L. Porsani, E. R. Almeida, V. R. N. dos Santos, and S. J. Allen, “Depth Estimates of Buried Utility Systems Using the GPR Method: Studies at the IAG/USP Geophysics Test Site,” Int. J. Geosci., vol. 08, no. 05, pp. 726–742, 2017, doi: 10.4236/ijg.2017.85040.
+[8]	R. H. Stolt, “Migration By Fourier Transform.,” Geophysics, vol. 43, no. 1, pp. 23–48, 1978, doi: 10.1190/1.1440826.
+[9]	X. Xu, E. L. Miller, and C. M. Rappaport, “Minimum entropy regularization in frequency-wavenumber migration to localize subsurface objects,” IEEE Trans. Geosci. Remote Sens., vol. 41, no. 8, pp. 1804–1812, 2003, doi: 10.1109/TGRS.2003.813497.
+[10]	C. Özdemir, Ş. Demirci, E. Yiǧit, and B. Yilmaz, “A review on migration methods in b-scan ground penetrating radar imaging,” Math. Probl. Eng., vol. 2014, 2014, doi: 10.1155/2014/280738.
+[11]	E. Huber and G. Hans, “RGPR—An open-source package to process and visualize GPR data,” in 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 2018, pp. 1–4.
+[12]	I. Nesbitt, F.-X. Simon, F. Hoffmann, T. Paulin, and teshaw, “readgssi: an open-source tool to read and plot GSSI ground-penetrating radar data.” Zenodo, Jan. 2022. doi: 10.5281/zenodo.5932420.
+
 
