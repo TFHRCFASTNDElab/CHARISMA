@@ -155,6 +155,25 @@ $$
 \phi(x, z=0, t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x - \omega t)} \ dk_x \ d\omega.
 $$
 
+This equation can transform the GPR signals into the frequency-wavenumber domain. To reconstruct the wave function, we need to know the E. E is obtained by inverse Fourier transform and our GPR signal,
 
+$$
+E(k_x, \omega) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \phi(x, z=0, t) e^{-j(k_x x - \omega t)} \ dx \ dt.
+$$
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now, the equation is formulated to construct our parameter $E(k_x, \omega)$ based on the GPR data. We will employ the Exploding Source Modeling (ESM), which straightforwardly assumes that the reflected GPR wave originates directly from the object itself. This assumption allows us to express our reconstructed signal (the migrated image) as $\phi(x, z, t = 0)\$, where $t = 0$ signifies the initial waveform at the object. Now we correlate the GPR signal $\phi(x, z = 0, t)\$ with the Fourier domain $E(k_x, \omega)$, and this $E(k_x, \omega)$ is again correlated to the wavefunction at the object $\phi(x, z, t = 0)\$. This is the main logic of the F-K migration.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's crucial to emphasize that this assumption holds true only when the data is time-zeroed, as our consideration of the time frame extends from the object to the surface. As previously mentioned, the time-zero correction assumes that we interpret the first positive peak as the surface reflection, and without time-zero, the time frame extends beyond the object to the surface when setting $t = 0$ at the object.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Another crucial aspect of ESM is the elimination of the $-\omega t$  term in the equation. This modification enables us to employ the Fast Fourier Transform for wavefunction reconstruction. By removing the time-dependent term from the exponential part, the equation becomes more numerically manageable. Our final mathematical representation of F-K migration is as follows,
+
+$$
+\phi(x, z, t=0) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x + k_z z)} \ dk_x \ d\omega.
+$$
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In our Python code, we discretize the wave function at the surface (GPR signal) $\phi(x, z = 0, t)$ as a matrix, and then solve the equations above numerically (through fast Fourier transform) to reconstruct the wave function at $t = 0$, $\phi(x, z, t = 0)$ based on $E(k_x, \omega)$. Figure 8 shows the migration results from the mean, and scan-by-scan time zero correction, respectively. Instead of the hyperbola profiles in the raw GPR B-scan data, there are some points with high amplitude (white dots in Figure 9). These points indicate the rebar locations underground. 
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a5e65925-b51b-46a7-b3bf-60ecbdfc9c24" alt="image">
+</p>
 
