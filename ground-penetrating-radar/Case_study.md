@@ -53,7 +53,9 @@ URL to download conda: https://www.anaconda.com/download
 `cd C:/your_download_path/`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To create and activate `charisma-env` with conda, run the following command:
+
 `conda env create -f charisma-env.yml`
+
 `conda activate charisma-env`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After creating and activating the `charisma-env` environment, specify the environment and install (or launch) Jupyter Notebook from Anaconda Navigator to use our CHARISMA Python package. 
