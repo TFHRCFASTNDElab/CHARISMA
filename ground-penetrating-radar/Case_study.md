@@ -303,6 +303,7 @@ Figure 20. The results of the F-K migration.
 Figure 21. The estimated rebar location.
 
 #### Step 7. Discussion
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compared to Lab specimens, we encountered a few challenges: firstly, the GPR data had some outliers with very high negative values (400 times larger than the 1st negative peak). Secondly, the amplitude of the 1st positive and negative peak outweighs the reflected signal, showing very unclear results. Lastly, the dielectric constant was not inputted correctly when the data was collected. This resulted in inaccurate migration results, so we estimated the dielectric based on the migration results.
 
 **How do we use CHARISMA to solve the problem?**
