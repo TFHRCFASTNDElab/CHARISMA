@@ -39,7 +39,7 @@ Figure 2. GPR data acquisition on the bridge (Left) and how GPR B-scan data look
 
 #### Objectives of the Case Study
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This case study aims to provide a Python-based solution to processing GPR data for rebar identification in concrete bridge decks. The case study will give a tutorial with detailed step-by-step on how to use CHARISMA for this task. The case study will first demonstrate the use of CHARISMA with GPR data collected in the FHWA NDE Laboratory. The study will then extend the use of CHARISMA to process GPR data collected in the field, a bridge located in Mississippi. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This case study aims to provide a Python-based solution to processing GPR data for rebar identification in concrete bridge decks. The case study will give a tutorial with detailed step-by-step on how to use CHARISMA for this task. The case study will first demonstrate the use of CHARISMA with GPR data collected in the Federal Highway Administration (FHWA) Non-Destructive Evaluation (NDE) Laboratory. The study will then extend the use of CHARISMA to process GPR data collected in the field, a bridge located in Mississippi. 
 
 ## Chapter 2. Setup CHARISMA for GPR Data Analysis
 
@@ -194,7 +194,7 @@ Figure 10. Estimated rebar location from (a) mean and (b) scan-by-scan time zero
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/869d90f1-9c93-4ceb-8a58-2b5945ea5ce4" alt="image">
 </p>
 
-Figure 11. Rebar location difference between mean time zero and scan-by-scan time zero correction.
+Figure 11. Rebar location difference between the mean time zero and scan-by-scan time zero correction.
 
 #### Step 5. Discussion 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the precise rebar configuration identified in our lab specimen through time-zero correction and F-K migration techniques, we have established a solid foundation for our data analysis. The remarkably clean nature of the lab specimen data has allowed us to bypass the need for additional processing steps like gain or dewow adjustments.
