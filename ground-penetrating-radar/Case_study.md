@@ -177,7 +177,7 @@ $$
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a5e65925-b51b-46a7-b3bf-60ecbdfc9c24" alt="image">
 </p>
 
-Figure 9. F-K migration results from (a) mean time zero correction and (b) scan-by-scan time zero correction. 
+Figure 9. F-K migration results from the (a) mean time-zero correction and (b) scan-by-scan time-zero correction. 
 
 #### Step 4. Pinpoint Rebars
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is noteworthy that the size of the white points in Figure 9 are too large compared to the actual rebar diameter, so we estimate the rebar location with the K-means clustering method. K-means clustering is a popular unsupervised machine learning algorithm used for partitioning a dataset into distinct, non-overlapping clusters. The goal is to group similar data points together and separate dissimilar ones. Interesting features in K-means clustering are that 1) we can specify the number of clusters we want to observe, and 2) we can point out the centroid of each cluster. We take advantage of these features to pinpoint the rebar location.
@@ -188,13 +188,13 @@ Figure 9. F-K migration results from (a) mean time zero correction and (b) scan-
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/b820aff2-86d0-4815-9371-42acfb1ecd7f" alt="image">
 </p>
 
-Figure 10. Estimated rebar location from (a) mean and (b) scan-by-scan time zero correction.
+Figure 10. Estimated rebar location from the (a) mean and (b) scan-by-scan time-zero correction.
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/869d90f1-9c93-4ceb-8a58-2b5945ea5ce4" alt="image">
 </p>
 
-Figure 11. Rebar location difference between the mean time zero and scan-by-scan time zero correction.
+Figure 11. Rebar location difference between the mean time-zero and scan-by-scan time-zero correction.
 
 #### Step 5. Discussion 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the precise rebar configuration identified in our lab specimen through time-zero correction and F-K migration techniques, we have established a solid foundation for our data analysis. The remarkably clean nature of the lab specimen data has allowed us to bypass the need for additional processing steps like gain or dewow adjustments.
