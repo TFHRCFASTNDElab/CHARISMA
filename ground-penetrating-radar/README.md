@@ -3,8 +3,6 @@
 
 ## Directory Structure
 
-- **docs:** Contains detailed markdown files that provide our case studies, guides, and explanations about the project.
-
 - **data:** Contains GPR data
 
 - **code:** Contains Python code files.
@@ -13,13 +11,15 @@
 
 ## Usage
 
-Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our case study markdown files.
+Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our `Case_study.md` markdown files.
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
 ## Case Studies
 
 - **Introduction:** Background and summary of the work.
+
+- **Setup CHARISMA:** Setting up the Anaconda environment and running the code.
 
 - **Case Study 1:** Rebar configuration on the lab specimen.
 
