@@ -23,7 +23,7 @@ We welcome the opportunity to share our work and receive feedback, bug reports, 
 
 - **Case Study 1:** Rebar configuration on the lab specimen.
 
-- **Case Study 2:** Rebar configuration on the mississippi I-10 bridge.
+- **Case Study 2:** Rebar configuration on the Mississippi I-10 bridge.
 
 ## License
 
