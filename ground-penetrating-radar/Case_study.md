@@ -69,5 +69,14 @@ Figure 3. Screenshot of launching the Jupyter Notebook under a specific environm
 #### Open GPR data in DZT
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We provide Python code to allow users to read GPR data in DZT format. To simplify the data analysis process, we convert the GPR data from DZT format into CSV format, which is more friendly to readers. The `readdzt` function in our Python code `GPR_locate_rebars.py` is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the `save_to_csv` function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 `df1` and DataFrame2 `df2` from one DZT file. The `df1` is for collected GPR data and `df2` is for the configuration settings of GPR.
 
+## Chapter 3. GPR Data from FHWA NDE Lab Specimen
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This chapter focuses on elucidating the procedures employed for processing Ground Penetrating Radar (GPR) data obtained from our laboratory specimen.[3] The structure under examination within our laboratory setting replicates a section of a concrete bridge with embedded reinforcement bars (rebar). Our GPR data processing involves implementing advanced techniques for time-zero correction and F-K migration, ensuring a precise representation of the rebar configuration within the specimen.
 
+#### Step 1. Read the saved CSV files
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We read the saved CSV files to process further. Let’s use the read_csv function to define two Pandas DataFrames. After that, we set each row of configuration data `df_2` as a local variable in Python, using the `config_to_variable` function.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Let’s investigate the CSV data in detail. The DataFrame1 `df_1` is actual GPR data (512 Rows × 332 Cols). The 512 rows are the “depth” within the investigated underground subsurface (also considered as wavelet traveling time), and 332 columns are the number of scans, corresponding to a distinct scan instance where a radar wavelet is emitted and recorded by the antenna while the GPR machine traverses along the survey line.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The DataFrame2 `df_2` is a configuration setting of GPR machine (24 Rows × 2 Cols). Here we discuss some of the important parameters among them, but readers are redirected to the GPR manufacturer webpage for further details: GSSI SIR 3000 Manual https://www.geophysical.com/wp-content/uploads/2017/10/GSSI-SIR-3000-Manual.pdf. Here we discuss 7 important parameters in the configuration setting: `rh_nsamp`, `rhf_sps`, `rhf_spm`, `rhf_position`, `rhf_range`, `rhf_espr`, and `rhf_depth`.
+ 
