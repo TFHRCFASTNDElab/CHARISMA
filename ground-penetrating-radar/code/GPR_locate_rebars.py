@@ -283,6 +283,8 @@ def Timezero_mean(df_1, rhf_position, rhf_range):
 
     Returns:
     - adjusted_time0data_t : DataFrame after time zero correction
+    - time0linspace: The discrete time value at the mean time.
+    - new_rh_nsamp : The number of rows after cut out
     '''
     time0array = []
     # Define time space (n) along with depth dimension
@@ -306,8 +308,9 @@ def Timezero_mean(df_1, rhf_position, rhf_range):
     time0linspace = next((i for i, value in enumerate(n) if value >= np.mean(time0array)), None)
     # cut out indices before the first positive peak
     time0data = df_1[time0linspace:-1] if time0linspace is not None else []
+    new_rh_nsamp = time0data.shape[0]
 
-    return time0data, time0linspace
+    return time0data, time0linspace, new_rh_nsamp
 
 def Timezero_individual(df_1, rhf_position, rhf_range):
     '''
@@ -320,7 +323,7 @@ def Timezero_individual(df_1, rhf_position, rhf_range):
 
     Returns:
     - adjusted_time0data_t : DataFrame after time zero correction
-    - new_rh_nsamp: The number of rows after cut out
+    - new_rh_nsamp : The number of rows after cut out
     '''
     
     first_peaks_index = []
