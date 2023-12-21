@@ -2,12 +2,20 @@
 
 #### Organization of the Case Study
 The case study consists of 5 chapters:
-•	Chapter 1. Introduction
-•	Chapter 2. Setup CHARISMA for GPR Data Analysis
-•	Chapter 3. GPR Data from FHWA NDE Lab Specimen
-•	Chapter 4. GPR Data from FHWA Infobridge™
-•	Chapter 5. References
 
+### Chapter 1. Introduction
+___
+
+### Chapter 2. Setup CHARISMA for GPR Data Analysis
+___
+
+### Chapter 3. GPR Data from FHWA NDE Lab Specimen
+___
+
+### Chapter 4. GPR Data from FHWA Infobridge™
+___
+
+### Chapter 5. References
 
 ## Chapter 1. Introduction
 
