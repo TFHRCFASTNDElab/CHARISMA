@@ -171,7 +171,7 @@ $$
 \phi(x, z, t=0) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x + k_z z)} \ dk_x \ d\omega.
 $$
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In our Python code, we discretize the wave function at the surface (GPR signal) $\phi(x, z = 0, t)$ as a matrix, and then solve the equations above numerically (through fast Fourier transform) to reconstruct the wave function at $t = 0$, $\phi(x, z, t = 0)$ based on $E(k_x, \omega)$. Figure 8 shows the migration results from the mean, and scan-by-scan time zero correction, respectively. Instead of the hyperbola profiles in the raw GPR B-scan data, there are some points with high amplitude (white dots in Figure 9). These points indicate the rebar locations underground. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In our Python code, we discretize the wave function at the surface (GPR signal) $\phi(x, z = 0, t)$ as a matrix, and then solve the equations above numerically (through fast Fourier transform) to reconstruct the wave function at $t = 0$, $\phi(x, z, t = 0)$ based on $E(k_x, \omega)$. Figure 9 shows the migration results from the mean, and scan-by-scan time zero correction, respectively. Instead of the hyperbola profiles in the raw GPR B-scan data, there are some points with high amplitude (white dots in Figure 9). These points indicate the rebar locations underground. 
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a5e65925-b51b-46a7-b3bf-60ecbdfc9c24" alt="image">
