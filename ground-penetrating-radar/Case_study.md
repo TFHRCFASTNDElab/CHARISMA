@@ -155,7 +155,7 @@ $$
 \phi(x, z=0, t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x - \omega t)} \ dk_x \ d\omega.
 $$
 
-This equation can transform the GPR signals into the frequency-wavenumber domain. To reconstruct the wave function, we need to know the E. E is obtained by inverse Fourier transform and our GPR signal,
+This equation can transform the GPR signals into the frequency-wavenumber domain. To reconstruct the wave function, we need to know the $E(k_x, \omega)$. $E(k_x, \omega)$ is obtained by inverse Fourier transform and our GPR signal,
 
 $$
 E(k_x, \omega) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \phi(x, z=0, t) e^{-j(k_x x - \omega t)} \ dx \ dt.
@@ -176,4 +176,30 @@ $$
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a5e65925-b51b-46a7-b3bf-60ecbdfc9c24" alt="image">
 </p>
+
+Figure 9. F-K migration results from (a) mean time zero correction and (b) scan-by-scan time zero correction. 
+
+#### Step 4. Pinpoint Rebars
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is noteworthy that the size of the white points in Figure 9 are too large compared to the actual rebar diameter, so we estimate the rebar location with the K-means clustering method. K-means clustering is a popular unsupervised machine learning algorithm used for partitioning a dataset into distinct, non-overlapping clusters. The goal is to group similar data points together and separate dissimilar ones. Interesting features in K-means clustering are that 1) we can specify the number of clusters we want to observe, and 2) we can point out the centroid of each cluster. We take advantage of these features to pinpoint the rebar location.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our code normalizes the signal amplitude of the migrated data frame from -1 to 1, gets all the data points where the amplitudes are above 0.7. This allows us to get all the white data points to form a cluster around the white locations. Since we know the number of white points, we apply the K-means clustering algorithm to identify the $(x, z)$ coordinates of each centroid of the cluster. In this case study, we want to compare the located results between the two time-zero correction methods. Figure 10 shows the estimated rebar location from the mean, and scan-by-scan time zero correction, respectively. Figure 11 shows the differences in these two cases, with the root mean squared error (RMSE) value of 0.101 inches. We confirmed that the scan-by-scan method is more accurate than the mean time-zero correction for our rebar locating algorithm since the latter method slightly overestimates the depth of the rebar.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/b820aff2-86d0-4815-9371-42acfb1ecd7f" alt="image">
+</p>
+
+Figure 10. Estimated rebar location from (a) mean and (b) scan-by-scan time zero correction.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/869d90f1-9c93-4ceb-8a58-2b5945ea5ce4" alt="image">
+</p>
+
+Figure 11. Rebar location difference between mean time zero and scan-by-scan time zero correction.
+
+#### Step 5. Discussion 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the precise rebar configuration identified in our lab specimen through time-zero correction and F-K migration techniques, we have established a solid foundation for our data analysis. The remarkably clean nature of the lab specimen data has allowed us to bypass the need for additional processing steps like gain or dewow adjustments.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As we move forward, a crucial step in validating the robustness of our methodology is to apply it to GPR data acquired from an actual bridge. Real-world scenarios often present unique challenges that may not be fully replicated in a controlled laboratory environment. To ensure the reliability and applicability of our method, the next chapter shows how we process GPR data collected from the bridge structure.
+
+## Chapter 4. GPR Data from FHWA InfoBridge™
 
