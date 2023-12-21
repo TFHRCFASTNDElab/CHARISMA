@@ -3,13 +3,11 @@
 
 ## Directory Structure
 
-- **data:** Contains GPR data
+- **case studies:** Contains Case Studies for specific tasks. Each task contains Jupyter notebook files for test & analysis
 
-- **docs:** Contains Case Studies for specific tasks.
+- **data:** Contains GPR data
   
 - **code:** Contains Python code files.
-
-- **notebooks:** Contains Jupyter notebook files, each representing a case study and analysis.
 
 
 ## Usage
