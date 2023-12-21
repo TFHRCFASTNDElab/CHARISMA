@@ -48,7 +48,7 @@ Figure 2. GPR data acquisition on the bridge (Left) and how GPR B-scan data look
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend the use of Anaconda to simplify the environment setup. Anaconda is commonly used for managing Python packages in user-defined environments. In other words, it allows you to create isolated environments for different projects, each with its own set of dependencies, without interfering with the system-wide Python installation. This is particularly useful in data science and scientific computing where projects may have different requirements and dependencies. Here in First, download Anaconda in the provided URL.
 URL to download conda: https://www.anaconda.com/download
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend installing our conda environment 'charisma-env' to run the code properly. This environment has all the dependencies from our entire code. Download the `charisma-env.yml` file from our CHARISMA Github first, open your Anaconda Prompt, and go to your download directory by typing the following command.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend installing our conda environment `charisma-env` to run the code properly. This environment has all the dependencies from our entire code. Download the `charisma-env.yml` file from our CHARISMA Github first, open your Anaconda Prompt, and go to your download directory by typing the following command.
 
 `cd C:/your_download_path/`
 
@@ -65,3 +65,9 @@ URL to download conda: https://www.anaconda.com/download
 </p>
 
 Figure 3. Screenshot of launching the Jupyter Notebook under a specific environment.
+
+#### Open GPR data in DZT
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We provide Python code to allow users to read GPR data in DZT format. To simplify the data analysis process, we convert the GPR data from DZT format into CSV format, which is more friendly to readers. The `readdzt` function in our Python code `GPR_locate_rebars.py` is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the `save_to_csv` function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 `df1` and DataFrame2 `df2` from one DZT file. The `df1` is for collected GPR data and `df2` is for the configuration settings of GPR.
+
+
+
