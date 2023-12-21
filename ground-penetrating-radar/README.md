@@ -5,25 +5,19 @@
 
 - **data:** Contains GPR data
 
+- **docs:** Contains Case Studies for specific tasks.
+  
 - **code:** Contains Python code files.
 
 - **notebooks:** Contains Jupyter notebook files, each representing a case study and analysis.
 
+
 ## Usage
 
-Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our `Case_study.md` markdown files.
+Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our `Case_study.md` markdown files in the `docs` directory.
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
-## Case Study
-
-- **Introduction:** Background and summary of the work.
-
-- **Setup CHARISMA:** Setting up the Anaconda environment and running the code.
-
-- **Case Study 1:** Rebar configuration on the lab specimen.
-
-- **Case Study 2:** Rebar configuration on the Mississippi I-10 bridge.
 
 ## License
 
