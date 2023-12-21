@@ -203,3 +203,58 @@ Figure 11. Rebar location difference between the mean time-zero and scan-by-scan
 
 ## Chapter 4. GPR Data from FHWA InfoBridge™
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FHWA InfoBridge™ provides field data collections using various NDE technologies, including GPR (https://infobridge.fhwa.dot.gov/Data). We selected a bridge from Mississippi to illustrate the use of CHARIMSA for rebar identification (Structure number: 11000100240460B). The bridge name is I-10 over CEDAR LAKE ROAD, built-in 1970. The bridge type is a Prestressed Concrete Girder/Beam. The length of the bridge is 242.50 and the width is 59.40 ft, respectively.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/fed8bd45-d4e1-41e9-ab38-65e1876b3bed" alt="image">
+</p>
+
+Figure 12. Screenshot of obtaining GPR data from FHWA InfoBridge™. Follow the URL, select the bridge, and scroll down to click LTBP. Then you can select the Download files to download the NDE data.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/9e7d0b1b-6db5-4f10-a470-4ff4dc72808b" alt="image">
+</p>
+
+Figure 13. Bridge location map of I-10 over CEDAR LAKE ROAD in Mississippi.
+
+## Step 1. Outlier control via interquartile range (IQR) method
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With the same `read_csv` function from the previous chapter, we are making 2 Pandas DataFrames: GPR data and configuration. We noticed that there are some outlier values on the GPR data, so we removed them by the interquartile range (IQR) method. The IQR method is a statistical technique used to identify and remove outliers from a dataset. It involves calculating the range between the first quartile (Q1) and the third quartile (Q3) of the data distribution. Outliers are then identified and removed based on a specified multiplier of the IQR. This method is effective in addressing skewed or non-normally distributed data by focusing on the central portion of the dataset. A more detailed explanation is in our code description of the `Interquartile_Range`.
+
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/841a406e-69d9-4f67-a6f4-0f3b8acf393a" alt="image">
+</p>
+
+Figure 14. Outlier control with IQR method. The `df_1` is the raw data and the `IQR_df_1` is the processed data. The red boxs show how the outlier value changed.
+
+## Step 2. Gain
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We observed that the GPR signal isn't sufficiently clear for processing (see Figure 16 (a) and (c)), likely because the first peak amplitude significantly outweighs other signals. This disparity could be attributed to the GPR settings or signal attenuation. To address this issue, we employ a gain function to better highlight the reflected signal. We introduce two methods, namely power gain and exponential gain,[11] to enhance the clarity of the reflected signal. The power gain function is defined as follows,
+
+$$
+x_g(t) = x(t) \cdot t^ \alpha.
+$$
+
+The signal $x(t)$ is multiplied by $t^ \alpha$, where $\alpha$ is the exponent. In the default case, $\alpha$ is set to 1. The effect of the power gain is to amplify the signal based on a power-law relationship with time $t$. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The exponential gain function is defined as,
+
+$$
+x_g(t) = x(t) \cdot \exp(\alpha \cdot t).
+$$
+
+Here, $\exp(\alpha \cdot t)$ represents the exponential function with $\alpha$ as the exponent. The signal $x(t)$ is multiplied by this exponential term. The exponential gain introduces a time-dependent exponential factor to the signal. Adjusting the $\alpha$ parameter allows control over the rate of amplification, impacting the signal characteristics. We applied the power gain function with $\alpha = 0.2$ only after the initial positive and negative peaks for improved visibility and processing.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/ebda4d59-3b52-4dbb-90b7-9349ce6cd697" alt="image">
+</p>
+
+Figure 15. A-scan of the GPR data (a) before gain and (b) after gain. The first peak in (a) is much larger than the other signals, making the B-scan image blur. Note that the base line of the signal in (b) is going upward, due to the amplification.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/d9f75034-493e-44a8-9766-813fcdaddb99" alt="image">
+</p>
+
+Figure 16. B-scan of the GPR data (a) & (c) before gain and (b) & (d) after gain.
+
