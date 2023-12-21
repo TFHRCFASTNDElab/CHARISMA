@@ -1,5 +1,8 @@
 # Case Study: An application of GPR for rebar identification in reinforced concrete bridge decks
 
+<img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/66e5ceaf-4d6a-4c0a-801f-5525186fede3" width="1000" />
+***★ Please click the red box on the upper right side of GitHub to open the outlines***
+
 ## Chapter 1. Introduction
 
 #### Physical Principal
