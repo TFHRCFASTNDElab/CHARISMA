@@ -323,7 +323,7 @@ Cook, Samantha N et al. 2022. “Automated Ground-Penetrating-Radar Post-Process
 
 Huber, Emanuel, and Guillaume Hans. 2018. “RGPR—An Open-Source Package to Process and Visualize GPR Data.” In 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 1–4.
 
-GSSI (Geophysical Survey Systems. Inc. 2017. “RADAN 7 Manual.”
+GSSI (Geophysical Survey Systems). Inc. 2017. “RADAN 7 Manual.”
 
 Jol, Harry M. 2008. Ground Penetrating Radar Theory and Applications. elsevier.
 
