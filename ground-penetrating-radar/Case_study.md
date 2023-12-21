@@ -100,6 +100,25 @@ Figure 4. Comparison of (a) before time-zero correction and (b) after scan-by-sc
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a couple of methods of time-zero correction, one method is calculating the mean or median value of the first peak’s arrival time for the entire A-scans and cut out the data before the mean or median time.[5] However, this method is not robust since the time-zero position is not perfectly aligned with all the 1st positive peaks of the A-scans (see Figure 5). This method does not correspond with our assumption that the first positive peak of each A-scan represents the 0 m depth of the ground surface.
 
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/03a6088f-0b02-47e2-819b-d9de0ecd277e" alt="image">
+</p>
+
+Figure 5. Plots of multiple A-scans with mean value method. The red vertical line shows the time-zero index based on the mean value. Some of the 1st positive peaks of A-scans align with the time-zero, but some A-scans do not.   
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The other method is “scan-by-scan” which is more reasonable and robust than the mean or median strategy. This method detects the 1st positive peaks of A-scans and processes them individually. However, since the location of the 1st peak is different from each other, the data length is also changed. For example, one A-scan has 1st positive peak at the 127th depth index, the other has the 130th index, and if we align the data based on the time-zero index, the starting and ending points of A-scans mismatch each other (See Figure 6). Thus, we cut out the data indices that are not in the common range. For example, if one of the A-scan ranges [-125, 386] and the other ranges [-135, 376], we are taking the data only in common so that the range of data indices becomes [-125, 376]. Figure 7 shows the result of our scan-by-scan time-zero correction after the index cut out.
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/05d38f89-1285-40c2-a681-a90ea5357318" alt="image">
+</p>
+
+Figure 6. Plots of multiple A-scans with scan-by-scan method. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. This method results in misalignment at the starting and ending points of the A-scan profiles.
+
+
+<p align="center">
+  <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/bb5e629b-58c2-49ad-8a06-d7ddea478369" alt="image">
+</p>
+
+Figure 7. Plots of multiple A-scans with scan-by-scan method, but after cutting out the data that is not in the common range. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. The misalignment at the starting and the ending points of the A-scan profiles is removed.
 
 
