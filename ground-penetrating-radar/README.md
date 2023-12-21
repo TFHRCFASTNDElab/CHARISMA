@@ -15,7 +15,7 @@ Set up the Anaconda environment, download data, and follow the provided Jupyter 
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
-## Case Studies
+## Case Study
 
 - **Introduction:** Background and summary of the work.
 
