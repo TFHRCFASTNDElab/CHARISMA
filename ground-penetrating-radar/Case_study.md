@@ -310,7 +310,7 @@ Figure 21. The estimated rebar location.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We successfully processed the actual concrete bridge GPR data by processing the outliers with IQR, applying gain to amplify the reflection signals, adjusting the A-scan baseline with dewow, leveraging the scan-by-scan time-zero correction, F-K migration, and K-means clustering algorithm to pinpoint the rebar locations. It is noteworthy that GPR data processing requires a deep understanding of each data processing method, and the workers should be able to adjust or apply variables or types of the function with respect to the data characteristics.
 
-**What are reminded limitations?**
+**What limitations have been reminded of?**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The limitation to our work lies in the F-K migration. It requires the dielectric to be constant for all media, which is hard to assume. Notably, the approximate dielectric value used in F-K migration is from the GPR configuration settings, which are defined by the user. This means if the actual data collector sets the value as default, the migration results can be significantly distorted or underestimated. We are currently working on how to automate to determine the estimated dielectric based only on the migration results.
 
