@@ -207,7 +207,7 @@ Figure 11. Rebar location difference between the mean time-zero and scan-by-scan
 
 ## Chapter 4. GPR Data from FHWA InfoBridge™
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FHWA InfoBridge™ provides field data collections using various NDE technologies, including GPR (https://infobridge.fhwa.dot.gov/Data). We selected a bridge from Mississippi to illustrate the use of CHARIMSA for rebar identification (Structure number: 11000100240460B). The bridge name is I-10 over CEDAR LAKE ROAD, built-in 1970. The bridge type is a Prestressed Concrete Girder/Beam. The length of the bridge is 242.50 and the width is 59.40 ft, respectively.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FHWA InfoBridge™ provides field data collections using various NDE technologies, including GPR (https://infobridge.fhwa.dot.gov/Data). We selected a bridge from Mississippi to illustrate the use of CHARISMA for rebar identification (Structure number: 11000100240460B). The bridge name is I-10 over CEDAR LAKE ROAD, built-in 1970. The bridge type is a Prestressed Concrete Girder/Beam. The length of the bridge is 242.50 and the width is 59.40 ft, respectively.
 
 <p align="center">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/fed8bd45-d4e1-41e9-ab38-65e1876b3bed" alt="image">
