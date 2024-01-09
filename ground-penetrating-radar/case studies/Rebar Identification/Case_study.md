@@ -10,7 +10,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ground Penetrating Radar (GPR) is a Non-Destructive Evaluation (NDE) technique to investigate objects or structures buried underground. The basic principle of GPR involves the transmission of electromagnetic (EM) waves with high frequencies ranging from 10 MHz to 2.6 GHz into the test subject. The EM will reflect when reaching subsurface objects that have dielectric properties different from the surrounding materials. Table 1 shows the dielectric of common materials. For concrete bridge decks, concrete has a dielectric normally around 8, while metallic rebars have a theoretically infinite dielectric. Thus, large reflections will be observed when using GPR to scan concrete bridge decks. The GPR system records the reflected signals and uses this information to identify rebars. If you want more detailed knowledge of GPR (or any other NDE techniques), click the image below to visit infotechnology.
 
-<a href="https://infotechnology.fhwa.dot.gov/bridge/">
+<a href="https://infotechnology.fhwa.dot.gov/">
   <img src="https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/a8f0f1f5-160e-47f2-8254-9544174698da" alt="infotech" width="300">
 </a>
 
