@@ -1,4 +1,3 @@
-# Case Study: An application of GPR for rebar identification in reinforced concrete bridge decks
 
 
 ## Directory Structure
