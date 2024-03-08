@@ -4,7 +4,7 @@
 
 - **case studies:** Contains Case Studies for specific tasks. Each task contains Jupyter notebook files for test & analysis
 
-- **data:** Contains GPR data
+- **data:** Contains dielectric measurement data from the pave testing facility (PTF) at FHWA TFHRC
   
 - **code:** Contains Python code files.
 
