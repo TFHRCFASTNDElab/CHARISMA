@@ -422,79 +422,110 @@ def FK_migration(data, rhf_spm, rhf_sps, rhf_position, rhf_range, rh_nsamp, rhf_
     
     return migrated_data, profilePos, dt, dx, velocity
 
+def custom_minmax_scale(data, new_min, new_max):
+    '''
+    Custom minmax scale function without losing resolution. GPR B-scan amplitude resolution goes bad with scikit-learn minmax scale. 
 
-def Locate_rebar(migrated_data, rhf_depth, rh_nsamp, profilePos, amplitude_threshold = 0.70, depth_threshold = 0.15, num_clusters = 14, random_state = 42, midpoint_factor=0.4):
+    Parameters:
+    - data: numpy array.
+    - new_min: the minimum value in your normalization.
+    - new_max: the maximum value in your normalization.
+    
+    Returns:
+    - scaled_data: Normalized numpy array.
+    '''
+    min_val = data.min()
+    max_val = data.max()
+    scaled_data = ((data - min_val) / (max_val - min_val)) * (new_max - new_min) + new_min
+    return scaled_data
+
+def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profilePos, 
+                             vmin=0.15, vmax=0.7, amplitude_threshold=0.55, depth_threshold=8, 
+                             minimal_y_index=10, num_clusters=50, random_state=42, 
+                             redundancy_filter=0.6):
     '''
     Locates rebar positions in migrated data based on specified parameters.
 
     Parameters:
-    - migrated_data: Input DataFrame containing migrated data
-    - rhf_depth: Depth (m)
-    - rh_nsamp: The number of rows in the DataFrame
-    - amplitude_threshold: Threshold for rebar amplitude detection (Gets more points when the value is low and vice versa)
-    - depth_threshold: Threshold to skip the 1st positive and negative peak (Plot the migrated result first, and determine the value)
-    - num_clusters: Number of clusters for k-means clustering (Count the white spots in the migrated plot, and put that number here)
-    - random_state: Random seed for reproducibility in clustering (default is 42)
-    - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa)
+    - migrated_data: migrated GPR B-scan numpy array .
+    - velocity: The wave speed in the media. (c)/math.sqrt(rhf_espr) * 1e-9 m/ns
+    - rhf_range: The time it takes for the radar signals to travel to the subsurface and return (ns).
+    - rh_nsamp: The number of rows in the GPR B-scan.
+    - profilePos: x axis (survey line axis) after migration.
+    - vmin, vmax: The parameter used in visualizing B-scans. Controls B-scan amplitude contrast ranges. 
+    - amplitude_threshold: Threshold for rebar amplitude detection.
+    - depth_threshold: The maximum depth of the bridge in inches.
+    - minimal_y_index: The initial y-axis index of the B-scan to skip the 1st positive peak from the rebar counting.
+    - num_clusters: Number of clusters for k-means clustering (Count the white spots in the migrated plot, and put that number here).
+    - random_state: Random seed for reproducibility in clustering (default is 42).
+    - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa).
 
     Returns:
-    - rebar_positions: DataFrame containing the detected rebar positions
+    - rebar_positions: DataFrame containing the detected rebar positions.
 
     '''
-
-    fig, ax = plt.subplots(figsize=(15, 2))
-
+    fig, ax = plt.subplots(figsize=(15, 12))
     # Calculate depth per point and depth axis in inches
-    depth_per_point = rhf_depth / rh_nsamp
+    depth = (velocity/2) * rhf_range # one way travel
+    depth_per_point = depth / rh_nsamp
     depth_axis = np.linspace(0, depth_per_point * len(migrated_data) * 39.37, len(migrated_data))
-    
+
     # Convert survey line axis to inches
     survey_line_axis = profilePos * 39.37
-    
-    vmin, vmax = migrated_data.min(), migrated_data.max()
-    
-    # Calculate the midpoint based on the provided factor
-    midpoint = vmin + (vmax - vmin) * midpoint_factor
-    
-    cmap = plt.cm.gray
-    norm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=midpoint, vmax=vmax)
-    
-    heatmap = ax.imshow(migrated_data, cmap='Greys_r', extent=[survey_line_axis.min(), survey_line_axis.max(), depth_axis.max(), depth_axis.min()], norm=norm)
 
-    # Add a colorbar
-    cbar = plt.colorbar(heatmap, ax=ax)
-    
+    new_min = 0
+    new_max = 1
+
     # Normalize the data
-    normalized_migrated_data = minmax_scale(migrated_data, feature_range=(-1, 1))
-    
+    normalized_migrated_data = custom_minmax_scale(migrated_data, new_min, new_max)
+
+     # Plot the heatmap with custom colormap
+    cmap = plt.cm.Greys_r
+    norm = mcolors.Normalize(vmin=vmin, vmax=vmax)
+    heatmap = ax.imshow(normalized_migrated_data, cmap=cmap, norm=norm, extent=[survey_line_axis.min(), survey_line_axis.max(), depth_axis.max(), depth_axis.min()])
+
     # Create meshgrid of indices
     x_indices, y_indices = np.meshgrid(np.arange(normalized_migrated_data.shape[1]), np.arange(normalized_migrated_data.shape[0]))
-    
-    # Highlight data points with values higher than threshold
-    threshold = amplitude_threshold  
-    # Skip the first positive peak based on the depth threshold you defined
-    threshold_index = int(depth_threshold * normalized_migrated_data.shape[0]) 
-    highlighted_points = np.column_stack((x_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)],
-                                          y_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)]))
-    
+    threshold = amplitude_threshold  # Adjust this threshold based on your data
+    bridge_depth = int(depth_threshold * normalized_migrated_data.shape[0])
+    highlighted_points = np.column_stack((x_indices[(normalized_migrated_data > threshold) & (y_indices < bridge_depth) & (y_indices > minimal_y_index)],
+                                          y_indices[(normalized_migrated_data > threshold) & (y_indices < bridge_depth) & (y_indices > minimal_y_index)]))
+
     # Use KMeans clustering to identify representative points
-    num_clusters = num_clusters  
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit(highlighted_points)
-    
+    num_clusters = num_clusters
+    kmeans = KMeans(n_clusters=num_clusters, random_state=random_state).fit(highlighted_points)
+
     # Get the cluster centers
     cluster_centers_m = kmeans.cluster_centers_
-    
+
     # Convert cluster centers to inches
     cluster_centers_inches_m = np.column_stack((cluster_centers_m[:, 0] * survey_line_axis.max() / normalized_migrated_data.shape[1],
-                                              cluster_centers_m[:, 1] * depth_axis.max() / normalized_migrated_data.shape[0]))
-    
-    # Overlay scatter points at cluster centers
-    scatter = ax.scatter(cluster_centers_inches_m[:, 0], cluster_centers_inches_m[:, 1],
-                         c='red', marker='o', s=50, edgecolors='black')
-    
+                                                cluster_centers_m[:, 1] * depth_axis.max() / normalized_migrated_data.shape[0]))
+
+    # Remove points that are very close together and deeper, keeping only the one with the smaller y value
+    filtered_cluster_centers = []
+    for x, y in cluster_centers_inches_m:
+        close_points = [(x2, y2) for x2, y2 in filtered_cluster_centers if abs(x2 - x) < redundancy_filter]
+        if close_points:
+            # There are already points close to this one
+            if y < min(close_points, key=lambda p: p[1])[1]:
+                # This point has a smaller y value, replace the existing ones
+                filtered_cluster_centers = [p for p in filtered_cluster_centers if (abs(p[0] - x) >= redundancy_filter) or (abs(p[1] - y) >= redundancy_filter)]
+                filtered_cluster_centers.append((x, y))
+        else:
+            # No close points yet, add this one
+            filtered_cluster_centers.append((x, y))
+
+    filtered_cluster_centers = np.array(filtered_cluster_centers)
+
+    # Overlay scatter points at filtered cluster centers
+    scatter = ax.scatter(filtered_cluster_centers[:, 0], filtered_cluster_centers[:, 1],
+                         c='red', marker='o', s=30, edgecolors='black')
+
     # Set labels for axes
     ax.set_xlabel('GPR Survey line (inch)')
     ax.set_ylabel('Depth (inch)')
-    
-    # Show the plot
+    #ax.set_aspect(5)
+    #ax.set_ylim(15, 0)
+
     return plt.show()
