@@ -461,7 +461,7 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
     - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa).
 
     Returns:
-    - rebar_positions: DataFrame containing the detected rebar positions.
+    - figure: Scatter rebar points on the migrated B-scan.
 
     '''
     fig, ax = plt.subplots(figsize=(15, 12))
