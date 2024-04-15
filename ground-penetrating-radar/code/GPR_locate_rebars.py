@@ -528,4 +528,5 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
     #ax.set_aspect(5)
     #ax.set_ylim(15, 0)
 
-    return plt.show()
+    plt.show()
+    return cluster_centers_inches_m
