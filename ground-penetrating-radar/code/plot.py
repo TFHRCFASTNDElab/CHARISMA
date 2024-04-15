@@ -36,7 +36,7 @@ def Plot_b_scan(data):
     Parameters:
     - data: GPR Pandas dataframe
     '''
-    fig, ax = plt.subplots(figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(15, 6))
     heatmap = ax.imshow(data, cmap='gray', aspect='auto')
     
     ax.set_ylim(data.shape[0], 0)
@@ -51,7 +51,7 @@ def Plot_b_scan_advanced(data, midpoint_factor=0.4):
     - data: GPR Pandas dataframe
     - midpoint_factor: Factor controlling the midpoint of the colormap.
     '''
-    fig, ax = plt.subplots(figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(15, 6))
 
     vmin = np.nanmin(data)
     vmax = np.nanmax(data)
@@ -66,7 +66,11 @@ def Plot_b_scan_advanced(data, midpoint_factor=0.4):
 
     cbar = plt.colorbar(heatmap, ax=ax)
     ax.set_ylim(data.shape[0], 0)
+    # Set font size for legend
+    cbar.ax.tick_params(labelsize=14)  # Adjust the font size as needed
 
+    # Set font size for axis labels and ticks
+    ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
     plt.show()
 
 def Plot_migrated(data):
@@ -79,11 +83,11 @@ def Plot_migrated(data):
     Returns:
     None
     '''
-    fig, ax = plt.subplots(figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(15, 8))
     
     heatmap = ax.imshow(data, cmap='Greys_r', aspect='auto')
     
-    cbar = plt.colorbar(heatmap, ax=ax)
+    cbar = plt.colorbar(heatmap, ax=ax, shrink=0.8)
 
     ax.set_xlabel('GPR Survey line index')
     ax.set_ylabel('Depth index')
@@ -102,7 +106,7 @@ def Plot_migrated_advanced(data, profilePos, velocity, rhf_range, rh_nsamp, midp
     - midpoint_factor: Factor controlling the midpoint of the colormap.
     '''
     # mean time zero with 1st positive peak cut
-    fig, ax = plt.subplots(figsize=(12, 4))  # Increase the height of the plot
+    fig, ax = plt.subplots(figsize=(15, 12))  # Increase the height of the plot
     depth = (velocity/2) * rhf_range
     depth_per_point = depth / rh_nsamp
     depth_axis = np.linspace(0, depth_per_point * len(data) * 39.37, len(data))
@@ -120,20 +124,25 @@ def Plot_migrated_advanced(data, profilePos, velocity, rhf_range, rh_nsamp, midp
                                                       depth_axis.max(), depth_axis.min()], norm=norm)
 
     # Add colorbar for better interpretation
-    cbar = plt.colorbar(heatmap, ax=ax)
+    cbar = plt.colorbar(heatmap, ax=ax, shrink=0.5)
 
     # Add the red zone between y=2.5 and y=3 inches with red color and alpha=0.5
     #ax.axhspan(2.5, 3.5, facecolor='red', alpha=0.5)
 
     # Set labels for axes
-    ax.set_xlabel('GPR Survey line (inch)')
-    ax.set_ylabel('Depth (inch)')
+    ax.set_xlabel('GPR Survey line (inch)', fontsize=20)
+    ax.set_ylabel('Depth (inch)', fontsize=20)
+    cbar.ax.tick_params(labelsize=14)  # Adjust the font size as needed
+
+    # Set font size for axis labels and ticks
+    ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
 
     # Adjust the aspect ratio to magnify the y-axis
-    #ax.set_aspect(5)
+    ax.set_aspect(3)
     #ax.set_ylim(15, 0)
     # Show the plot
     return plt.show()
+
 
 
 
