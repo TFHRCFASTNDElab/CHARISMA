@@ -12,7 +12,7 @@ Figure 1. Bridge deck sample located at Turner Fairbank Highway Research Center 
 
 Bridge structures are exposed to harsh environmental and physical conditions. The moisture with chemicals (salt or acid) can cause corrosion on rebars and damage the concrete cover. Also, the vibration, abrasion, or impact from the vehicles on the bridge affects the concrete. (Aljalawi et al., 2016) Thus, it is crucial to monitor the rebar cover depth on the concrete bridge over time in terms of structural health. The most simple and intuitive way is ‘coring’, meaning drilling cylindrical holes in the structure and measuring the cover depth from the core sample. This method directly damages the structures and leaves weak points on the spot, resulting in poor structural condition.
 
-The alternative way is using the Non-Destructive Evaluation (NDE) technique, and the most efficient method for the rebar cover depth measurement is using Ground Penetrating Radar (GPR). It emits electromagnetic waves underground and records the reflected waves to investigate the internal structure. For detailed physical principles, readers are redirected to :code:`Ground Penetrating Radar - Physical principle` section.
+The alternative way is using the Non-Destructive Evaluation (NDE) technique, and the most efficient method for the rebar cover depth measurement is using Ground Penetrating Radar (GPR). It emits electromagnetic waves underground and records the reflected waves to investigate the internal structure. For detailed physical principles, readers are redirected to :doc:`../Physical_principle` section.
 
 Objective of the Case Study
 =======================================
@@ -26,7 +26,7 @@ This case study aims to provide a Python-based solution to process raw GPR data 
 Prerequisites
 =======================================
 
-Readers are redirected to the :code:`USING CHARISMA` section to install the CHARISMA environment. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the :code:`Ground Penetrating Radar - Data Format Conversion` section.  
+Readers are redirected to the :code:`USING CHARISMA` section to install the CHARISMA environment. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the :doc:`../open_data` section.  
 
 GPR Data from FHWA InfoBridge™
 
@@ -39,7 +39,7 @@ FHWA InfoBridge™ provides field data collections using various NDE technologie
    
 Figure 2. Selecting Mississippi I-10 bridge to download the NDE data from LTBP Infobridge™
 
-In :code:`Downloaded files - GPR` tab in InfoBridge™, there are multiple ZIP files along with one XML file. The ZIP files are the GPR scan data, and the XML file contains the actual location of GPR scanning lines with specific file names. CHARISMA reads the XML file and automatically creates a visual plot of the GPR scan area (see Figure 3). Also, it automatically creates a nested CSV directory within each :code:`Region` directory, organizing all the CSV files with numbering according to the DZT file order.
+In "Downloaded files - GPR" tab in InfoBridge™, there are multiple ZIP files along with one XML file. The ZIP files are the GPR scan data, and the XML file contains the actual location of GPR scanning lines with specific file names. CHARISMA reads the XML file and automatically creates a visual plot of the GPR scan area (see Figure 3). Also, it automatically creates a nested CSV directory within each :code:`Region` directory, organizing all the CSV files with numbering according to the DZT file order.
 
 .. image:: ../../_static/GPR_RCD/figure3.png
    :width: 1000

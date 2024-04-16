@@ -5,5 +5,5 @@ Ground Penetrating Radar
     :maxdepth: 2
 
     Physical_principle
-    Data_format_conversion
+    open_data
     Applications/index

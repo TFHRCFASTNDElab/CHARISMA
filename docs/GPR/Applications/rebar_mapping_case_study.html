@@ -63,7 +63,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../env.html">Used Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference.html">References</a></li>
 </ul>
 
@@ -83,7 +83,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Introduction to Reinforcement Bars</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/GPR/Applications/rebar_mapping_case_study.rst.txt" rel="nofollow"> View page source</a>
+              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/GPR/Applications/rebar_mapping_case_study.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -96,7 +96,7 @@
 <p>Concrete is a composite material composed of aggregates (gravel and sand), that are glued with cement and water. Due to the nature of its material structure, it is strong in compression but relatively weak in tension. (ASTM International, 1999, 2001)  To address the inherent weakness of concrete in tension, reinforcement bars (rebars), typically made of steel, are added to provide tensile strength to the structure. By incorporating rebars into the concrete, the structure becomes capable of withstanding both compressive and tensile forces more effectively.</p>
 <p>Hence, concrete with rebars is a widely used material in bridge construction. However, over time, these bridges are subject to some of environmental factors and loading conditions. These include temperature fluctuations, chemical exposure, vehicular traffic, and seismic activity, all of which can contribute to deterioration and structural changes. Among the critical challenges faced by reinforced concrete bridges are issues related to the rebars themselves. Corrosion, concrete cracking, and rebar deformation are factors that can compromise the structural integrity of the bridge.</p>
 <p>Therefore, monitoring the location and condition of rebars is essential for assessing the structural health of concrete bridges. By continuously monitoring rebar positions, bridge owners and managers can effectively manage the long-term performance and safety of their infrastructure assets. This approach not only helps prevent costly repairs or structural failures but also ensures the continued safety and functionality of concrete bridges throughout their service life.</p>
-<p>The prevailing technique for monitoring rebar locations in concrete bridges is employing Ground Penetrating Radar (GPR), a non-destructive evaluation technique to investigate objects or structures buried underground. The basics of GPR is organized in the <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Physical</span> <span class="pre">Principle</span></code> section.</p>
+<p>The prevailing technique for monitoring rebar locations in concrete bridges is employing Ground Penetrating Radar (GPR), a non-destructive evaluation technique to investigate objects or structures buried underground. The basics of GPR is organized in the <a class="reference internal" href="../Physical_principle.html"><span class="doc">Physical Principle</span></a> section.</p>
 </section>
 <section id="objectives-of-the-case-study">
 <h1>Objectives of the Case Study<a class="headerlink" href="#objectives-of-the-case-study" title="Link to this heading"></a></h1>
@@ -104,7 +104,7 @@
 </section>
 <section id="prerequisites">
 <h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h1>
-<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. For the transparency, we convert the data format from DZT to CSV. This part is explained in the <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Data</span> <span class="pre">Format</span> <span class="pre">Conversion</span></code> section.</p>
+<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. For the transparency, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
 </section>
 <section id="gpr-data-from-fhwa-nde-lab-specimen">
 <h1>GPR Data from FHWA NDE Lab Specimen<a class="headerlink" href="#gpr-data-from-fhwa-nde-lab-specimen" title="Link to this heading"></a></h1>
@@ -124,6 +124,11 @@
 <h1>Discussion<a class="headerlink" href="#discussion" title="Link to this heading"></a></h1>
 <p>With the precise rebar configuration identified in our lab specimen through time-zero correction and migration techniques, we have established a solid foundation for our data analysis. The remarkably clean nature of the lab specimen data has allowed us to bypass the need for additional processing steps like gain or dewow adjustments.</p>
 <p>As we move forward, a crucial step in validating the robustness of our methodology is to apply it to GPR data acquired from an actual bridge. Real-world scenarios often present unique challenges that may not be fully replicated in a controlled laboratory environment. To ensure the reliability and applicability of our method, the next chapter shows how we process GPR data collected from the bridge structure.</p>
+</section>
+<section id="jupyter-notebook-lab-specimen">
+<h1>Jupyter Notebook – Lab Specimen<a class="headerlink" href="#jupyter-notebook-lab-specimen" title="Link to this heading"></a></h1>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Lab_specimen_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
 </section>
 <section id="gpr-data-from-fhwa-infobridge">
 <h1>GPR Data from FHWA InfoBridge™<a class="headerlink" href="#gpr-data-from-fhwa-infobridge" title="Link to this heading"></a></h1>
@@ -148,6 +153,11 @@
 <p>We successfully processed the actual concrete bridge GPR data by processing the outliers with IQR, applying gain to amplify the reflection signals, adjusting the A-scan baseline with dewow, leveraging the scan-by-scan time-zero correction, F-K migration, and K-means clustering algorithm to pinpoint the rebar locations. We organized all the data processing details in the Code Explanation section.</p>
 <p><strong>What limitations have been reminded of?</strong></p>
 <p>The limitation to our work lies in the F-K migration. It requires the dielectric to be constant for all media, which is hard to assume. Notably, the approximate dielectric value used in F-K migration is from the GPR configuration settings, which are defined by the user. This means if the actual data collector sets the value as default, the migration results can be significantly distorted or underestimated. We are currently working on how to automate to set the estimated dielectric based only on the migration results.</p>
+</section>
+<section id="jupyter-notebook-mississippi-bridge">
+<h1>Jupyter Notebook – Mississippi Bridge<a class="headerlink" href="#jupyter-notebook-mississippi-bridge" title="Link to this heading"></a></h1>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Mississippi_bridge_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
 </section>
 
 

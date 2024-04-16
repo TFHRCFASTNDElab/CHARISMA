@@ -58,8 +58,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Ground Penetrating Radar</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Physical_principle.html">Physical Principle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Data_format_conversion.html">Data Format Conversion</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../open_data.html">Open Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">NDE Applications</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Rebar_mapping.html">Rebar Mapping</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Cover Depth Measurement</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction-to-rebar-cover-depth">Introduction to Rebar Cover Depth</a></li>
@@ -81,7 +81,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../env.html">Used Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference.html">References</a></li>
 </ul>
 
@@ -100,10 +100,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Ground Penetrating Radar</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="index.html">NDE Applications</a></li>
       <li class="breadcrumb-item active">Cover Depth Measurement</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/GPR/Applications/Cover_depth_measurement.rst.txt" rel="nofollow"> View page source</a>
+              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/GPR/Applications/Cover_depth_measurement.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -119,7 +119,7 @@
 <a class="reference internal image-reference" href="../../_images/def.png"><img alt="figure 1" class="align-center" src="../../_images/def.png" style="width: 1000px;" /></a>
 <p>Figure 1. Bridge deck sample located at Turner Fairbank Highway Research Center (TFHRC). The rebar cover depth is defined as the distance between the concrete surface and rebar surface.</p>
 <p>Bridge structures are exposed to harsh environmental and physical conditions. The moisture with chemicals (salt or acid) can cause corrosion on rebars and damage the concrete cover. Also, the vibration, abrasion, or impact from the vehicles on the bridge affects the concrete. (Aljalawi et al., 2016) Thus, it is crucial to monitor the rebar cover depth on the concrete bridge over time in terms of structural health. The most simple and intuitive way is ‘coring’, meaning drilling cylindrical holes in the structure and measuring the cover depth from the core sample. This method directly damages the structures and leaves weak points on the spot, resulting in poor structural condition.</p>
-<p>The alternative way is using the Non-Destructive Evaluation (NDE) technique, and the most efficient method for the rebar cover depth measurement is using Ground Penetrating Radar (GPR). It emits electromagnetic waves underground and records the reflected waves to investigate the internal structure. For detailed physical principles, readers are redirected to <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Physical</span> <span class="pre">principle</span></code> section.</p>
+<p>The alternative way is using the Non-Destructive Evaluation (NDE) technique, and the most efficient method for the rebar cover depth measurement is using Ground Penetrating Radar (GPR). It emits electromagnetic waves underground and records the reflected waves to investigate the internal structure. For detailed physical principles, readers are redirected to <a class="reference internal" href="../Physical_principle.html"><span class="doc">Physical Principle</span></a> section.</p>
 </section>
 <section id="objective-of-the-case-study">
 <h2>Objective of the Case Study<a class="headerlink" href="#objective-of-the-case-study" title="Link to this heading"></a></h2>
@@ -128,12 +128,12 @@
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Data</span> <span class="pre">Format</span> <span class="pre">Conversion</span></code> section.</p>
+<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
 <p>GPR Data from FHWA InfoBridge™</p>
 <p>FHWA InfoBridge™ provides field data collections using various NDE technologies. We selected a bridge from Mississippi to illustrate the use of CHARIMSA for rebar identification (Structure number: 11000100240460B). The bridge name is I-10 over CEDAR LAKE ROAD, built-in 1970. The bridge type is a Prestressed Concrete Girder/Beam. The length of the bridge is 242.50 and the width is 59.40 ft, respectively.</p>
 <a class="reference internal image-reference" href="../../_images/infobridge.png"><img alt="figure 2" class="align-center" src="../../_images/infobridge.png" style="width: 1000px;" /></a>
 <p>Figure 2. Selecting Mississippi I-10 bridge to download the NDE data from LTBP Infobridge™</p>
-<p>In <code class="code docutils literal notranslate"><span class="pre">Downloaded</span> <span class="pre">files</span> <span class="pre">-</span> <span class="pre">GPR</span></code> tab in InfoBridge™, there are multiple ZIP files along with one XML file. The ZIP files are the GPR scan data, and the XML file contains the actual location of GPR scanning lines with specific file names. CHARISMA reads the XML file and automatically creates a visual plot of the GPR scan area (see Figure 3). Also, it automatically creates a nested CSV directory within each <code class="code docutils literal notranslate"><span class="pre">Region</span></code> directory, organizing all the CSV files with numbering according to the DZT file order.</p>
+<p>In “Downloaded files - GPR” tab in InfoBridge™, there are multiple ZIP files along with one XML file. The ZIP files are the GPR scan data, and the XML file contains the actual location of GPR scanning lines with specific file names. CHARISMA reads the XML file and automatically creates a visual plot of the GPR scan area (see Figure 3). Also, it automatically creates a nested CSV directory within each <code class="code docutils literal notranslate"><span class="pre">Region</span></code> directory, organizing all the CSV files with numbering according to the DZT file order.</p>
 <a class="reference internal image-reference" href="../../_images/figure3.png"><img alt="figure 3" class="align-center" src="../../_images/figure3.png" style="width: 1000px;" /></a>
 <p>Figure 3. Visualized XML file downloaded from InfoBridge™.</p>
 <p>Incorporating with all the converted CSV files, CHARISMA identifies the cartesian coordinates of rebar locations, measures the cover depth, and visualizes the result with a 2D contour figure. The entire process is automated, requiring proper input from the user. CHARISMA handles multiple CSV files within each region, breaking down the entire B-scan data into smaller segments along the x-axis survey line. Subsequently, the code automatically applies various adjustments such as time-zero correction, background removal, gain, dewow, migration, and rebar mapping to each segmented B-scan. Finally, a grid space is established covering the entire bridge to accommodate the calculated rebar locations from the four regions. We leverage the GPR location coordinates from the XML file to locate each rebar point on the bridge and interpolate among the points to create a 2D contour of the grid.</p>

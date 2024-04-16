@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Cover Depth Measurement" href="Cover_depth_measurement.html" />
-    <link rel="prev" title="Applications" href="index.html" /> 
+    <link rel="prev" title="NDE Applications" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,8 +58,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Ground Penetrating Radar</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Physical_principle.html">Physical Principle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Data_format_conversion.html">Data Format Conversion</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../open_data.html">Open Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">NDE Applications</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Rebar Mapping</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction-to-reinforcement-bars">Introduction to Reinforcement Bars</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#objectives-of-the-case-study">Objectives of the Case Study</a></li>
@@ -67,9 +67,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#gpr-data-from-fhwa-nde-lab-specimen">GPR Data from FHWA NDE Lab Specimen</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lab-specimen-results">Lab Specimen Results</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#discussion">Discussion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-lab-specimen">Jupyter Notebook – Lab Specimen</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gpr-data-from-fhwa-infobridge">GPR Data from FHWA InfoBridge™</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mississippi-bridge-results">Mississippi Bridge Results</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Discussion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-mississippi-bridge">Jupyter Notebook – Mississippi Bridge</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Cover_depth_measurement.html">Cover Depth Measurement</a></li>
@@ -85,7 +87,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../env.html">Used Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env.html">Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference.html">References</a></li>
 </ul>
 
@@ -104,10 +106,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Ground Penetrating Radar</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="index.html">NDE Applications</a></li>
       <li class="breadcrumb-item active">Rebar Mapping</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/GPR/Applications/Rebar_mapping.rst.txt" rel="nofollow"> View page source</a>
+              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/GPR/Applications/Rebar_mapping.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -122,7 +124,7 @@
 <p>Concrete is a composite material composed of aggregates (gravel and sand), that are glued with cement and water. Due to the nature of its material structure, it is strong in compression but relatively weak in tension. (ASTM International, 1999, 2001)  To address the inherent weakness of concrete in tension, reinforcement bars (rebars), typically made of steel, are added to provide tensile strength to the structure. By incorporating rebars into the concrete, the structure becomes capable of withstanding both compressive and tensile forces more effectively.</p>
 <p>Hence, concrete with rebars is a widely used material in bridge construction. However, over time, these bridges are subject to some of environmental factors and loading conditions. These include temperature fluctuations, chemical exposure, vehicular traffic, and seismic activity, all of which can contribute to deterioration and structural changes. Among the critical challenges faced by reinforced concrete bridges are issues related to the rebars themselves. Corrosion, concrete cracking, and rebar deformation are factors that can compromise the structural integrity of the bridge.</p>
 <p>Therefore, monitoring the location and condition of rebars is essential for assessing the structural health of concrete bridges. By continuously monitoring rebar positions, bridge owners and managers can effectively manage the long-term performance and safety of their infrastructure assets. This approach not only helps prevent costly repairs or structural failures but also ensures the continued safety and functionality of concrete bridges throughout their service life.</p>
-<p>The prevailing technique for monitoring rebar locations in concrete bridges is employing Ground Penetrating Radar (GPR), a non-destructive evaluation technique to investigate objects or structures buried underground. The basics of GPR is organized in the <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Physical</span> <span class="pre">Principle</span></code> section.</p>
+<p>The prevailing technique for monitoring rebar locations in concrete bridges is employing Ground Penetrating Radar (GPR), a non-destructive evaluation technique to investigate objects or structures buried underground. The basics of GPR is organized in the <a class="reference internal" href="../Physical_principle.html"><span class="doc">Physical Principle</span></a> section.</p>
 </section>
 <section id="objectives-of-the-case-study">
 <h2>Objectives of the Case Study<a class="headerlink" href="#objectives-of-the-case-study" title="Link to this heading"></a></h2>
@@ -130,7 +132,7 @@
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. For the transparency, we convert the data format from DZT to CSV. This part is explained in the <code class="code docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Penetrating</span> <span class="pre">Radar</span> <span class="pre">-</span> <span class="pre">Data</span> <span class="pre">Format</span> <span class="pre">Conversion</span></code> section.</p>
+<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. For the transparency, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
 </section>
 <section id="gpr-data-from-fhwa-nde-lab-specimen">
 <h2>GPR Data from FHWA NDE Lab Specimen<a class="headerlink" href="#gpr-data-from-fhwa-nde-lab-specimen" title="Link to this heading"></a></h2>
@@ -150,6 +152,11 @@
 <h2>Discussion<a class="headerlink" href="#discussion" title="Link to this heading"></a></h2>
 <p>With the precise rebar configuration identified in our lab specimen through time-zero correction and migration techniques, we have established a solid foundation for our data analysis. The remarkably clean nature of the lab specimen data has allowed us to bypass the need for additional processing steps like gain or dewow adjustments.</p>
 <p>As we move forward, a crucial step in validating the robustness of our methodology is to apply it to GPR data acquired from an actual bridge. Real-world scenarios often present unique challenges that may not be fully replicated in a controlled laboratory environment. To ensure the reliability and applicability of our method, the next chapter shows how we process GPR data collected from the bridge structure.</p>
+</section>
+<section id="jupyter-notebook-lab-specimen">
+<h2>Jupyter Notebook – Lab Specimen<a class="headerlink" href="#jupyter-notebook-lab-specimen" title="Link to this heading"></a></h2>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Lab_specimen_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
 </section>
 <section id="gpr-data-from-fhwa-infobridge">
 <h2>GPR Data from FHWA InfoBridge™<a class="headerlink" href="#gpr-data-from-fhwa-infobridge" title="Link to this heading"></a></h2>
@@ -175,13 +182,18 @@
 <p><strong>What limitations have been reminded of?</strong></p>
 <p>The limitation to our work lies in the F-K migration. It requires the dielectric to be constant for all media, which is hard to assume. Notably, the approximate dielectric value used in F-K migration is from the GPR configuration settings, which are defined by the user. This means if the actual data collector sets the value as default, the migration results can be significantly distorted or underestimated. We are currently working on how to automate to set the estimated dielectric based only on the migration results.</p>
 </section>
+<section id="jupyter-notebook-mississippi-bridge">
+<h2>Jupyter Notebook – Mississippi Bridge<a class="headerlink" href="#jupyter-notebook-mississippi-bridge" title="Link to this heading"></a></h2>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Mississippi_bridge_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="NDE Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Cover_depth_measurement.html" class="btn btn-neutral float-right" title="Cover Depth Measurement" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impact Echo &mdash; CHARISMA 04/09/2024 documentation</title>
+  <title>Open Data &mdash; CHARISMA 04/09/2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=10472ade" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Phased Array Ultrasonic Testing" href="../PAUT/index.html" />
-    <link rel="prev" title="Electrical Resistivity" href="../ER/index.html" /> 
+    <link rel="next" title="NDE Applications" href="Applications/index.html" />
+    <link rel="prev" title="Physical Principle" href="Physical_principle.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -56,13 +56,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">NDE techniques</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../GPR/index.html">Ground Penetrating Radar</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Ground Penetrating Radar</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Physical_principle.html">Physical Principle</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Applications/index.html">NDE Applications</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../DPS/index.html">Density Profiling System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HCP/index.html">Half Cell Potential</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ER/index.html">Electrical Resistivity</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Impact Echo</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../IE/index.html">Impact Echo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PAUT/index.html">Phased Array Ultrasonic Testing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
@@ -85,9 +88,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Impact Echo</li>
+          <li class="breadcrumb-item"><a href="index.html">Ground Penetrating Radar</a></li>
+      <li class="breadcrumb-item active">Open Data</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/IE/index.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/GPR/open_data.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -95,18 +99,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="impact-echo">
-<h1>Impact Echo<a class="headerlink" href="#impact-echo" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-</div>
+  <section id="open-data">
+<h1>Open Data<a class="headerlink" href="#open-data" title="Link to this heading"></a></h1>
+<p>We provide a Python code to allow users to read GPR data in DZT format. General users cannot read DZT files if they do not have access to specific software, and there is no way to know how the NDE data is processed to get the results. The <code class="code docutils literal notranslate"><span class="pre">readdzt</span></code> function in our Python code <code class="code docutils literal notranslate"><span class="pre">GPR_locate_rebars.py</span></code> is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the <code class="code docutils literal notranslate"><span class="pre">save_to_csv</span></code> function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 <code class="code docutils literal notranslate"><span class="pre">df1</span></code> and DataFrame2 <code class="code docutils literal notranslate"><span class="pre">df2</span></code> from one DZT file. The <code class="code docutils literal notranslate"><span class="pre">df1</span></code> is for collected GPR data and <code class="code docutils literal notranslate"><span class="pre">df2</span></code> is for the configuration settings of GPR.</p>
+<a class="reference internal image-reference" href="../_images/gprdataconversion.png"><img alt="gprconv" class="align-center" src="../_images/gprdataconversion.png" style="width: 1000px;" /></a>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../ER/index.html" class="btn btn-neutral float-left" title="Electrical Resistivity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../PAUT/index.html" class="btn btn-neutral float-right" title="Phased Array Ultrasonic Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Physical_principle.html" class="btn btn-neutral float-left" title="Physical Principle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Applications/index.html" class="btn btn-neutral float-right" title="NDE Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
