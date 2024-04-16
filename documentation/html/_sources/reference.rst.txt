@@ -1,0 +1,30 @@
+******************
+References
+******************
+
+GPR
+----------
+
+Cook, Samantha N et al. 2022. “Automated Ground-Penetrating-Radar Post-Processing Software in R Programming.”
+
+Huber, Emanuel, and Guillaume Hans. 2018. “RGPR—An Open-Source Package to Process and Visualize GPR Data.” In 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 1–4.
+
+GSSI (Geophysical Survey Systems). Inc. 2017. “RADAN 7 Manual.”
+
+Jol, Harry M. 2008. Ground Penetrating Radar Theory and Applications. elsevier.
+
+Lin, Shibin et al. 2018. “Laboratory Assessment of Nine Methods for Nondestructive Evaluation of Concrete Bridge Decks with Overlays.” Construction and Building Materials 188: 966–82.
+
+Merkle, Dominik, Carsten Frey, and Alexander Reiterer. 2021. “Fusion of Ground Penetrating Radar and Laser Scanning for Infrastructure Mapping.” Journal of Applied Geodesy 15(1): 31–45.
+
+Nesbitt, Ian et al. 2022. “Readgssi: An Open-Source Tool to Read and Plot GSSI Ground-Penetrating Radar Data.” https://doi.org/10.5281/zenodo.5932420.
+
+Özdemir, Caner, Şevket Demirci, Enes Yiǧit, and Betül Yilmaz. 2014. “A Review on Migration Methods in B-Scan Ground Penetrating Radar Imaging.” Mathematical Problems in Engineering 2014.
+
+Poluha, Bruno et al. 2017. “Depth Estimates of Buried Utility Systems Using the GPR Method: Studies at the IAG/USP Geophysics Test Site.” International Journal of Geosciences 08(05): 726–42.
+
+Stolt, R. H. 1978. “Migration By Fourier Transform.” Geophysics 43(1): 23–48.
+
+Xu, Xiaoyin, Eric L. Miller, and Carey M. Rappaport. 2003. “Minimum Entropy Regularization in Frequency-Wavenumber Migration to Localize Subsurface Objects.” IEEE Transactions on Geoscience and Remote Sensing 41(8): 1804–12.
+
+Yelf, Richard. 2004. “Where Is True Time Zero?” Proceedings of the Tenth International Conference Ground Penetrating Radar, GPR 2004 1(February 2004): 279–82.

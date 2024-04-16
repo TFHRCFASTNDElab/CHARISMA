@@ -1,0 +1,84 @@
+******************************
+Databricks
+******************************
+
+.. image:: _static/databricks-logo.png
+   :width: 350
+   :target: https://www.databricks.com/
+   :alt: db
+
+Databricks is a user-friendly platform for working with large datasets. It is like a shared space where people who analyze data and those who work with it can all collaborate. Built on Apache Spark and hosted in the cloud, Databricks offers convenient access from anywhere. It features useful tools like collaborative notebooks for writing and sharing, task scheduling, and data exploration capabilities. Designed to streamline the entire data analytics process, Databricks covers everything from data preparation to model training and deployment. Plus, it supports various programming languages such as Python, SQL, R, and Scala, and seamlessly integrates with popular machine learning and data visualization tools.
+
+CHARISMA can be utilized on Databricks. This method clones (copies) the original CHARISMA GitHub contents and save it into your workspace. Thus, users are free to modify, add, or remove the codes and data. Also, all the necessary Python packages are automatically installed, eliminating the need for users to install anything themselves.
+
+1. Log in into Databricks.
+
+URL: https://dbc-76d86e80-ff34.cloud.databricks.com/
+
+2. Click Workspace.
+
+.. image:: _static/db2.png
+   :width: 200
+   :alt: 2
+   :align: center
+   
+3. Click Create on the right top blue panel and click Git folder.
+
+.. image:: _static/db3.png
+   :width: 200
+   :alt: 3
+   :align: center
+   
+4. Paste the following address into the “Git repository URL”: https://github.com/TFHRCFASTNDElab/CHARISMA/ 
+Then the Git provider and Git folder name will be automatically filled.
+
+.. image:: _static/db4.png
+   :width: 1000
+   :alt: 3
+   :align: center
+   
+5. Click Create Git folder.
+
+6. Click the branch icon with “main”.
+
+.. image:: _static/db5.png
+   :width: 300
+   :alt: 3
+   :align: center
+   
+7. Click “Branch: main” and change it as DataBricks.
+
+.. image:: _static/db6.png
+   :width: 400
+   :alt: 3
+   :align: center
+   
+8. Exit the white screen after confirming the branch has set with Databricks.
+
+.. image:: _static/db7.png
+   :width: 400
+   :alt: 3
+   :align: center
+   
+9. Click ground-penetrating-radar, docs, Rebar mapping, and notebooks.
+
+.. image:: _static/db8.png
+   :width: 1000
+   :alt: 3
+   :align: center
+   
+10. Click one of the notebooks, and type in your DOT email address, to specify the directory path.
+
+.. image:: _static/db9.png
+   :width: 1000
+   :alt: 3
+   :align: center
+   
+11. Request a computational resource by clicking Connect, and click Run all.
+
+.. image:: _static/db10.png
+   :width: 500
+   :alt: 3
+   :align: center
+
+

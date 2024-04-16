@@ -1,0 +1,46 @@
+
+******************************
+Anaconda
+******************************
+Please visit our GitHub website to download the packages: https://github.com/TFHRCFASTNDElab/CHARISMA
+
+Click the green "Code" button and "Download ZIP" to download CHARISMA.
+
+.. image:: _static/git.png
+   :width: 1000
+   :alt: git
+   :align: center
+
+.. raw:: html
+   
+   <br>
+   
+We recommend using Anaconda to simplify the environment setup. Anaconda is commonly used for managing Python packages in user-defined environments. In other words, it allows you to create isolated environments for different projects, each with its own set of dependencies, without interfering with the system-wide Python installation. This is particularly useful in data science and scientific computing where projects may have different requirements and dependencies. First, download Anaconda by clicking the image below.
+
+.. image:: _static/Anaconda_Logo.png
+   :width: 300
+   :target: https://www.anaconda.com/download
+   :alt: anaconda
+
+We recommend installing our conda environment :code:`charisma-env` to run the code properly. This environment has all the dependencies from our entire code. Open Anaconda Prompt, and go to your download directory by typing the following command.
+
+.. code-block:: bash
+
+   cd C:/your_download_path/
+
+To create and activate :code:`charisma-env` with conda, run the following command:
+
+.. code-block:: bash
+
+   conda env create -f charisma-env.yml
+
+   conda activate charisma-env
+
+After creating and activating the :code:`charisma-env` environment, specify the environment and install (or launch) Jupyter Notebook from Anaconda Navigator to use our CHARISMA Python package. 
+
+.. image:: https://github.com/TFHRCFASTNDElab/CHARISMA/assets/154364860/65c52a82-8f65-4a72-aebb-020334b98795
+   :alt: Screenshot of launching the Jupyter Notebook under a specific environment.
+   
+
+Lastly, import the notebook (ipynb) file in the CHARISMA notebook directory and revise the directory path to run the code.
+

@@ -1,0 +1,10 @@
+Data Format Conversion
+-----------------------
+
+We provide a Python code to allow users to read GPR data in DZT format. General users cannot read DZT files if they do not have access to specific software, and there is no way to know how the NDE data is processed to get the results. The :code:`readdzt` function in our Python code :code:`GPR_locate_rebars.py` is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the :code:`save_to_csv` function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 :code:`df1` and DataFrame2 :code:`df2` from one DZT file. The :code:`df1` is for collected GPR data and :code:`df2` is for the configuration settings of GPR.
+
+.. image:: ../_static/gprdataconversion.png
+   :width: 1000
+   :alt: gprconv
+   :align: center
+   
