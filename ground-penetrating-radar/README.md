@@ -2,9 +2,13 @@
 ## Directory Structure
 
 - Available GPR Applications:
+
 	Rebar mapping
+
 	Cover depth measurement
+
 	Rebar corrosion (Will be updated soon)
+
 
 - **notebooks:** Contains Jupyter notebook files for test & analysis
 
