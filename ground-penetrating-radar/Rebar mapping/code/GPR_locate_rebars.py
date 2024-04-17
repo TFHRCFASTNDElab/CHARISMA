@@ -8,7 +8,7 @@ from scipy.constants import c as c
 import struct
 sys.path.append('C:/directory/path/downloaded_py_files/')
 import mig_fk
-import plot
+import GPR_plot as plot
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
@@ -528,4 +528,5 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
     #ax.set_aspect(5)
     #ax.set_ylim(15, 0)
 
-    return plt.show()
+    plt.show()
+    return cluster_centers_inches_m
