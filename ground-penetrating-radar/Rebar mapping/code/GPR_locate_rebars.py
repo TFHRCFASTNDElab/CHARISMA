@@ -527,8 +527,6 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
     ax.set_ylabel('Depth (inch)', fontsize=20)
     ax.set_aspect(3)
     #ax.set_ylim(15, 0)
-    cbar.ax.tick_params(labelsize=14)  # Adjust the font size as needed
-
     # Set font size for axis labels and ticks
     ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
     plt.show()
