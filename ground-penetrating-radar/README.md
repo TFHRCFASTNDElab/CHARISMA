@@ -1,17 +1,21 @@
 
-
 ## Directory Structure
 
-- **case studies:** Contains Case Studies for specific tasks. Each task contains Jupyter notebook files for test & analysis
+- Available GPR Applications:
+	Rebar mapping
+	Cover depth measurement
+	Rebar corrosion (Will be updated soon)
+
+- **notebooks:** Contains Jupyter notebook files for test & analysis
 
 - **data:** Contains GPR data
   
-- **code:** Contains Python code files.
+- **code:** Contains Python code files
 
 
 ## Usage
 
-Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our `Case_study.md` markdown files in the `docs` directory.
+Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our case study documentation.
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
