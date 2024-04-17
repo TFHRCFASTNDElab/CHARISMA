@@ -8,7 +8,7 @@ from scipy.constants import c as c
 import struct
 sys.path.append('C:/directory/path/downloaded_py_files/')
 import mig_fk
-import plot
+import GPR_plot as plot
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
