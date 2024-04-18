@@ -36,7 +36,7 @@ def Plot_b_scan(data):
     Parameters:
     - data: GPR Pandas dataframe
     '''
-    fig, ax = plt.subplots(figsize=(15, 6))
+    fig, ax = plt.subplots(figsize=(12, 4))
     heatmap = ax.imshow(data, cmap='gray', aspect='auto')
     
     ax.set_ylim(data.shape[0], 0)
@@ -83,17 +83,63 @@ def Plot_migrated(data):
     Returns:
     None
     '''
-    fig, ax = plt.subplots(figsize=(15, 8))
+    fig, ax = plt.subplots(figsize=(12, 4))
     
     heatmap = ax.imshow(data, cmap='Greys_r', aspect='auto')
     
-    cbar = plt.colorbar(heatmap, ax=ax, shrink=0.8)
+    cbar = plt.colorbar(heatmap, ax=ax)
 
     ax.set_xlabel('GPR Survey line index')
     ax.set_ylabel('Depth index')
     plt.show()
 
 def Plot_migrated_advanced(data, profilePos, velocity, rhf_range, rh_nsamp, midpoint_factor=0.4):
+    '''
+    Plot an advanced migrated GPR data with adjustable midpoint and depth calculation.
+    
+    Parameters:
+    - data: 2D array representing migrated GPR data.
+    - profilePos: x axis (survey line axis) after migration 
+    - velocity: The wave speed in the media. (c)/math.sqrt(rhf_espr) * 1e-9 m/ns
+    - rhf_range: The time it takes for the radar signals to travel to the subsurface and return (ns)
+    - rh_nsamp: The number of rows in the GPR B-scan
+    - midpoint_factor: Factor controlling the midpoint of the colormap.
+    '''
+    # mean time zero with 1st positive peak cut
+    fig, ax = plt.subplots(figsize=(15, 5))  # Increase the height of the plot
+    depth = (velocity/2) * rhf_range
+    depth_per_point = depth / rh_nsamp
+    depth_axis = np.linspace(0, depth_per_point * len(data) * 39.37, len(data))
+    survey_line_axis = profilePos * 39.37
+
+    vmin, vmax = data.min(), data.max()
+
+    # Calculate the midpoint based on the provided factor
+    midpoint = vmin + (vmax - vmin) * midpoint_factor
+
+    cmap = plt.cm.gray
+    norm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=midpoint, vmax=vmax)
+
+    heatmap = ax.imshow(data, cmap='Greys_r', extent=[survey_line_axis.min(), survey_line_axis.max(),
+                                                      depth_axis.max(), depth_axis.min()], norm=norm)
+
+    # Add colorbar for better interpretation
+    cbar = plt.colorbar(heatmap, ax=ax)
+
+    # Add the red zone between y=2.5 and y=3 inches with red color and alpha=0.5
+    #ax.axhspan(2.5, 3.5, facecolor='red', alpha=0.5)
+
+    # Set labels for axes
+    ax.set_xlabel('GPR Survey line (inch)')
+    ax.set_ylabel('Depth (inch)')
+
+    # Adjust the aspect ratio to magnify the y-axis
+    ax.set_aspect(5)
+    ax.set_ylim(15, 0)
+    # Show the plot
+    return plt.show()
+
+def Plot_migrated_rebarmaps(data, profilePos, velocity, rhf_range, rh_nsamp, midpoint_factor=0.4):
     '''
     Plot an advanced migrated GPR data with adjustable midpoint and depth calculation.
     
@@ -142,7 +188,3 @@ def Plot_migrated_advanced(data, profilePos, velocity, rhf_range, rh_nsamp, midp
     #ax.set_ylim(15, 0)
     # Show the plot
     return plt.show()
-
-
-
-
