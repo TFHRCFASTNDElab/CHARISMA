@@ -2,7 +2,9 @@
 ******************************
 Anaconda
 ******************************
-Please visit our GitHub website to download the packages: https://github.com/TFHRCFASTNDElab/CHARISMA
+Please visit our GitHub website to download the packages:
+
+https://github.com/TFHRCFASTNDElab/CHARISMA
 
 Click the green "Code" button and "Download ZIP" to download CHARISMA.
 

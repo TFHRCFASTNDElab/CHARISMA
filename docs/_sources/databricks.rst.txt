@@ -22,6 +22,10 @@ URL: https://dbc-76d86e80-ff34.cloud.databricks.com/
    :alt: 2
    :align: center
    
+.. raw:: html
+   
+   <br>
+
 3. Click Create on the right top blue panel and click Git folder.
 
 .. image:: _static/db3.png
@@ -29,15 +33,30 @@ URL: https://dbc-76d86e80-ff34.cloud.databricks.com/
    :alt: 3
    :align: center
    
-4. Paste the following address into the “Git repository URL”: https://github.com/TFHRCFASTNDElab/CHARISMA/ 
+.. raw:: html
+   
+   <br>
+   
+4. Paste the following address into the “Git repository URL”: 
+
+https://github.com/TFHRCFASTNDElab/CHARISMA/ 
+
 Then the Git provider and Git folder name will be automatically filled.
 
 .. image:: _static/db4.png
    :width: 1000
    :alt: 3
    :align: center
+
+.. raw:: html
+   
+   <br>
    
 5. Click Create Git folder.
+
+.. raw:: html
+   
+   <br>
 
 6. Click the branch icon with “main”.
 
@@ -45,13 +64,21 @@ Then the Git provider and Git folder name will be automatically filled.
    :width: 300
    :alt: 3
    :align: center
+
+.. raw:: html
    
+   <br>
+
 7. Click “Branch: main” and change it as DataBricks.
 
 .. image:: _static/db6.png
    :width: 400
    :alt: 3
    :align: center
+
+.. raw:: html
+   
+   <br>
    
 8. Exit the white screen after confirming the branch has set with Databricks.
 
@@ -59,6 +86,10 @@ Then the Git provider and Git folder name will be automatically filled.
    :width: 400
    :alt: 3
    :align: center
+
+.. raw:: html
+   
+   <br>
    
 9. Click ground-penetrating-radar, docs, Rebar mapping, and notebooks.
 
@@ -66,6 +97,10 @@ Then the Git provider and Git folder name will be automatically filled.
    :width: 1000
    :alt: 3
    :align: center
+
+.. raw:: html
+   
+   <br>
    
 10. Click one of the notebooks, and type in your DOT email address, to specify the directory path.
 
@@ -73,6 +108,10 @@ Then the Git provider and Git folder name will be automatically filled.
    :width: 1000
    :alt: 3
    :align: center
+
+.. raw:: html
+   
+   <br>
    
 11. Request a computational resource by clicking Connect, and click Run all.
 

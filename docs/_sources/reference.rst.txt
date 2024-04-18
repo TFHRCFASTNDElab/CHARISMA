@@ -5,6 +5,14 @@ References
 GPR
 ----------
 
+AASHTO. (2024b). LRFD Bridge Design Specifications.
+
+Aljalawi, N., Fawzi, N. M., Altameemi, A. A., Al-Jarrah, S. H., Al-Galawi, N. M., & Al-Tameemi, A. A. H. (2016). Effect Of Age And Concrete Cover Thickness On Steel Reinforcement Corrosion At Splash Zone In Reinforced Concrete Hydraulic Structures Effect high content metakolan on properties of lightweight concrete View project Production ferrocement plate View proje. Article in International Journal of Scientific & Technology Research, 5(09). www.ijstr.org
+
+ASTM International. (1999). Standard Test Method for Splitting Tensile Strength of Cylindrical Concrete Specimens. 95(Reapproved), 1–2. https://doi.org/10.1520/C0496
+
+ASTM International. (2001). Standard Test Method for Compressive Strength of Cylindrical Concrete Specimens 1 - ASTM C39/C39M - Standard. Annual Book of ASTM Standards, 04.02(July), 1–7. https://doi.org/10.1520/C0039
+
 Cook, Samantha N et al. 2022. “Automated Ground-Penetrating-Radar Post-Processing Software in R Programming.”
 
 Huber, Emanuel, and Guillaume Hans. 2018. “RGPR—An Open-Source Package to Process and Visualize GPR Data.” In 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 1–4.
@@ -28,3 +36,4 @@ Stolt, R. H. 1978. “Migration By Fourier Transform.” Geophysics 43(1): 23–
 Xu, Xiaoyin, Eric L. Miller, and Carey M. Rappaport. 2003. “Minimum Entropy Regularization in Frequency-Wavenumber Migration to Localize Subsurface Objects.” IEEE Transactions on Geoscience and Remote Sensing 41(8): 1804–12.
 
 Yelf, Richard. 2004. “Where Is True Time Zero?” Proceedings of the Tenth International Conference Ground Penetrating Radar, GPR 2004 1(February 2004): 279–82.
+

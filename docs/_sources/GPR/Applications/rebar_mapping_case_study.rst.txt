@@ -62,7 +62,7 @@ We provide our Jupyter notebook to show how the code is utilized to get the resu
 
 .. image:: ../../_static/ipynb_icon.png
    :width: 125
-   :target: https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Lab_specimen_notebook.ipynb
+   :target: https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/Rebar%20mapping/notebooks/Lab_specimen_notebook.ipynb
    :alt: ipynb_icon
 
 GPR Data from FHWA InfoBridge™
@@ -126,5 +126,193 @@ We provide our Jupyter notebook to show how the code is utilized to get the resu
 
 .. image:: ../../_static/ipynb_icon.png
    :width: 125
-   :target: https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/notebooks/Rebar%20mapping/Mississippi_bridge_notebook.ipynb
+   :target: https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/Rebar%20mapping/notebooks/Mississippi_bridge_notebook.ipynb
    :alt: ipynb_icon
+   
+Code Explanation
+=======================================
+
+Read the saved CSV files
+--------------------------------------------------
+
+We read the saved CSV files to process further. Let’s use the :code:`read_csv` function to define two Pandas DataFrames. After that, we set each row of configuration data :code:`df_2` as a local variable in Python, using the :code:`config_to_variable` function.
+
+Let’s investigate the lab specimen CSV data in detail. The DataFrame1 :code:`df_1` is actual GPR data (512 Rows × 332 Cols). The 512 rows are the “time” within the investigated underground subsurface, and 332 columns are the number of scans, corresponding to a distinct scan instance where a radar wavelet is emitted and recorded by the antenna while the GPR machine traverses along the survey line.
+
+The DataFrame2 :code:`df_2` is a configuration setting of GPR machine (24 Rows × 2 Cols). Here we discuss some of the important parameters among them, but readers are redirected to the GPR manufacturer webpage for further details: GSSI SIR 3000 Manual https://www.geophysical.com/wp-content/uploads/2017/10/GSSI-SIR-3000-Manual.pdf. Here we discuss 7 important parameters in the configuration setting: :code:`rh_nsamp`, :code:`rhf_sps`, :code:`rhf_spm`, :code:`rhf_position`, :code:`rhf_range`, :code:`rhf_espr`, and :code:`rhf_depth`.
+
+The parameter :code:`rh_nsamp` represents the number of samples in the depth dimension (equivalent to the number of rows in GPR data). Imagine a grid interface of the underground subsurface to save the wavelet data in a discrete form. The higher number of samples provide higher resolution, but larger size of the data. 
+
+The :code:`rhf_sps` and :code:`rhf_spm` refer to “scans-per-second” and “scans-per-meter”. Here scans mean the column dimension of the GPR data. Both of parameters indicate how many scans are obtained per unit time or distance. 
+
+The :code:`rhf_position` and :code:`rhf_range` are parameters for indicating the position and range of the GPR scans in nanoseconds (ns). For example, if :code:`rhf_position = 0`, this means that the starting point for measuring positions in your GPR data is at the initial time when the radar pulse is sent. In other words, the measurement of positions starts from the moment the radar pulse is emitted. Similarly, if :code:`rhf_range = 8`, it indicates the time it takes for the radar signals to travel to the subsurface and return takes 8 ns. The subtraction of rhf_range from rhf_position is the two-way travel time. By knowing the speed of electromagnetic waves and the average dielectric constant, this time can be converted to a depth measurement.
+
+The :code:`rhf_espr` is average dielectric constant. It accounts for the varying properties of the subsurface materials. Different materials have different dielectric constants, and accurate knowledge of this parameter is crucial for correctly interpreting the travel time of radar signals and converting it into depth. Table 1 shows the relative dielectric constant for various materials. The :code:`rhf_depth` is depth in meters, indicating how deep into the subsurface the radar signals penetrate underground.
+
+It is noteworthy that these GPR configurations are usually not calibrated or adjusted by the data collector. For instance, while the GPR scan distance can be determined by scans-per-meter, based on the number of scans in the data, this method often does not align accurately with real distances. Users may need to make adjustments to align the data with the actual distances.
+
+Outlier control via interquartile range (IQR) method
+---------------------------------------------------------------
+
+With the same :code:`read_csv` function from the previous chapter, we are making 2 Pandas DataFrames: GPR data and configuration. We noticed that there are some outlier values on the GPR data, so we removed them by the interquartile range (IQR) method. The IQR method is a statistical technique used to identify and remove outliers from a dataset. It involves calculating the range between the first quartile (Q1) and the third quartile (Q3) of the data distribution. Outliers are then identified and removed based on a specified multiplier of the IQR. This method is effective in addressing skewed or non-normally distributed data by focusing on the central portion of the dataset. A more detailed explanation is in our code docstrings.
+
+.. image:: ../../_static/GPR_RM/figure7.png
+   :width: 1000
+   :alt: figure 7
+   :align: center
+
+Gain
+---------------
+
+We observed that the GPR signal is not sufficiently clear for processing (see Figure 9 (a) and (c)), likely because the first peak amplitude significantly outweighs other signals. This disparity could be attributed to the GPR settings or signal attenuation. To address this issue, we employ a gain function to better highlight the reflected signal. We introduce two methods, namely power gain and exponential gain (Huber and Hans 2018), to enhance the clarity of the reflected signal. The power gain function is defined as follows,
+
+.. math::
+
+    x_g(t) = x(t) \cdot t^{\alpha}.
+
+The signal :math:`x(t)` is multiplied by :math:`t^{\alpha}`, where :math:`\alpha` is the exponent. In the default case, :math:`\alpha` is set to 1. The effect of the power gain is to amplify the signal based on a power-law relationship with time :math:`t`.
+
+The exponential gain function is defined as,
+
+.. math::
+
+    x_g(t) = x(t) \cdot \exp(\alpha \cdot t).
+
+Here, :math:`\exp(\alpha \cdot t)` represents the exponential function with :math:`\alpha` as the exponent. The signal :math:`x(t)` is multiplied by this exponential term. The exponential gain introduces a time-dependent exponential factor to the signal. Adjusting the :math:`\alpha` parameter allows control over the rate of amplification, impacting the signal characteristics. We applied the power gain function with :math:`\alpha = 0.2` only after the initial positive and negative peaks for improved visibility and processing.
+
+.. image:: ../../_static/GPR_RM/figure8.png
+   :width: 1000
+   :alt: figure 8
+   :align: center
+
+Figure 8. A-scan of the GPR data (a) before gain and (b) after gain. The first peak in (a) is much larger than the other signals, making the B-scan image blur. Note that the base line of the signal in (b) is going upward, due to the amplification.
+
+.. image:: ../../_static/GPR_RM/figure9.png
+   :width: 1000
+   :alt: figure 9
+   :align: center
+
+Figure 9. B-scan of the GPR data (a) & (c) before gain and (b) & (d) after gain.
+
+Dewow
+----------------
+
+Dewow is used to mitigate the effects of low-frequency variations, or "wows," in the GPR signal. The terminology is derived from the nature of the low-frequency variations or oscillations that it aims to mitigate—resembling a slow, undulating motion, akin to the exclamation "wow." Wows can result from various factors, such as uneven ground surfaces or fluctuations in the system. Dewow processing involves filtering or removing these low-frequency components from the GPR signal to enhance the clarity and resolution of subsurface features. This technique helps improve the overall quality of GPR data by reducing unwanted variations. Here we used trinomial dewow (Nesbitt et al. 2022) to correct the baseline of each A-scan.
+
+.. image:: ../../_static/GPR_RM/figure10.png
+   :width: 1000
+   :alt: figure 10
+   :align: center
+
+Figure 10. A-scan of the GPR data (a) before dewow and (b) after dewow. The baseline of the A-scan is corrected.
+
+.. image:: ../../_static/GPR_RM/figure11.png
+   :width: 1000
+   :alt: figure 11
+   :align: center
+   
+Figure 11. B-scan of the GPR data (a) & (c) before dewow and (b) & (d) after dewow.   
+
+Time-zero correction
+-----------------------------
+
+Time-zero correction aligns multiple A-scans vertically. When the reflected signal is recorded in the receiver, several factors (thermal drift, electronic instability, cable length differences, or variations in antenna airgap) can cause inconsistent wavelet arrival time (Jol 2008). Time-zero correction provides a more accurate depth calculation because it sets the top of the scan to a close approximation of the ground surface (GSSI Inc. 2017). We assume the first positive peak of each A-scan represents the 0 m depth of the ground surface, which is called the “first positive peak” method (Cook et al. 2022)(Yelf 2004).
+
+.. image:: ../../_static/GPR_RM/figure12.png
+   :width: 1000
+   :alt: figure 12
+   :align: center
+
+Figure 12. Comparison of (a) before time-zero correction and (b) after scan-by-scan time-zero correction on our GPR data.
+
+There are a couple of methods of time-zero correction, one method is calculating the mean or median value of the first peak’s arrival time for the entire A-scans and cut out the data before the mean or median time (Cook et al. 2022). However, this method is not robust since the time-zero position is not perfectly aligned with all the 1st positive peaks of the A-scans (see Figure 12). This method does not correspond with our assumption that the first positive peak of each A-scan represents the 0 m depth of the ground surface.
+
+.. image:: ../../_static/GPR_RM/figure13.png
+   :width: 1000
+   :alt: figure 13
+   :align: center
+
+Figure 13. Plots of multiple A-scans with mean value method. The red vertical line shows the time-zero index based on the mean value. Some of the 1st positive peaks of A-scans align with the time-zero, but some A-scans do not.
+
+The other method is “scan-by-scan” which is more reasonable and robust than the mean or median strategy. This method detects the 1st positive peaks of A-scans and processes them individually. However, since the location of the 1st peak is different from each other, the data length is also changed. For example, one A-scan has 1st positive peak at the 127th depth index, the other has the 130th index, and if we align the data based on the time-zero index, the starting and ending points of A-scans mismatch each other (See Figure 13). Thus, we cut out the data indices that are not in the common range. For example, if one of the A-scan ranges [-125, 386] and the other ranges [-135, 376], we are taking the data only in common so that the range of data indices becomes [-125, 376]. Figure 14 shows the result of our scan-by-scan time-zero correction after the index cut out.
+
+.. image:: ../../_static/GPR_RM/figure14.png
+   :width: 1000
+   :alt: figure 14
+   :align: center
+
+Figure 14. Plots of multiple A-scans with scan-by-scan method. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. This method results in misalignment at the starting and ending points of the A-scan profiles.
+
+.. image:: ../../_static/GPR_RM/figure15.png
+   :width: 1000
+   :alt: figure 15
+   :align: center
+
+Figure 15. Plots containing multiple A-scans using the scan-by-scan approach, with the exclusion of data outside the common range. The red vertical line shows the time-zero index, and the 1st positive peak is aligned to the red line. The misalignment issue at the starting and the ending points of the A-scan profiles is solved.
+
+Migration
+------------------------
+
+Migration process converts the hyperbolic signal into spatial locations of the subsurface object. The hyperbolas in the GPR B-scan data stem from the nature of its method. GPR uses electromagnetic wave pulse to detect buried objects, and the antenna is traversing over the survey line. When the antenna is directly above the object, the distance is at its minimum. As the antenna moves, the distance is getting longer. This changing distance results in a distance-time plot that resembles a hyperbola (Figure 15).
+
+.. image:: ../../_static/GPR_RM/figure16.png
+   :width: 600
+   :alt: figure 16
+   :align: center
+
+Figure 16. Schematic of GPR data acquisition process and hyperbola profile formation on the distance-time plot. Note that the distance is minimal when the object and antenna are vertically aligned (Poluha et al. 2017). 
+
+The hyperbola profiles in B-scan can lead to distortions in the radar image. Migration algorithms help correct these distortions, relocating the reflected signals to their correct positions in the subsurface, resulting in a more accurate representation of the buried features. Here we specifically introduce Frequency-Wavenumber (F-K or Stolt) migration (Stolt 1978). This method has proven to work well for the constant-velocity propagation media (Xu, Miller, and Rappaport 2003)(Özdemir et al. 2014).
+
+The F-K migration transforms the GPR B-scan into an artificially created wave map. In other words, this method specifically locates the object by reconstructing the waveforms at object locations. This is done by the Fourier Transform, converting the waves from the time-space domain to the frequency-wavenumber domain. To understand how this process works, we need the wave propagation equation in a media,
+
+.. math::
+
+    \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial z^2} - \frac{1}{v^2} \frac{\partial^2}{\partial t^2} \right) \phi(x, z, t) = 0,
+
+where :math:`\phi` is the wave function (apparently GPR signals are electromagnetic waves), :math:`x` is the axis along the GPR survey line, :math:`z` is the axis along the depth, and :math:`t` is the time. If you are not familiar with the wave propagation equation in a media, you are redirected to the following YouTube video, which derives the wave equation from scratch with the guitar (acoustic wave): https://www.youtube.com/watch?v=UXqUXYaRyGU&t=1684s&ab_channel=SteveBrunton
+
+
+The next step is applying the inverse Fourier transform to the wave function :math:`\phi(x, z, t)`,
+
+.. math::
+
+    \phi(x, z, t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x + k_z z - \omega t)} \ dk_x \ d\omega
+
+where :math:`E(k_x, \omega)` is the Fourier domain for every possible combination of wave number :math:`k_x` and frequency :math:`\omega`. The physical meaning of the equation is that the wave function can be expressed as a summation of various plane waves with different wavenumbers and frequencies. It is noteworthy that the :math:`E(k_x, \omega)` is time-independent, which will be used to relocate the waveform at the specific location of the object underground (The meaning of “migration” comes from this aspect).
+
+After the inverse Fourier transform, we correlate our actual GPR data into the equation. Note that we receive GPR signal at :math:`z = 0`, where the antenna locations are at the surface. Then the wave function becomes,
+
+.. math::
+
+    \phi(x, z=0, t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x - \omega t)} \ dk_x \ d\omega.
+
+
+This equation can transform the GPR signals into the frequency-wavenumber domain. To reconstruct the wave function, we need to know the :math:`E(k_x, \omega)`. :math:`E(k_x, \omega)` is obtained by Fourier transform and our GPR signal,
+
+.. math::
+
+    E(k_x, \omega) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \phi(x, z=0, t) e^{j(k_x x - \omega t)} \ dx \ dt.
+
+Now, the equation is formulated to construct our parameter :math:`E(k_x, \omega)` based on the GPR data. We will employ the Exploding Source Modeling (ESM), which straightforwardly assumes that the reflected GPR wave originates directly from the object itself. This assumption allows us to express our reconstructed signal (the migrated image) as :math:`\phi(x, z, t = 0)`, where :math:`t = 0` signifies the initial waveform at the object. At this point, we successfully correlated the GPR signal :math:`\phi(x, z = 0, t)` with the Fourier domain :math:`E(k_x, \omega)`, and this :math:`E(k_x, \omega)` is again correlated to the wavefunction at the object :math:`\phi(x, z, t = 0)`. This is the main logic of the F-K migration.
+
+It's crucial to emphasize that this assumption holds true only when the data is time-zeroed, as our consideration of the time frame extends from the object to the surface. As previously mentioned, the time-zero correction assumes that we interpret the first positive peak as the surface reflection, and without time-zero, the time frame extends beyond the object to the surface when setting :math:`t = 0` at the object.
+
+Another crucial aspect of ESM is the elimination of the :math:`-\omega t`  term in the equation. This modification enables us to employ the Fast Fourier Transform for wavefunction reconstruction. By removing the time-dependent term from the exponential part, the equation becomes more numerically manageable. Our final mathematical representation of F-K migration is as follows,
+
+.. math::
+
+    \phi(x, z, t=0) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E(k_x, \omega) e^{-j(k_x x + k_z z)} \ dk_x \ d\omega.
+
+In our Python code, we discretize the wave function at the surface (GPR signal) :math:`\phi(x, z = 0, t)` as a matrix, and then solve the equations above numerically (through fast Fourier transform) to reconstruct the wave function at :math:`t = 0`, :math:`\phi(x, z, t = 0)` based on :math:`E(k_x, \omega)`. 
+
+Pinpoint Rebars
+--------------------------
+
+It is noteworthy that the size of the white points are too large compared to the actual rebar diameter, so we estimate the rebar location with the K-means clustering method. K-means clustering is a popular unsupervised machine learning algorithm used for partitioning a dataset into distinct, non-overlapping clusters. The goal is to group similar data points together and separate dissimilar ones. Interesting features in K-means clustering are that 1) we can specify the number of clusters we want to observe, and 2) we can point out the centroid of each cluster. We take advantage of these features to pinpoint the rebar location.
+
+Our code normalizes the signal amplitude of the migrated data frame from 0 to 1, gets all the data points where the amplitudes are above a threshold value. This allows us to get all the white data points to form a cluster around the white locations. Since we know the number of white points, we apply the K-means clustering algorithm to identify the :math:`(x, z)` coordinates of each centroid of the cluster. Detailed information is available on the docstrings in the code.
+
+
+
+
