@@ -157,12 +157,12 @@ def read_csv(directory):
     
     return df_1, df_2
 
-def config_to_variable(df_2):
+def config_to_variable(df):
     '''
-    Declares the items in df_2 (GPR configuration settings) as a variable dictionary.
+    Declares the items in df (GPR configuration settings) as a variable dictionary.
 
     Parameters:
-    - df_2: Pandas dataframe df_2 (GPR configuration settings).
+    - df: Pandas DataFrame with index representing variable names and a single column containing the values.
     
     Returns:
     - variables_dict: a dictionary to declare variables. (locals().update(result_variables))
@@ -170,16 +170,10 @@ def config_to_variable(df_2):
     # Create an empty dictionary to store variables
     variables_dict = {}
 
-    # Allocate variables for config dataframe (df_2)
-    for index, row in df_2.iterrows():
-        variable_name = row['Unnamed: 0']
-        variable_value = row['config']
-
-        # Assign the variable dynamically using locals()
-        locals()[variable_name] = variable_value
-
+    # Allocate variables for config dataframe (df)
+    for variable_name, variable_value in df.iterrows():
         # Store the variable in the dictionary
-        variables_dict[variable_name] = variable_value
+        variables_dict[variable_name] = variable_value[0]
     
     # Adjust the wave traveling time as 0 to value (sometimes position has negative value)
     if 'rhf_position' in variables_dict and variables_dict['rhf_position'] != 0:
