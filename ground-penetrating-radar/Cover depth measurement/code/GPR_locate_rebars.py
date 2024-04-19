@@ -153,7 +153,7 @@ def read_csv(directory):
     
     # Read dataframe
     df_1 = pd.read_csv(filepath_data, header=None)
-    df_2 = pd.read_csv(filepath_config)
+    df_2 = pd.read_csv(filepath_config, index_col=0)
     
     return df_1, df_2
 
