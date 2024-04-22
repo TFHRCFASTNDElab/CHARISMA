@@ -4,4 +4,5 @@ Collaborative Highway Asset Research: Integrated Sensor-Modeling Application (CH
 
 Please visit our user guide for a detailed explanation:
 
-[CHARISMA User Guide](https://tfhrcfastndelab.github.io/CHARISMA/)
+[**CHARISMA User Guide**](https://tfhrcfastndelab.github.io/CHARISMA/)
+
