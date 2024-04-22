@@ -10,6 +10,7 @@ from sklearn.preprocessing import minmax_scale
 from scipy.signal import find_peaks
 import sys 
 sys.path.append('/Workspace/Users/steve.yang.ctr@dot.gov/Pavement_thickness/')
+import GPR_locate_rebars as gpr_lr
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MultipleLocator, AutoMinorLocator
 import matplotlib.colors as mcolors

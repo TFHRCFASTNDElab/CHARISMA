@@ -173,7 +173,7 @@ def config_to_variable(df):
     # Allocate variables for config dataframe (df)
     for variable_name, variable_value in df.iterrows():
         # Store the variable in the dictionary
-        variables_dict[variable_name] = variable_value[0]
+        variables_dict[variable_name] = variable_value.iloc[0]
     
     # Adjust the wave traveling time as 0 to value (sometimes position has negative value)
     if 'rhf_position' in variables_dict and variables_dict['rhf_position'] != 0:
