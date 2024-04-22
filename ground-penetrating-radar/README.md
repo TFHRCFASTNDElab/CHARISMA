@@ -19,7 +19,7 @@
 
 ## Usage
 
-Visit [**CHARISMA User Guide**](https://tfhrcfastndelab.github.io/CHARISMA/), set up the environment, download data, and Jupyter notebooks.
+Visit [**CHARISMA User Guide**](https://tfhrcfastndelab.github.io/CHARISMA/) and read the documentation to set up the environment. Then download data, code, and Jupyter notebooks to utilize CHARISMA.
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
