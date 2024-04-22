@@ -9,6 +9,8 @@
 
 	Rebar corrosion (Will be updated soon)
 
+	Pavement thickness measurement
+
 
 - **notebooks:** Contains Jupyter notebook files for test & analysis
 
