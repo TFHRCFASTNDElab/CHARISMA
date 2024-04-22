@@ -19,7 +19,7 @@
 
 ## Usage
 
-Set up the Anaconda environment, download data, and follow the provided Jupyter notebooks with our case study documentation.
+Visit [**CHARISMA User Guide**](https://tfhrcfastndelab.github.io/CHARISMA/), set up the environment, download data, and Jupyter notebooks.
 
 We welcome the opportunity to share our work and receive feedback, bug reports, or any suggestions to enhance the development of our technology.
 
