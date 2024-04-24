@@ -130,7 +130,7 @@
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
+<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. Our code downloads the required GPR ZIP files directly from InfoBridge™ and automatically unzip all the ZIP files. To make our data processing transparent, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
 <p>GPR Data from FHWA InfoBridge™</p>
 <p>FHWA InfoBridge™ provides field data collections using various NDE technologies. We selected a bridge from Mississippi to illustrate the use of CHARIMSA for rebar identification (Structure number: 11000100240460B). The bridge name is I-10 over CEDAR LAKE ROAD, built-in 1970. The bridge type is a Prestressed Concrete Girder/Beam. The length of the bridge is 242.50 and the width is 59.40 ft, respectively.</p>
 <a class="reference internal image-reference" href="../../_images/infobridge.png"><img alt="figure 2" class="align-center" src="../../_images/infobridge.png" style="width: 1000px;" /></a>
@@ -164,8 +164,8 @@
 </section>
 <section id="jupyter-notebook-mississippi-bridge">
 <h2>Jupyter Notebook – Mississippi Bridge<a class="headerlink" href="#jupyter-notebook-mississippi-bridge" title="Link to this heading"></a></h2>
-<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page. Since the file size is too large for preview in GitHub, we recommend downloading the notebook on your personal device.</p>
-<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/Cover%20depth%20measurement/notebooks/Mississippi_bridge_cover_depth_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/Cover%20depth%20measurement/notebooks/cover_depth_measurement.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
 </section>
 <section id="code-explanation">
 <h2>Code Explanation<a class="headerlink" href="#code-explanation" title="Link to this heading"></a></h2>
@@ -181,7 +181,9 @@
 <section id="read-xml-file-and-data-format-conversion">
 <h3>Read XML File and Data Format Conversion<a class="headerlink" href="#read-xml-file-and-data-format-conversion" title="Link to this heading"></a></h3>
 <p>CHARISMA outputs rebar cover depth contour plots based on the XML file and ZIP files from the LTBP InfoBridge™. CHARISMA reads the XML file and automatically creates the data frame and visual plots of the GPR scan area. This data frame is used to generate the rebar cover depth contour map. The first step is specifying the directory path of the XML file, and using <code class="code docutils literal notranslate"><span class="pre">XMLReader</span></code> class in CHARISMA:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">xml_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:/User/Download/28-000002_2019-05-21_GPR.xml&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">home_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:/download/path/data/&#39;</span>
+
+<span class="nv">xml_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>home_dir<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;28-000002_2019-05-21_GPR.xml&#39;</span>
 
 <span class="nv">xml_reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>XMLReader<span class="o">(</span>xml_file<span class="o">)</span>
 
@@ -298,7 +300,7 @@ df_coord.loc<span class="o">[</span><span class="m">28</span>:31,<span class="w"
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright Federal Highway Administration (FHWA).</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
