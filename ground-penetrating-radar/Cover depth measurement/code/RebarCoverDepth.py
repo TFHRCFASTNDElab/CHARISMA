@@ -121,7 +121,6 @@ class RebarCoverDepth:
             rhf_spm = result_variables.get('rhf_spm')
             rhf_sps = result_variables.get('rhf_sps')
             rh_nsamp = result_variables.get('rh_nsamp')
-
             IQR_df_1 = gpr_lr.Interquartile_Range(df_1)
             IQR_df_1 = IQR_df_1.astype('float64')
             data_length_feet = (IQR_df_1.shape[1] / rhf_spm) * 3.28
@@ -190,7 +189,7 @@ class RebarCoverDepth:
         filepath_config = f"{directory}{'config'}{index}.csv"
 
         df_1 = pd.read_csv(filepath_data, header=None)
-        df_2 = pd.read_csv(filepath_config)
+        df_2 = pd.read_csv(filepath_config, index_col=0)
 
         return df_1, df_2
 
