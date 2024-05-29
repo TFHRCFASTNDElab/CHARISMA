@@ -1,0 +1,9 @@
+Copy each line and paste it into your web browser.
+
+https://infobridge.fhwa.dot.gov/Data/DownloadZippedLTBPFiles?fileID=698&fileName=GPR%20Zone%2001.zip
+
+https://infobridge.fhwa.dot.gov/Data/DownloadZippedLTBPFiles?fileID=699&fileName=GPR%20Zone%2002.zip
+
+https://infobridge.fhwa.dot.gov/Data/DownloadZippedLTBPFiles?fileID=700&fileName=GPR%20Zone%2003.zip
+
+https://infobridge.fhwa.dot.gov/Data/DownloadZippedLTBPFiles?fileID=701&fileName=GPR%20Zone%2004.zip
