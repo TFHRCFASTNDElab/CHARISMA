@@ -20,7 +20,7 @@ Click the green "Code" button and "Download ZIP" to download CHARISMA.
 We recommend using Anaconda to simplify the environment setup. Anaconda is commonly used for managing Python packages in user-defined environments. In other words, it allows you to create isolated environments for different projects, each with its own set of dependencies, without interfering with the system-wide Python installation. This is particularly useful in data science and scientific computing where projects may have different requirements and dependencies. First, download Anaconda by clicking the image below.
 
 .. image:: _static/Anaconda_Logo.png
-   :width: 300
+   :width: 100
    :target: https://www.anaconda.com/download
    :alt: anaconda
 

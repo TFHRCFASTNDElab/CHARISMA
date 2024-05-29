@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corrosion Assessment &mdash; CHARISMA 04/09/2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=a6eb682e" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=c8a63458"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Density Profiling System" href="../../DPS/index.html" />
+    <link rel="prev" title="Cover Depth Measurement" href="Cover_depth_measurement.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CHARISMA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_charisma.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using CHARISMA</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../anaconda_installation.html">Anaconda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../databricks.html">Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">NDE techniques</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Ground Penetrating Radar</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Physical_principle.html">Physical Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../open_data.html">Open Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">NDE Applications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Rebar_mapping.html">Rebar Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cover_depth_measurement.html">Cover Depth Measurement</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Corrosion Assessment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction-to-reinforcement-corrosion">Introduction to Reinforcement Corrosion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objectives-of-the-case-study">Objectives of the Case Study</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#corrosion-assessment-results">Corrosion Assessment Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#discussion">Discussion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-mississippi-bridge">Jupyter Notebook – Mississippi Bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code-explanation">Code Explanation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../DPS/index.html">Density Profiling System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HCP/index.html">Half Cell Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ER/index.html">Electrical Resistivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../IE/index.html">Impact Echo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PAUT/index.html">Phased Array Ultrasonic Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../env.html">Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CHARISMA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Ground Penetrating Radar</a></li>
+          <li class="breadcrumb-item"><a href="index.html">NDE Applications</a></li>
+      <li class="breadcrumb-item active">Corrosion Assessment</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/docs/GPR/Applications/Corrosion.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="corrosion-assessment">
+<h1>Corrosion Assessment<a class="headerlink" href="#corrosion-assessment" title="Link to this heading"></a></h1>
+<section id="introduction-to-reinforcement-corrosion">
+<h2>Introduction to Reinforcement Corrosion<a class="headerlink" href="#introduction-to-reinforcement-corrosion" title="Link to this heading"></a></h2>
+<p>Corrosion is an electrochemical process that converts a metal into a more thermodynamically stable oxide. The rust (Fe<sub>2</sub>O<sub>3</sub>·xH<sub>2</sub>O) on steel (Fe) is one of the most common examples of a corrosion byproduct. The presence of water is crucial for this process, as it allows the oxygen to react with the electrons on the surface of the steel. The electrochemical process always includes two chemical reactions: oxidation and reduction. Oxidation is the loss of electrons, while reduction is the gain of electrons.</p>
+<p>Oxidation of Steel: 2Fe → 4e<sup>-</sup> + 2Fe<sup>2+</sup></p>
+<p>Reduction of Water: 4e<sup>-</sup> + 2H<sub>2</sub>O + O<sub>2</sub> → 4OH<sup>-</sup></p>
+<p>Steel/water interface: 2Fe<sup>2+</sup> + 4OH<sup>-</sup> → 2Fe(OH)<sub>2</sub> → Fe<sub>2</sub>O<sub>3</sub>·xH<sub>2</sub>O</p>
+<p>In a concrete bridge, the rebars are surrounded by concrete. If the concrete is soaked with ions (mostly chloride ions), corrosion can occur on the rebar surface. The rebars (steel) form a crystal structure (Base Centered Cubic), and when corrosion occurs, the molecular arrangement changes due to the formation of the corrosion byproduct, which occupies more space than refined steel. This causes pressure on the surrounding concrete, resulting in cracks. Figure 1 shows the type of crack in a concrete bridge due to corrosion. Figure 2 displays the bridge deck specimen located at Turner Fairbank Highway Research Center (TFHRC), showing actual delamination along the rebars due to the corrosive environment.</p>
+<a class="reference internal image-reference" href="../../_images/Figure_1.jpg"><img alt="figure 1" class="align-center" src="../../_images/Figure_1.jpg" style="width: 1000px;" /></a>
+<p>Figure 1. Type of crack on the concrete bridge due to the corrosion.</p>
+<a class="reference internal image-reference" href="../../_images/Figure_2.png"><img alt="figure 2" class="align-center" src="../../_images/Figure_2.png" style="width: 1000px;" /></a>
+<p>Figure 2. Bridge deck sample located at TFHRC. The right figure shows delamination along the rebars due to the corrosion.</p>
+<p>GPR uses electromagnetic (EM) wave to investigate below the surface. Since EM waves travel at different speeds at different media (the wave speed is slower in higher dielectric, and faster in lower dielectric media), GPR is widely accepted for identifying concrete’s corrosive environment.(Dinh et al., 2017; Faris et al., 2023; Imperatore &amp; Rinaldi, 2019; Solla et al., 2019) Specifically, the GPR signal on corrosive area tend to be attenuated compared to the healthy rebar, because the presence of cracks or corrosion byproducts cause the scattering of GPR signals.(Tešić et al., 2021; Zaki et al., 2018) However, some researches have shown that the signal can be enhanced when the cracking is longitudinal and specific type of corrosion byproduct is stacked along with the crack direction.(Hong et al., 2022) Here we exclude these uncommon cases and consider a general corrosive environment or delamination cases.</p>
+<p>We follow the ASTM D6087 standard method, “Standard Test Method for Evaluating Asphalt-Covered Concrete Bridge Decks Using Ground Penetrating Radar”.(ASTM International, 2022)  In this procedure, the reflection amplitudes among rebars are compared to assess their condition. The assessment is done on a logarithmic scale, where the amplitude differences among the rebar signals are calculated relative to the rebar with the highest reflection amplitude, considered the healthy rebar.</p>
+<p>The reflection amplitudes are converted to a logarithmic scale using the following equation:</p>
+<p><span class="math notranslate nohighlight">\(A_{dB} = 20 \log_{10}(A)\)</span>,</p>
+<p>where <span class="math notranslate nohighlight">\(A_{dB}\)</span> is the reflection amplitude in decibels, and <span class="math notranslate nohighlight">\(A\)</span> is the reinforcing reflection amplitude in data units. After converting the GPR signals to decibels, we subtract each signal’s amplitude from the maximum decibel value among all signals. These subtracted values are then displayed as contour maps on the bridge deck. Locations where the signal is below -6 to -8 dB are suspected to be under corrosive environments.(ASTM International, 2022)</p>
+<p>To achieve our objective, first we need to identify the rebars from GPR B-scan data. Secondly, list all the amplitudes according with the coordinates. Then convert them into decibel scales, and lastly subtract all the decibels from the maximum value to plot the 2D contour map.</p>
+</section>
+<section id="objectives-of-the-case-study">
+<h2>Objectives of the Case Study<a class="headerlink" href="#objectives-of-the-case-study" title="Link to this heading"></a></h2>
+<p>This case study aims to provide a Python-based solution to processing GPR data for assessing corrosion on rebars of the concrete bridges and output 2D amplitude contour plots. It will give a high-level summarized report, followed by a detailed explanation about how we processed the data. Here we leverage actual GPR data from the concrete bridge located at Mississippi I-10. The NDE data is downloadable at FHWA LTBP InfoBridge™.</p>
+<a class="reference external image-reference" href="https://infobridge.fhwa.dot.gov/Data"><img alt="infobridge_logo" src="../../_images/LTBP_Bridge_thumbnail.png" style="width: 300px;" /></a>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Readers are redirected to the <code class="code docutils literal notranslate"><span class="pre">USING</span> <span class="pre">CHARISMA</span></code> section to install the CHARISMA environment. For the transparency, we convert the data format from DZT to CSV. This part is explained in the <a class="reference internal" href="../open_data.html"><span class="doc">Open Data</span></a> section.</p>
+<p>The detailed data information is available in our Cover Depth Measurement case study, by clicking the following link: <a class="reference internal" href="rebar_cover_depth_case_study.html#prerequisites-section"><span class="std std-ref">Prerequisites</span></a>.</p>
+</section>
+<section id="corrosion-assessment-results">
+<h2>Corrosion Assessment Results<a class="headerlink" href="#corrosion-assessment-results" title="Link to this heading"></a></h2>
+<p>Executing our code along with proper input variables, it automatically outputs interpolated rebar signal amplitudes in decibel unit. Figure 5 (a), (b), and (c) shows the pinpointed rebar signals on the split GPR B-scans. Our code reads the absolute amplitude values right on the rebar signals, save as a list. Subsequently, the code concatenates the split B-scans and generates 2D scatter plots for the entire data and splits the concatenated B-scans again to plot the 2D scatter plots along the actual four GPR scan lines (Figure 5 (d) and (e)). To check how the rebar signal amplitudes vary, we also output the amplitude distribution histogram on each lane (4 GPR lines), shown in Figure 5 (g).</p>
+<a class="reference internal image-reference" href="../../_images/Figure_3.png"><img alt="figure 3" class="align-center" src="../../_images/Figure_3.png" style="width: 1000px;" /></a>
+<p>Figure 3. CHARISMA outputs from Mississippi I-10 Region 01 rebar cover depth for the first 4 GPR scan lines. Figure 3 (a), (b), and (c) are the rebar mapping result (3 examples among 20 split B-scans), (d) and (e) show the rebar coordinates, (f) displays the rebar amplitude distribution histogram, and (g) exhibits the interpolated 2D contour map.</p>
+<p>Figure 4 shows the output of processing GPR data with CHARISMA, which is the interpolated 2D contour from the entire lanes in the bridge Zone 01. Figure 4 (a) follows the ASTM standard, stating the rebar signals below -6 or -8 dB is suspected to be under corrosive environment. Figure 4 (b) is a rainbow contour map, which is also used in LTBP InfoBridge™. We repeat this process for the other zones to gather all the rebar points on the entire bridge.</p>
+<a class="reference internal image-reference" href="../../_images/Figure_4.png"><img alt="figure 4" class="align-center" src="../../_images/Figure_4.png" style="width: 1000px;" /></a>
+<p>Figure 4. Interpolated reinforcing reflection amplitude 2D contour from the entire lanes in the bridge Zone 01. (a) follows the ASTM standard and (b) uses rainbow contour map. The black circle shows the reference points that have the maximum amplitude among each lane.</p>
+<p>Once we have obtained the rebar points from all regions, CHARISMA generates the rebar cover depth contour map for the entire bridge. It combines all the rebar point lists from individual regions and establishes a grid space based on the XML file. For each colormap (ASTM and rainbow), There are two options available: one involves plotting without interpolating the gap among regions (Figure 5 and 6 (a)), while the other interpolates the entire bridge based on the gathered rebar points (Figure 5 and 6 (b)). Since we use the linear interpolation method, there is no available value for the edges, which is shown in grey color.</p>
+<a class="reference internal image-reference" href="../../_images/Figure_5.png"><img alt="figure 5" class="align-center" src="../../_images/Figure_5.png" style="width: 1000px;" /></a>
+<p>Figure 5. CHARISMA output (ASTM style): 2D contour plot of reinforcing reflection amplitude on Mississippi I-10 concrete bridge without interpolating the gap among regions (a), and with interpolating the entire bridge (b).</p>
+<a class="reference internal image-reference" href="../../_images/Figure_6.png"><img alt="figure 6" class="align-center" src="../../_images/Figure_6.png" style="width: 1000px;" /></a>
+<p>Figure 6. CHARISMA output (Rainbow colormap): 2D contour plot of reinforcing reflection amplitude on Mississippi I-10 concrete bridge without interpolating the gap among regions (a), and with interpolating the entire bridge (b).</p>
+</section>
+<section id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Link to this heading"></a></h2>
+<p><strong>How do we use CHARISMA to solve the problem?</strong></p>
+<p>CHARISMA successfully measured the reinforcing reflection amplitude on the concrete bridge at Mississippi I-10 to assess its corrosive environment. Our approach begins by leveraging the XML file containing the actual GPR scan coordinates to correlate with the GPR data. Then, we process GPR data based on the raw data analysis, pinpoint rebar coordinates with the K-means clustering algorithm, and concatenate all the rebar points from different regions with the offset correction. Finally, we interpolate the points to populate the grid space, ensuring it matches the dimensions of the bridge. All the details are organized in <a class="reference internal" href="corrosion_case_study.html#code-explanation-corrosion-section"><span class="std std-ref">Code Explanation</span></a> section.</p>
+<p><strong>What limitations have been reminded of?</strong></p>
+<p>Our corrosion assessment method shares the same limitations as the Cover Depth measurement because the code algorithms are largely the same. While the F-K migration and K-means clustering algorithms produce reasonable results, they are not robust and are difficult to automate for data processing. For more details, readers are encouraged to refer to the <a class="reference internal" href="rebar_cover_depth_case_study.html#discussion-reber-cover-depth-section"><span class="std std-ref">Discussion</span></a> section of the Cover Depth Measurement case study.</p>
+<p>Additionally, the amplitude map is not depth-corrected. In principle, the signal attenuates more as the wave propagates deeper, resulting in weaker amplitudes for deeper rebars. This means our current methodology may struggle to distinguish between corrosive rebars and deep rebars. Several researchers suggest correcting the signal amplitude for depth using the attenuation equation, but there are multiple methods for this correction, and no standard approach has been established. Furthermore, the rebar depths in a bridge are relatively similar, so depth correction may not make a significant difference.</p>
+<p>Comprehensively, this approach still requires manual raw data analysis and setting appropriate parameters for code input, indicating that the code is not fully automated to get the result. Our focus currently lies on utilizing machine learning tools to locate rebars without relying on migration or the K-means clustering algorithm, aiming for complete automation of the corrosion assessment.</p>
+</section>
+<section id="jupyter-notebook-mississippi-bridge">
+<h2>Jupyter Notebook – Mississippi Bridge<a class="headerlink" href="#jupyter-notebook-mississippi-bridge" title="Link to this heading"></a></h2>
+<p>We provide our Jupyter notebook to show how the code is utilized to get the results. Clicking the image below will redirect you to our notebook on CHARISMA’s GitHub page.</p>
+<a class="reference external image-reference" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/Rebar%20corrosion/notebooks/corrosion_notebook.ipynb"><img alt="ipynb_icon" src="../../_images/ipynb_icon.png" style="width: 125px;" /></a>
+</section>
+<section id="code-explanation">
+<span id="code-explanation-corrosion-section"></span><h2>Code Explanation<a class="headerlink" href="#code-explanation" title="Link to this heading"></a></h2>
+<p>The code algorithm is very similar to that used for Cover Depth Measurement. For cover depth, we first locate the rebars on the GPR B-scans and measure the distance between the surface of the rebars and the surface of the concrete. For corrosion, we locate the rebars and measure the rebar signal amplitude. Therefore, the code function used for corrosion assessment is mostly the same. However, the cover depth code processes the data in inches, while the corrosion code does not convert the units and processes the data as is. This difference arises from the distinct objectives: cover depth measures the distance, whereas corrosion measures the amplitude at specific coordinates.</p>
+<p>For this reason, readers are directed to <a class="reference internal" href="rebar_cover_depth_case_study.html#code-explanation-rebar-cover-depth-section"><span class="std std-ref">Code Explanation</span></a> section from the Cover Depth Measurement, as the input parameters for the code are identical. We will also compare the two applications, highlighting the differences in the code.</p>
+<section id="corrosion-assessment-details">
+<h3>Corrosion Assessment Details<a class="headerlink" href="#corrosion-assessment-details" title="Link to this heading"></a></h3>
+<p>We first process the GPR B-scans with time-zero correction, background removal, F-K migration, and contrast adjustment. In accordance with the ASTM standards, we use the migrated data without any visual modifications (as contrast adjustment can alter the amplitude and affect the decibel values) to obtain the amplitude signals on the rebars.</p>
+<p>After mapping the rebars (unitless) with the migrated data, we create a Pandas dataframe to process further, as shown in Figure 7. In the dataframe, the rebar coordinate x represents the GPR survey line, and y represents the wave travel time. Since the rebar coordinates are not integers (the data is discrete and the amplitude between two data points is unknown), we use the <code class="code docutils literal notranslate"><span class="pre">SciPy</span> <span class="pre">interp2d</span></code> function to determine the amplitude at the exact points. Then, we convert the amplitude to a logarithmic scale in decibels and subtract it from the maximum dB value.</p>
+<a class="reference internal image-reference" href="../../_images/Figure_7.png"><img alt="figure 7" class="align-center" src="../../_images/Figure_7.png" style="width: 1000px;" /></a>
+<p>Figure 7. (a) table is an output from the <code class="code docutils literal notranslate"><span class="pre">extract_reinforcing_reflection_amplitude</span></code> function, the first 20 rows in corrosion assessment data processing and the rows with the maximum amplitude. (b) shows the rebar points (red line) on the GPR a-scans to check whether the interpolation works correctly or not.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Cover_depth_measurement.html" class="btn btn-neutral float-left" title="Cover Depth Measurement" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../DPS/index.html" class="btn btn-neutral float-right" title="Density Profiling System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Federal Highway Administration (FHWA).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

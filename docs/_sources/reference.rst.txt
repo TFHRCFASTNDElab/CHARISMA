@@ -13,11 +13,21 @@ ASTM International. (1999). Standard Test Method for Splitting Tensile Strength 
 
 ASTM International. (2001). Standard Test Method for Compressive Strength of Cylindrical Concrete Specimens 1 - ASTM C39/C39M - Standard. Annual Book of ASTM Standards, 04.02(July), 1–7. https://doi.org/10.1520/C0039
 
+ASTM International. (2022). Standard Test Method for Evaluating Asphalt-Covered Concrete Bridge Decks Using Ground Penetrating Radar, 1–6. https://doi.org/10.1520/D6087-22
+
 Cook, Samantha N et al. 2022. “Automated Ground-Penetrating-Radar Post-Processing Software in R Programming.”
+
+Dinh, K., Gucunski, N., Kim, J., & Duong, T. H. (2017). Method for attenuation assessment of GPR data from concrete bridge decks. NDT and E International, 92(March), 50–58. https://doi.org/10.1016/j.ndteint.2017.07.016
+
+Faris, N., Zayed, T., Abdelkader, E. M., & Fares, A. (2023). Corrosion assessment using ground penetrating radar in reinforced concrete structures: Influential factors and analysis methods. Automation in Construction, 156(April), 105130. https://doi.org/10.1016/j.autcon.2023.105130
+
+Hong, S., Chen, D., & Dong, B. (2022). Numerical simulation and mechanism analysis of GPR-based reinforcement corrosion detection. Construction and Building Materials, 317(December 2021), 125913. https://doi.org/10.1016/j.conbuildmat.2021.125913
 
 Huber, Emanuel, and Guillaume Hans. 2018. “RGPR—An Open-Source Package to Process and Visualize GPR Data.” In 2018 17th International Conference on Ground Penetrating Radar (GPR), IEEE, 1–4.
 
 GSSI (Geophysical Survey Systems). Inc. 2017. “RADAN 7 Manual.”
+
+Imperatore, S., & Rinaldi, Z. (2019). Cracking in Reinforced Concrete Structures Damaged by Artificial Corrosion: An Overview. The Open Construction & Building Technology Journal, 13(1), 199–213. https://doi.org/10.2174/1874836801913010199
 
 Jol, Harry M. 2008. Ground Penetrating Radar Theory and Applications. elsevier.
 
@@ -31,9 +41,14 @@ Nesbitt, Ian et al. 2022. “Readgssi: An Open-Source Tool to Read and Plot GSSI
 
 Poluha, Bruno et al. 2017. “Depth Estimates of Buried Utility Systems Using the GPR Method: Studies at the IAG/USP Geophysics Test Site.” International Journal of Geosciences 08(05): 726–42.
 
+Solla, M., Lagüela, S., Fernández, N., & Garrido, I. (2019). Assessing rebar corrosion through the combination of nondestructive GPR and IRT methodologies. Remote Sensing, 11(14). https://doi.org/10.3390/rs11141705
+
 Stolt, R. H. 1978. “Migration By Fourier Transform.” Geophysics 43(1): 23–48.
+
+Tešić, K., Baričević, A., & Serdar, M. (2021). Non-destructive corrosion inspection of reinforced concrete using ground-penetrating radar: A review. Materials, 14(4), 1–20. https://doi.org/10.3390/ma14040975
 
 Xu, Xiaoyin, Eric L. Miller, and Carey M. Rappaport. 2003. “Minimum Entropy Regularization in Frequency-Wavenumber Migration to Localize Subsurface Objects.” IEEE Transactions on Geoscience and Remote Sensing 41(8): 1804–12.
 
 Yelf, Richard. 2004. “Where Is True Time Zero?” Proceedings of the Tenth International Conference Ground Penetrating Radar, GPR 2004 1(February 2004): 279–82.
 
+Zaki, A., Johari, M. A. M., Hussin, W. M. A. W., & Jusman, Y. (2018). Experimental Assessment of Rebar Corrosion in Concrete Slab Using Ground Penetrating Radar (GPR). International Journal of Corrosion, 2018. https://doi.org/10.1155/2018/5389829

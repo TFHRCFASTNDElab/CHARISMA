@@ -3,7 +3,7 @@ Databricks
 ******************************
 
 .. image:: _static/databricks-logo.png
-   :width: 350
+   :width: 100
    :target: https://www.databricks.com/
    :alt: db
 
