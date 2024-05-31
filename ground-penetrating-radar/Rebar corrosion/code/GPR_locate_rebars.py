@@ -697,19 +697,13 @@ def locate_rebar_consecutive_discrete(migrated_data, velocity, rhf_range, rh_nsa
     depth = (velocity/2) * rhf_range # one way travel (m)
     depth_per_point = depth / rh_nsamp # (m)
     depth_per_point_inch =  depth_per_point * 39.37  #(inch)
-    fig, ax = plt.subplots(figsize=(15, 12))
 
     new_min = 0
     new_max = 1
 
     # Normalize the data
     normalized_migrated_data = custom_minmax_scale(migrated_data, new_min, new_max)
-    
-     # Plot the heatmap with custom colormap
-    cmap = plt.cm.Greys_r
-    norm = mcolors.Normalize(vmin=vmin, vmax=vmax)
-    heatmap = ax.imshow(normalized_migrated_data, cmap=cmap, norm=norm)
-    cbar = plt.colorbar(heatmap, ax=ax, shrink=0.5)
+
     # Create meshgrid of indices
     x_indices, y_indices = np.meshgrid(np.arange(normalized_migrated_data.shape[1]), np.arange(normalized_migrated_data.shape[0]))
     threshold = amplitude_threshold  # Adjust this threshold based on your data
@@ -778,18 +772,4 @@ def locate_rebar_consecutive_discrete(migrated_data, velocity, rhf_range, rh_nsa
     # Convert back to numpy array 
     filtered_cluster_centers = np.array(filtered_cluster_centers)
 
-    # Overlay scatter points at filtered cluster centers
-    ax.scatter(filtered_cluster_centers[:, 0], filtered_cluster_centers[:, 1],
-                         c='red', marker='o', s=30, edgecolors='black')
-
-    # Set labels for axes
-    ax.set_xlabel('GPR Survey line', fontsize=20)
-    ax.set_ylabel('Depth', fontsize=20)
-    ax.set_aspect(1)
-    #ax.set_ylim(15, 0)
-    cbar.ax.tick_params(labelsize=14)  # Adjust the font size as needed
-
-    # Set font size for axis labels and ticks
-    ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
-    plt.show()
     return filtered_cluster_centers

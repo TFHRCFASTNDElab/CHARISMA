@@ -1,11 +1,14 @@
 import pandas as pd
 import numpy as np
+import copy
 from scipy.interpolate import griddata
 from scipy.interpolate import interp2d
+from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 import GPR_locate_rebars as gpr_lr
 import warnings
 warnings.filterwarnings('ignore')
+import matplotlib.colors as mcolors
 from matplotlib.colors import LinearSegmentedColormap
 
 class CorrosionAssessment:
@@ -165,9 +168,11 @@ class CorrosionAssessment:
             contrasted_list.append(contrasted)
             located_list.append(located)
             
-            db_df, max_row, max_amplitude = self.extract_reinforcing_reflection_amplitude(migrated, located, self.chunk_size)
+            updated_located = self.update_located_with_peaks(time0ed, located)
+            self.plot_migrated_data_with_rebar(contrasted, updated_located)
+            db_df, max_row, max_amplitude = self.extract_reinforcing_reflection_amplitude(time0ed, updated_located, self.chunk_size)
             max_row_list.append(max_row)
-            result_data = self.make_consecutive_rebar_unitless(located, self.chunk_size)
+            result_data = self.make_consecutive_rebar_unitless(updated_located, self.chunk_size)
             offset = self.determine_min_offset_unitless(result_data, rhf_spm, df_process, offset_range=(0, 10))
             print('The offset is:', offset, 'feet')
             split_dfs, split_points = self.split_amplitude_df(db_df, df_process, IQR_df_1, rhf_spm, offset, i)
@@ -287,15 +292,104 @@ class CorrosionAssessment:
     
         return located, Ppos, time0ed, gained, dewowed, bgrmed, migrated, contrasted
     
+    def update_located_with_peaks(self, time0ed, located, prominence=1, distance=40, width=5):
+        """
+        Update the 'located' array by replacing the second element in each sub-array with the index of the peak.
+        
+        Parameters:
+        - time0ed: List of DataFrames containing the z values
+        - located: List of arrays containing the rebar coordinates
+        - prominence: Prominence parameter for find_peaks
+        - distance: Distance parameter for find_peaks
+        - width: Width parameter for find_peaks
+        
+        Returns:
+        - updated_located: List of arrays with updated peak indices
+        """
+        updated_located = copy.deepcopy(located)
+        
+        for tz, rebar in zip(time0ed, updated_located):
+            x = tz.columns.values
+            y = tz.index.values
+    
+            # Get the z values
+            z = tz.values
+            
+            # Create the interpolation function
+            interp_func = interp2d(x, y, z, kind='linear')
+            
+            for i in rebar:
+
+                # Interpolate the specific row
+                interp_row = interp_func(i[0], x)
+                interp_row_1d = interp_row.flatten()
+                
+                # Find peaks
+                peaks, _ = find_peaks(interp_row_1d, prominence=prominence, distance=distance, width=width)
+                if len(peaks) > 0:
+                    # Check if the difference between i[1] and peaks[0] is above 10
+                    if abs(i[1] - peaks[0]) > 10:
+                        i[1] = i[1]  # Set to default value if the difference is above 10
+                    else:
+                        i[1] = peaks[0]
+                else:
+                    i[1] = i[1]
+
+        return updated_located
+    
+    def custom_minmax_scale(self, data, new_min, new_max):
+        min_val = data.min()
+        max_val = data.max()
+        scaled_data = ((data - min_val) / (max_val - min_val)) * (new_max - new_min) + new_min
+        return scaled_data
+    
+    def plot_migrated_data_with_rebar(self, migrated, located, new_min=0, new_max=1):
+        """
+        Plot migrated data as a heatmap and overlay rebar locations as scatter points.
+        
+        Parameters:
+        - migrated: List of 2D arrays representing the migrated data
+        - located: List of 2D arrays representing rebar locations
+        - new_min: Minimum value for normalization
+        - new_max: Maximum value for normalization
+        """
+        for mg, rebar in zip(migrated, located):
+            fig, ax = plt.subplots(figsize=(15, 12))
+    
+            # Normalize the data
+            normalized_migrated_data = self.custom_minmax_scale(mg, new_min, new_max)
+    
+            # Plot the heatmap with custom colormap
+            cmap = plt.cm.Greys_r
+            norm = mcolors.Normalize(vmin=0.15, vmax=0.7)
+            heatmap = ax.imshow(normalized_migrated_data, cmap=cmap, norm=norm)
+            cbar = plt.colorbar(heatmap, ax=ax, shrink=0.5)
+    
+            temp_rebar = np.array(rebar)
+    
+            # Overlay scatter points at filtered cluster centers
+            ax.scatter(temp_rebar[:, 0], temp_rebar[:, 1],
+                       c='red', marker='o', s=30, edgecolors='black')
+    
+            # Set labels for axes
+            ax.set_xlabel('GPR Survey line', fontsize=20)
+            ax.set_ylabel('Depth', fontsize=20)
+            ax.set_aspect(1)
+            cbar.ax.tick_params(labelsize=14)  # Adjust the font size as needed
+    
+            # Set font size for axis labels and ticks
+            ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
+            plt.show()
+
     def amplitude_to_dB(self, amplitude):
         return 20 * np.log10(np.abs(amplitude))
 
-    def extract_reinforcing_reflection_amplitude(self, migrated, located, length):
+    def extract_reinforcing_reflection_amplitude(self, time0ed, located, length):
         '''
         Extracts the amplitude of rebars from migrated GPR data.
         
         Parameters:
-        - migrated: list of migrated dataframes containing GPR scan data.
+        - time0ed: list of time0ed dataframes containing GPR scan data.
         - located: list of arrays containing rebar coordinates.
         - length: length of each split B-scan segment.
         
@@ -307,11 +401,9 @@ class CorrosionAssessment:
         rebar_loc_x = [element[:, 0] for element in located]
         rebar_loc_y = [element[:, 1] for element in located]
     
-        migrated_df = [pd.DataFrame(df) for df in migrated]
-    
         full_df_list = []
         
-        for index, temp_df in enumerate(migrated_df):
+        for index, temp_df in enumerate(time0ed):
     
             # Get the x and y coordinates
             x = temp_df.columns.values
@@ -322,28 +414,35 @@ class CorrosionAssessment:
     
             # Create the interpolation function
             interp_func = interp2d(x, y, z, kind='linear') 
-    
+            
+            #append amplitude at the rebar locations
             amplitude_list = []
             for rx, ry in zip(rebar_loc_x[index], rebar_loc_y[index]):
                 amplitude = interp_func(rx, ry)[0]
                 amplitude_list.append(amplitude)
-    
+               
+            # create dataframe for rebar_x, rebar_y, amplitude
             xyz_df = pd.DataFrame(    
             {'rebar_loc_x': rebar_loc_x[index],
              'rebar_loc_y': rebar_loc_y[index],
              'amplitude': amplitude_list
             })
+            #remove negative amplitude signals
+            xyz_df = xyz_df[xyz_df['amplitude'] >= 0]
             full_df_list.append(xyz_df)
         
+        #make rebar_x consecutive    
         for i, df in enumerate(full_df_list):
             df['rebar_loc_x'] += i * length
-            
+        
+        #convert amplitude to decibels
         db_df = pd.concat(full_df_list)
         db_df.reset_index(drop=True, inplace=True)
         db_df['dB'] = self.amplitude_to_dB(db_df['amplitude'])
         
+        #get Amax - A (dB)
         max_dB = db_df['dB'].max()
-        db_df['subtract_from_max_dB'] = db_df['dB'] - max_dB
+        db_df['subtract_from_max_dB'] = db_df['dB'] - max_dB + 0.00001 #trick for the interpolation (contour goes weird if the value is exactly 0)
     
         max_row = db_df[db_df['dB']==db_df['dB'].max()]
         max_amplitude = max_row['amplitude'].values[0]
@@ -558,14 +657,6 @@ class CorrosionAssessment:
             y_indices = np.searchsorted(Y, lin_y, side='right') - 1
             result_grid[y_indices, x_indices] = list(split_dfs[i]['subtract_from_max_dB'].values)  # Use the second column as Z values
         
-        if df_process.iloc[0]['Scan_dir'] == 1:
-            ref_x = ref_x + np.array(df_process['Start_X'])[i] 
-        else:
-            ref_x = ref_x + np.array(df_process['End_X'])[i]
-
-        ref_y = y_points[ref_df_index][y_index]
-        ref_tuple = ref_x, ref_y
-        print('Reference point is:', ref_tuple)
         # Collect non-zero points
         nonzero_indices = np.nonzero(result_grid)
     
@@ -602,8 +693,13 @@ class CorrosionAssessment:
     
         # Set label for colorbar
         cbar.set_label('Amplitude (dB)')
-        
-        plt.scatter(ref_x, ref_y, color='black', marker='x')
+        max_idx = np.unravel_index(np.nanargmax(result_grid_interp), result_grid_interp.shape)
+        max_x = X_grid[max_idx]
+        max_y = Y_grid[max_idx]
+        ref_tuple = max_x, max_y
+        print('Reference point is:', ref_tuple)
+        plt.scatter(max_x, max_y, color='black', marker='x')
+
         plt.title('Contour Plot of Reinforcing Reflection Amplitude with Lane {:02d}'.format(int(lane_number+1)))
     
         plt.gca().set_aspect('equal', adjustable='box')
@@ -782,15 +878,10 @@ class CorrosionAssessment:
         # Plot the contour using imshow
         plt.figure(figsize=(15, 12))
         plt.imshow(result_interp_fine, extent=(X_fine.min(), X_fine.max(), Y_fine.min(), Y_fine.max()),
-                   aspect='auto', cmap='gist_rainbow', origin='lower', vmin=-12, vmax=0)
+                   aspect='auto', cmap='rainbow_r', origin='lower', vmin=-12, vmax=0)
     
         # Custom colorbar with defined ticks
         cbar = plt.colorbar(orientation='horizontal', shrink=0.8, pad=0.09)
-        
-        # Set custom tick labels
-        # Set the colorbar ticks and labels
-        cbar.set_ticks([-12, -8, -6, 0])
-        cbar.ax.set_xticklabels(['-12', '-8', '-6', '0'], fontsize=16)
         
         # Set label for colorbar
         cbar.set_label('Amplitude (dB)', fontsize=17)
