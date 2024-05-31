@@ -259,10 +259,10 @@ class ContourProcessor:
         plt.figure(figsize=(20, 12))
 
         # Plot each zone individually using imshow
-        plt.imshow(result_interp_fine1, extent=extent1, aspect='auto', cmap='gist_rainbow', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
-        plt.imshow(result_interp_fine2, extent=extent2, aspect='auto', cmap='gist_rainbow', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
-        plt.imshow(result_interp_fine3, extent=extent3, aspect='auto', cmap='gist_rainbow', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
-        plt.imshow(result_interp_fine4, extent=extent4, aspect='auto', cmap='gist_rainbow', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
+        plt.imshow(result_interp_fine1, extent=extent1, aspect='auto', cmap='rainbow_r', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
+        plt.imshow(result_interp_fine2, extent=extent2, aspect='auto', cmap='rainbow_r', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
+        plt.imshow(result_interp_fine3, extent=extent3, aspect='auto', cmap='rainbow_r', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
+        plt.imshow(result_interp_fine4, extent=extent4, aspect='auto', cmap='rainbow_r', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
 
         # Set the background color of the figure
         plt.gca().set_facecolor('lightgrey')
@@ -330,7 +330,7 @@ class ContourProcessor:
         plt.figure(figsize=(20, 12))
 
         # Plot each zone individually using imshow
-        plt.imshow(result_interp_fine, extent=extent, aspect='auto', cmap='gist_rainbow', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
+        plt.imshow(result_interp_fine, extent=extent, aspect='auto', cmap='rainbow_r', interpolation='bilinear', origin='lower', alpha=1, vmin=-12, vmax=0)
 
         # Set the background color of the figure
         plt.gca().set_facecolor('lightgrey')

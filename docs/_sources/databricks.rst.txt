@@ -39,7 +39,7 @@ URL: https://dbc-76d86e80-ff34.cloud.databricks.com/
    
 4. Paste the following address into the “Git repository URL”: 
 
-https://github.com/TFHRCFASTNDElab/CHARISMA/ 
+:code:`https://github.com/TFHRCFASTNDElab/CHARISMA/`
 
 Then the Git provider and Git folder name will be automatically filled.
 
@@ -51,14 +51,30 @@ Then the Git provider and Git folder name will be automatically filled.
 .. raw:: html
    
    <br>
+
+5. Databricks does not allow Git operations on a GitHub repository larger than 200MB. Therefore, we need to specify only the directories we use. Enable "Sparse checkout mode" and specify the following directories:
+
+.. code-block:: bash
+
+    environment
+    ground-penetrating-radar
+    
+.. image:: _static/db_new.png
+   :width: 400
+   :alt: new
+   :align: center
    
-5. Click Create Git folder.
+.. raw:: html
+   
+   <br>
+
+6. Click Create Git folder.
 
 .. raw:: html
    
    <br>
 
-6. Click the branch icon with “main”.
+7. Click the branch icon with “main”.
 
 .. image:: _static/db5.png
    :width: 300
@@ -69,7 +85,7 @@ Then the Git provider and Git folder name will be automatically filled.
    
    <br>
 
-7. Click “Branch: main” and change it as DataBricks.
+8. Click “Branch: main” and change it as DataBricks.
 
 .. image:: _static/db6.png
    :width: 400
@@ -80,7 +96,7 @@ Then the Git provider and Git folder name will be automatically filled.
    
    <br>
    
-8. Exit the white screen after confirming the branch has set with Databricks.
+9. Exit the white screen after confirming the branch has set with Databricks.
 
 .. image:: _static/db7.png
    :width: 400
@@ -91,7 +107,7 @@ Then the Git provider and Git folder name will be automatically filled.
    
    <br>
    
-9. Click ground-penetrating-radar, docs, Rebar mapping, and notebooks.
+10. Click ground-penetrating-radar, docs, Rebar mapping, and notebooks.
 
 .. image:: _static/db8.png
    :width: 1000
@@ -102,7 +118,7 @@ Then the Git provider and Git folder name will be automatically filled.
    
    <br>
    
-10. Click one of the notebooks, and type in your DOT email address, to specify the directory path.
+11. Click one of the notebooks, and type in your DOT email address, to specify the directory path.
 
 .. image:: _static/db9.png
    :width: 1000
@@ -113,7 +129,7 @@ Then the Git provider and Git folder name will be automatically filled.
    
    <br>
    
-11. Request a computational resource by clicking Connect, and click Run all.
+12. Request a computational resource by clicking Connect, and click Run all.
 
 .. image:: _static/db10.png
    :width: 500

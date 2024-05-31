@@ -113,33 +113,41 @@
 <br><ol class="arabic simple" start="4">
 <li><p>Paste the following address into the “Git repository URL”:</p></li>
 </ol>
-<p><a class="reference external" href="https://github.com/TFHRCFASTNDElab/CHARISMA/">https://github.com/TFHRCFASTNDElab/CHARISMA/</a></p>
+<p><code class="code docutils literal notranslate"><span class="pre">https://github.com/TFHRCFASTNDElab/CHARISMA/</span></code></p>
 <p>Then the Git provider and Git folder name will be automatically filled.</p>
 <a class="reference internal image-reference" href="_images/db4.png"><img alt="3" class="align-center" src="_images/db4.png" style="width: 1000px;" /></a>
 <br><ol class="arabic simple" start="5">
+<li><p>Databricks does not allow Git operations on a GitHub repository larger than 200MB. Therefore, we need to specify only the directories we use. Enable “Sparse checkout mode” and specify the following directories:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>environment
+ground-penetrating-radar
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/db_new.png"><img alt="new" class="align-center" src="_images/db_new.png" style="width: 400px;" /></a>
+<br><ol class="arabic simple" start="6">
 <li><p>Click Create Git folder.</p></li>
 </ol>
-<br><ol class="arabic simple" start="6">
+<br><ol class="arabic simple" start="7">
 <li><p>Click the branch icon with “main”.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db5.png"><img alt="3" class="align-center" src="_images/db5.png" style="width: 300px;" /></a>
-<br><ol class="arabic simple" start="7">
+<br><ol class="arabic simple" start="8">
 <li><p>Click “Branch: main” and change it as DataBricks.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db6.png"><img alt="3" class="align-center" src="_images/db6.png" style="width: 400px;" /></a>
-<br><ol class="arabic simple" start="8">
+<br><ol class="arabic simple" start="9">
 <li><p>Exit the white screen after confirming the branch has set with Databricks.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db7.png"><img alt="3" class="align-center" src="_images/db7.png" style="width: 400px;" /></a>
-<br><ol class="arabic simple" start="9">
+<br><ol class="arabic simple" start="10">
 <li><p>Click ground-penetrating-radar, docs, Rebar mapping, and notebooks.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db8.png"><img alt="3" class="align-center" src="_images/db8.png" style="width: 1000px;" /></a>
-<br><ol class="arabic simple" start="10">
+<br><ol class="arabic simple" start="11">
 <li><p>Click one of the notebooks, and type in your DOT email address, to specify the directory path.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db9.png"><img alt="3" class="align-center" src="_images/db9.png" style="width: 1000px;" /></a>
-<br><ol class="arabic simple" start="11">
+<br><ol class="arabic simple" start="12">
 <li><p>Request a computational resource by clicking Connect, and click Run all.</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/db10.png"><img alt="3" class="align-center" src="_images/db10.png" style="width: 500px;" /></a>
