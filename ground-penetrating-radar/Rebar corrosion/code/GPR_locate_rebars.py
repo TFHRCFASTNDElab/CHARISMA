@@ -2,6 +2,7 @@ import sys
 import math
 import pandas as pd
 import numpy as np
+import segyio
 from sklearn.preprocessing import minmax_scale
 from scipy.signal import find_peaks
 from scipy.ndimage import uniform_filter1d
@@ -114,6 +115,49 @@ def readdzt(filename, minheadsize = 1024, infoareasize = 128):
     df2 = df2.transpose()
     
     return df1, df2
+
+def readsegy(segyfile):
+    '''
+    Reads SEG-Y files and returns Pandas dataframe.
+    We use segyio package to open the data: https://github.com/equinor/segyio 
+    - filename : SEG-Y file name including path.
+
+    Returns:
+    - df1 : GPR data
+    - df2 : Header data
+    - twt : two-way travel time axis (Y axis of B-scan)
+
+    '''
+    with segyio.open(segyfile, ignore_geometry=True) as f:
+        # Get basic attributes
+        n_traces = f.tracecount
+        sample_rate = segyio.tools.dt(f) / 1000
+        n_samples = f.samples.size
+        twt = f.samples
+        data = f.trace.raw[:]  # Get all data into memory (could cause on big files)
+        # Load headers
+        bin_headers = f.bin
+    print(f'N Traces: {n_traces}, N Samples: {n_samples}, dt: {sample_rate} ns')
+    df1 = pd.DataFrame(data.T)
+    df2 = pd.DataFrame.from_dict(bin_headers, orient='index', columns=['Value'])
+    
+    return df1, df2, twt
+
+def readsegy_geometry_csv(csvfile):
+    '''
+    Reads CSV files followed by SEG-Y files and returns Pandas dataframe.
+    The CSV file includes geometrical GPR scanning space information.
+    - csvfile : CSV file name including path.
+
+    Returns:
+    - df_geometry : geometry data
+    '''
+    
+    try:
+        df_geometry = pd.read_csv(csvfile, encoding='utf-8', sep='\t')
+    except UnicodeDecodeError:
+        df_geometry = pd.read_csv(csvfile, encoding='utf-16', sep='\t')
+    return df_geometry
 
 def save_to_csv(dataframe, directory, filename, include_index=False, include_header=False):
     '''
@@ -473,83 +517,6 @@ def FK_migration(data, rhf_spm, rhf_sps, rhf_range, rh_nsamp, rhf_espr):
     profilePos = migProfilePos + profilePos[0]
     
     return migrated_data, profilePos, dt, dx, velocity
-
-
-def Locate_rebar(migrated_data, rhf_depth, rh_nsamp, profilePos, amplitude_threshold = 0.70, depth_threshold = 0.15, num_clusters = 14, random_state = 42, midpoint_factor=0.4):
-    '''
-    Locates rebar positions in migrated data based on specified parameters. (Old version)
-
-    Parameters:
-    - migrated_data: Input DataFrame containing migrated data.
-    - rhf_depth: Depth (m).
-    - rh_nsamp: The number of rows in the DataFrame.
-    - amplitude_threshold: Threshold for rebar amplitude detection (Gets more points when the value is low and vice versa).
-    - depth_threshold: Threshold to skip the 1st positive and negative peak (Plot the migrated result first, and determine the value).
-    - num_clusters: Number of clusters for k-means clustering (Count the white spots in the migrated plot, and put that number here).
-    - random_state: Random seed for reproducibility in clustering (default is 42).
-    - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa).
-
-    Returns:
-    - rebar_positions: DataFrame containing the detected rebar positions.
-
-    '''
-
-    fig, ax = plt.subplots(figsize=(15, 2))
-
-    # Calculate depth per point and depth axis in inches
-    depth_per_point = rhf_depth / rh_nsamp
-    depth_axis = np.linspace(0, depth_per_point * len(migrated_data) * 39.37, len(migrated_data))
-    
-    # Convert survey line axis to inches
-    survey_line_axis = profilePos * 39.37
-    
-    vmin, vmax = migrated_data.min(), migrated_data.max()
-    
-    # Calculate the midpoint based on the provided factor
-    midpoint = vmin + (vmax - vmin) * midpoint_factor
-    
-    cmap = plt.cm.gray
-    norm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=midpoint, vmax=vmax)
-    
-    heatmap = ax.imshow(migrated_data, cmap='Greys_r', extent=[survey_line_axis.min(), survey_line_axis.max(), depth_axis.max(), depth_axis.min()], norm=norm)
-
-    # Add a colorbar
-    cbar = plt.colorbar(heatmap, ax=ax)
-    
-    # Normalize the data
-    normalized_migrated_data = minmax_scale(migrated_data, feature_range=(-1, 1))
-    
-    # Create meshgrid of indices
-    x_indices, y_indices = np.meshgrid(np.arange(normalized_migrated_data.shape[1]), np.arange(normalized_migrated_data.shape[0]))
-    
-    # Highlight data points with values higher than threshold
-    threshold = amplitude_threshold  
-    # Skip the first positive peak based on the depth threshold you defined
-    threshold_index = int(depth_threshold * normalized_migrated_data.shape[0]) 
-    highlighted_points = np.column_stack((x_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)],
-                                          y_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)]))
-    
-    # Use KMeans clustering to identify representative points
-    num_clusters = num_clusters  
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit(highlighted_points)
-    
-    # Get the cluster centers
-    cluster_centers_m = kmeans.cluster_centers_
-    
-    # Convert cluster centers to inches
-    cluster_centers_inches_m = np.column_stack((cluster_centers_m[:, 0] * survey_line_axis.max() / normalized_migrated_data.shape[1],
-                                              cluster_centers_m[:, 1] * depth_axis.max() / normalized_migrated_data.shape[0]))
-    
-    # Overlay scatter points at cluster centers
-    scatter = ax.scatter(cluster_centers_inches_m[:, 0], cluster_centers_inches_m[:, 1],
-                         c='red', marker='o', s=50, edgecolors='black')
-    
-    # Set labels for axes
-    ax.set_xlabel('GPR Survey line (inch)')
-    ax.set_ylabel('Depth (inch)')
-    
-    # Show the plot
-    return plt.show()
 
 def custom_minmax_scale(data, new_min, new_max):
     '''

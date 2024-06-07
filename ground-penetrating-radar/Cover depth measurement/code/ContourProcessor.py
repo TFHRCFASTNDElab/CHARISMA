@@ -96,7 +96,7 @@ class ContourProcessor:
         im3.set_clim(vmin=z_min, vmax=z_max)
         im4.set_clim(vmin=z_min, vmax=z_max)
 
-        ticks = np.linspace(z_min, z_max, 6, endpoint=True)
+        ticks = np.linspace(z_min, z_max, 7, endpoint=True)
         ticks = np.around(ticks, decimals=2)
         ticks[-1]-=0.01
         ticks[0]+=0.01
@@ -171,7 +171,7 @@ class ContourProcessor:
         # Create a colorbar with adjusted size and position
         z_min = np.nanmin(result_interp_fine)
         z_max = np.nanmax(result_interp_fine)
-        ticks = np.linspace(z_min, z_max, 6, endpoint=True)
+        ticks = np.linspace(z_min, z_max, 7, endpoint=True)
         ticks = np.around(ticks, decimals=2)
         ticks[-1]-=0.01
         ticks[0]+=0.01

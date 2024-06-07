@@ -2,9 +2,11 @@ import sys
 import math
 import pandas as pd
 import numpy as np
+import segyio
 from sklearn.preprocessing import minmax_scale
 from scipy.signal import find_peaks
 from scipy.ndimage import uniform_filter1d
+from scipy.interpolate import interp2d
 from scipy.constants import c as c
 import struct
 sys.path.append('C:/directory/path/downloaded_py_files/')
@@ -114,6 +116,49 @@ def readdzt(filename, minheadsize = 1024, infoareasize = 128):
     
     return df1, df2
 
+def readsegy(segyfile):
+    '''
+    Reads SEG-Y files and returns Pandas dataframe.
+    We use segyio package to open the data: https://github.com/equinor/segyio 
+    - filename : SEG-Y file name including path.
+
+    Returns:
+    - df1 : GPR data
+    - df2 : Header data
+    - twt : two-way travel time axis (Y axis of B-scan)
+
+    '''
+    with segyio.open(segyfile, ignore_geometry=True) as f:
+        # Get basic attributes
+        n_traces = f.tracecount
+        sample_rate = segyio.tools.dt(f) / 1000
+        n_samples = f.samples.size
+        twt = f.samples
+        data = f.trace.raw[:]  # Get all data into memory (could cause on big files)
+        # Load headers
+        bin_headers = f.bin
+    print(f'N Traces: {n_traces}, N Samples: {n_samples}, dt: {sample_rate} ns')
+    df1 = pd.DataFrame(data.T)
+    df2 = pd.DataFrame.from_dict(bin_headers, orient='index', columns=['Value'])
+    
+    return df1, df2, twt
+
+def readsegy_geometry_csv(csvfile):
+    '''
+    Reads CSV files followed by SEG-Y files and returns Pandas dataframe.
+    The CSV file includes geometrical GPR scanning space information.
+    - csvfile : CSV file name including path.
+
+    Returns:
+    - df_geometry : geometry data
+    '''
+    
+    try:
+        df_geometry = pd.read_csv(csvfile, encoding='utf-8', sep='\t')
+    except UnicodeDecodeError:
+        df_geometry = pd.read_csv(csvfile, encoding='utf-16', sep='\t')
+    return df_geometry
+
 def save_to_csv(dataframe, directory, filename, include_index=False, include_header=False):
     '''
     Saves the Pandas dataframe (df1 or df2) from the readdzt function into CSV format.
@@ -173,7 +218,7 @@ def config_to_variable(df):
     # Allocate variables for config dataframe (df)
     for variable_name, variable_value in df.iterrows():
         # Store the variable in the dictionary
-        variables_dict[variable_name] = variable_value[0]
+        variables_dict[variable_name] = variable_value.iloc[0]
     
     # Adjust the wave traveling time as 0 to value (sometimes position has negative value)
     if 'rhf_position' in variables_dict and variables_dict['rhf_position'] != 0:
@@ -473,83 +518,6 @@ def FK_migration(data, rhf_spm, rhf_sps, rhf_range, rh_nsamp, rhf_espr):
     
     return migrated_data, profilePos, dt, dx, velocity
 
-
-def Locate_rebar(migrated_data, rhf_depth, rh_nsamp, profilePos, amplitude_threshold = 0.70, depth_threshold = 0.15, num_clusters = 14, random_state = 42, midpoint_factor=0.4):
-    '''
-    Locates rebar positions in migrated data based on specified parameters. (Old version)
-
-    Parameters:
-    - migrated_data: Input DataFrame containing migrated data.
-    - rhf_depth: Depth (m).
-    - rh_nsamp: The number of rows in the DataFrame.
-    - amplitude_threshold: Threshold for rebar amplitude detection (Gets more points when the value is low and vice versa).
-    - depth_threshold: Threshold to skip the 1st positive and negative peak (Plot the migrated result first, and determine the value).
-    - num_clusters: Number of clusters for k-means clustering (Count the white spots in the migrated plot, and put that number here).
-    - random_state: Random seed for reproducibility in clustering (default is 42).
-    - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa).
-
-    Returns:
-    - rebar_positions: DataFrame containing the detected rebar positions.
-
-    '''
-
-    fig, ax = plt.subplots(figsize=(15, 2))
-
-    # Calculate depth per point and depth axis in inches
-    depth_per_point = rhf_depth / rh_nsamp
-    depth_axis = np.linspace(0, depth_per_point * len(migrated_data) * 39.37, len(migrated_data))
-    
-    # Convert survey line axis to inches
-    survey_line_axis = profilePos * 39.37
-    
-    vmin, vmax = migrated_data.min(), migrated_data.max()
-    
-    # Calculate the midpoint based on the provided factor
-    midpoint = vmin + (vmax - vmin) * midpoint_factor
-    
-    cmap = plt.cm.gray
-    norm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=midpoint, vmax=vmax)
-    
-    heatmap = ax.imshow(migrated_data, cmap='Greys_r', extent=[survey_line_axis.min(), survey_line_axis.max(), depth_axis.max(), depth_axis.min()], norm=norm)
-
-    # Add a colorbar
-    cbar = plt.colorbar(heatmap, ax=ax)
-    
-    # Normalize the data
-    normalized_migrated_data = minmax_scale(migrated_data, feature_range=(-1, 1))
-    
-    # Create meshgrid of indices
-    x_indices, y_indices = np.meshgrid(np.arange(normalized_migrated_data.shape[1]), np.arange(normalized_migrated_data.shape[0]))
-    
-    # Highlight data points with values higher than threshold
-    threshold = amplitude_threshold  
-    # Skip the first positive peak based on the depth threshold you defined
-    threshold_index = int(depth_threshold * normalized_migrated_data.shape[0]) 
-    highlighted_points = np.column_stack((x_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)],
-                                          y_indices[(normalized_migrated_data > threshold) & (y_indices > threshold_index)]))
-    
-    # Use KMeans clustering to identify representative points
-    num_clusters = num_clusters  
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit(highlighted_points)
-    
-    # Get the cluster centers
-    cluster_centers_m = kmeans.cluster_centers_
-    
-    # Convert cluster centers to inches
-    cluster_centers_inches_m = np.column_stack((cluster_centers_m[:, 0] * survey_line_axis.max() / normalized_migrated_data.shape[1],
-                                              cluster_centers_m[:, 1] * depth_axis.max() / normalized_migrated_data.shape[0]))
-    
-    # Overlay scatter points at cluster centers
-    scatter = ax.scatter(cluster_centers_inches_m[:, 0], cluster_centers_inches_m[:, 1],
-                         c='red', marker='o', s=50, edgecolors='black')
-    
-    # Set labels for axes
-    ax.set_xlabel('GPR Survey line (inch)')
-    ax.set_ylabel('Depth (inch)')
-    
-    # Show the plot
-    return plt.show()
-
 def custom_minmax_scale(data, new_min, new_max):
     '''
     Custom minmax scale function without losing resolution. GPR B-scan amplitude resolution goes bad with scikit-learn minmax scale. 
@@ -572,7 +540,7 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
                              minimal_y_index=10, num_clusters=50, random_state=42, 
                              redundancy_filter=0.6):
     '''
-    Locates rebar positions in migrated data based on specified parameters.
+    Locates rebar positions in migrated data based on specified parameters. Converts the GPR B-scan dimensions in inches.
 
     Parameters:
     - migrated_data: migrated GPR B-scan numpy array .
@@ -664,3 +632,111 @@ def locate_rebar_consecutive(migrated_data, velocity, rhf_range, rh_nsamp, profi
     ax.tick_params(axis='both', which='major', labelsize=16)  # Adjust the font size as needed
     plt.show()
     return cluster_centers_inches_m
+
+def locate_rebar_consecutive_discrete(migrated_data, velocity, rhf_range, rh_nsamp, profilePos, 
+                             vmin=0.15, vmax=0.7, amplitude_threshold=0.55, depth_threshold=8, 
+                             minimal_y_index=10, num_clusters=50, random_state=42, 
+                             redundancy_filter=0.6):
+    '''
+    Locates rebar positions in migrated data based on specified parameters. This function does not convert the dimensions into inch.
+
+    Parameters:
+    - migrated_data: migrated GPR B-scan numpy array .
+    - velocity: The wave speed in the media. (c)/math.sqrt(rhf_espr) * 1e-9 m/ns
+    - rhf_range: The time it takes for the radar signals to travel to the subsurface and return (ns).
+    - rh_nsamp: The number of rows in the GPR B-scan.
+    - profilePos: x axis (survey line axis) after migration.
+    - vmin, vmax: The parameter used in visualizing B-scans. Controls B-scan amplitude contrast ranges. 
+    - amplitude_threshold: Threshold for rebar amplitude detection.
+    - depth_threshold: The maximum depth of the bridge in inches.
+    - minimal_y_index: The initial y-axis index of the B-scan to skip the 1st positive peak from the rebar counting.
+    - num_clusters: Number of clusters for k-means clustering (Count the white spots in the migrated plot, and put that number here).
+    - random_state: Random seed for reproducibility in clustering (default is 42).
+    - midpoint_factor: Controls the contrast of the plot. (Higher value outputs more darker plot and vice versa).
+
+    Returns:
+    - figure: Scatter rebar points on the migrated B-scan.
+
+    '''
+    if rh_nsamp != len(migrated_data):
+        raise ValueError("Length of migrated_data should be equal to rh_nsamp")
+    
+    depth = (velocity/2) * rhf_range # one way travel (m)
+    depth_per_point = depth / rh_nsamp # (m)
+    depth_per_point_inch =  depth_per_point * 39.37  #(inch)
+
+    new_min = 0
+    new_max = 1
+
+    # Normalize the data
+    normalized_migrated_data = custom_minmax_scale(migrated_data, new_min, new_max)
+
+    # Create meshgrid of indices
+    x_indices, y_indices = np.meshgrid(np.arange(normalized_migrated_data.shape[1]), np.arange(normalized_migrated_data.shape[0]))
+    threshold = amplitude_threshold  # Adjust this threshold based on your data
+    bridge_depth = int((depth_threshold / depth_per_point_inch))
+    highlighted_points = np.column_stack((x_indices[(normalized_migrated_data > threshold) & (y_indices < bridge_depth) & (y_indices > minimal_y_index)],
+                                          y_indices[(normalized_migrated_data > threshold) & (y_indices < bridge_depth) & (y_indices > minimal_y_index)]))
+
+    # Use KMeans clustering to identify representative points
+    num_clusters = num_clusters
+    kmeans = KMeans(n_clusters=num_clusters, random_state=random_state).fit(highlighted_points)
+
+    # Get the cluster centers
+    cluster_centers_m = kmeans.cluster_centers_
+
+    # Convert cluster centers to inches
+    cluster_centers_m = np.column_stack((cluster_centers_m[:, 0],
+                                                cluster_centers_m[:, 1]))
+    cluster_centers_m = cluster_centers_m[np.argsort(cluster_centers_m[:, 0])]
+    
+    # Initialize lists
+    filtered_cluster_centers = []
+    temp_list = []
+    
+    interp_func = interp2d(range(normalized_migrated_data.shape[1]), 
+                       range(normalized_migrated_data.shape[0]), 
+                       normalized_migrated_data)
+    
+    # Iterate over the sorted cluster centers
+    for i, (x, y) in enumerate(cluster_centers_m):
+        if i == 0:
+            # Always add the first point
+            temp_list.append((x, y))
+            continue
+
+        # Compare current point with the last point in the temp_list
+        last_x, last_y = temp_list[-1]
+
+        if x - last_x > redundancy_filter:
+            # If the current point is beyond the threshold
+            if filtered_cluster_centers:
+                last_filtered_x, last_filtered_y = filtered_cluster_centers[-1]
+            else:
+                last_filtered_x, last_filtered_y = last_x, last_y
+    
+            # Find the point with the maximum amplitude
+            existing_amplitudes = [interp_func(pt[1], pt[0])[0] for pt in temp_list]
+            max_amplitude_point = temp_list[np.argmax(existing_amplitudes)]
+            filtered_cluster_centers.append(max_amplitude_point)
+            
+            # Clear temp_list and add the current point
+            temp_list = [(x, y)]
+        else:
+            # If within the threshold, add to temp_list
+            temp_list.append((x, y))
+
+    # Add the last point from temp_list to filtered_cluster_centers
+    if temp_list:
+        if filtered_cluster_centers:
+            last_filtered_x, last_filtered_y = filtered_cluster_centers[-1]
+        else:
+            last_filtered_x, last_filtered_y = temp_list[-1]
+
+        closest_point = min(temp_list, key=lambda pt: abs(pt[1] - last_filtered_y))
+        filtered_cluster_centers.append(closest_point)
+
+    # Convert back to numpy array 
+    filtered_cluster_centers = np.array(filtered_cluster_centers)
+
+    return filtered_cluster_centers
