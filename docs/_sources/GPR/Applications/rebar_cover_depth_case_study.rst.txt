@@ -77,7 +77,7 @@ Once we have obtained the rebar points from all regions, CHARISMA generates the 
 
 .. image:: ../../_static/GPR_RCD/figure6.png
    :width: 1000
-   :alt: figure 5
+   :alt: figure 6
    :align: center
    
 Figure 6. CHARISMA output: 2D contour plot of rebar cover depth on Mississippi I-10 concrete bridge without interpolating the gap among regions (a), and with interpolating the entire bridge (b). 
@@ -206,9 +206,9 @@ We defined a Python class, name with :code:`RebarCoverDepth`, which requires sev
 
 :code:`depth_threshold`: The maximum depth of the bridge in inches. The signal below this value will not be counted as rebar. For example, if you know the ground truth of the bridge depth, use that value as the parameter.
 
-:code:`minimal_y_index`: The initial y-axis index of the B-scan to skip the 1st positive peak from the rebar counting. We recommend using the value between 10 and 20.
+:code:`minimal_y_index`: The initial y-axis index of the B-scan to skip the 1st positive peak from the rebar counting. We recommend using the value between 10 and 20 (The number is data index, not inch or feet).
 
-:code:`redundancy_filter`: Since we use the K-means clustering algorithm and use sufficient numbers for the num_clusters, there should be some redundant rebar points. This parameter is the criterion for removing the centroid points if they are too close along the x-axis. For example, if the value is 1, we remove adjacent points if the distance between them is shorter than 1 inch along the survey line. If there are redundant points and the depth is different, the code removes the deeper points and remains shallower points.
+:code:`redundancy_filter`: Since we use the K-means clustering algorithm and use sufficient numbers for the num_clusters, there should be some redundant rebar points. This parameter determines the criterion for removing centroid points that are too close along the x-axis. For instance, if the value is 2, we remove adjacent points if the distance between them is less than 2 units along the survey line, measured in data dimensions rather than physical units like inches or feet.
 
 :code:`scaling_factor`: Used for better contrast for B-scans. We recommend using between 0.2 to 0.5. 
 
@@ -267,15 +267,15 @@ The next step involves determining the parameters for identifying rebars. This r
 
     num_clusters = 100,
     
-    amplitude_threshold = 0.52,
+    amplitude_threshold = 0.51,
     
     depth_threshold = 8,
     
     minimal_y_index = 20,
     
-    redundancy_filter = 1.5,
+    redundancy_filter = 2,
     
-    scaling_factor = 0.25
+    scaling_factor = 0.27
 
 .. image:: ../../_static/GPR_RCD/figure11.png
    :width: 1000

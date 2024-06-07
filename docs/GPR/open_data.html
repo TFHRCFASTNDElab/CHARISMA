@@ -58,7 +58,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Ground Penetrating Radar</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Physical_principle.html">Physical Principle</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssi-dzt-format">GSSI DZT format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seg-y-format">SEG-Y format</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Applications/index.html">NDE Applications</a></li>
 </ul>
 </li>
@@ -101,8 +105,17 @@
              
   <section id="open-data">
 <h1>Open Data<a class="headerlink" href="#open-data" title="Link to this heading"></a></h1>
-<p>We provide a Python code to allow users to read GPR data in DZT format. General users cannot read DZT files if they do not have access to specific software, and there is no way to know how the NDE data is processed to get the results. The <code class="code docutils literal notranslate"><span class="pre">readdzt</span></code> function in our Python code <code class="code docutils literal notranslate"><span class="pre">GPR_locate_rebars.py</span></code> is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the <code class="code docutils literal notranslate"><span class="pre">save_to_csv</span></code> function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 <code class="code docutils literal notranslate"><span class="pre">df1</span></code> and DataFrame2 <code class="code docutils literal notranslate"><span class="pre">df2</span></code> from one DZT file. The <code class="code docutils literal notranslate"><span class="pre">df1</span></code> is for collected GPR data and <code class="code docutils literal notranslate"><span class="pre">df2</span></code> is for the configuration settings of GPR.</p>
+<p>CHARISMA converts proprietary GPR data format into user-friendly CSV files. General users cannot read the GPR data if they do not have access to specific software, and there is no way to understand how the NDE data is processed to get the results. We provide Python code for reading GPR data, specifically from two major GPR vendors, GSSI and Proceq. By sharing our algorithm, we aim to help the community understand and communicate more effectively, ultimately contributing to the standardization of this technique.</p>
+<section id="gssi-dzt-format">
+<h2>GSSI DZT format<a class="headerlink" href="#gssi-dzt-format" title="Link to this heading"></a></h2>
+<p>We provide a Python code to allow users to read GPR data in DZT format. The <code class="code docutils literal notranslate"><span class="pre">readdzt</span></code> function in our Python code <code class="code docutils literal notranslate"><span class="pre">GPR_locate_rebars.py</span></code> is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the <code class="code docutils literal notranslate"><span class="pre">save_to_csv</span></code> function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 <code class="code docutils literal notranslate"><span class="pre">df1</span></code> and DataFrame2 <code class="code docutils literal notranslate"><span class="pre">df2</span></code> from one DZT file. The <code class="code docutils literal notranslate"><span class="pre">df1</span></code> is for collected GPR data and <code class="code docutils literal notranslate"><span class="pre">df2</span></code> is for the configuration settings of GPR.</p>
+</section>
+<section id="seg-y-format">
+<h2>SEG-Y format<a class="headerlink" href="#seg-y-format" title="Link to this heading"></a></h2>
+<p>SEG-Y file format is a data standard created by the Society of Exploration Geophysicists (SEG) for sharing geophysical data. We use segyio package to open and read the SEG-Y format (<a class="reference external" href="https://github.com/equinor/segyio">https://github.com/equinor/segyio</a>). In general, Proceq GPR exports multiple SEG-Y data files along with a CSV file. The CSV file contains geometrical information (coordinates x and y of the scanning area) and other important parameters, such as scans-per-meter. The SEG-Y files contain the actual GPR B-scans and their data headers.</p>
+<p>To read this data, we use two functions defined in <code class="code docutils literal notranslate"><span class="pre">GPR_locate_rebars.py</span></code>: <code class="code docutils literal notranslate"><span class="pre">readsegy</span></code> and <code class="code docutils literal notranslate"><span class="pre">readsegy_geometry_csv</span></code>. These functions load the data into Pandas data frames: <code class="code docutils literal notranslate"><span class="pre">df1</span></code> (B-scans), <code class="code docutils literal notranslate"><span class="pre">df2</span></code> (headers), and <code class="code docutils literal notranslate"><span class="pre">df_geometry</span></code> (geometry). We then save these data frames as CSV files for further processing.</p>
 <a class="reference internal image-reference" href="../_images/gprdataconversion.png"><img alt="gprconv" class="align-center" src="../_images/gprdataconversion.png" style="width: 1000px;" /></a>
+</section>
 </section>
 
 

@@ -1,10 +1,23 @@
 Open Data
+=======================================
+
+CHARISMA converts proprietary GPR data format into user-friendly CSV files. General users cannot read the GPR data if they do not have access to specific software, and there is no way to understand how the NDE data is processed to get the results. We provide Python code for reading GPR data, specifically from two major GPR vendors, GSSI and Proceq. By sharing our algorithm, we aim to help the community understand and communicate more effectively, ultimately contributing to the standardization of this technique.
+ 
+
+GSSI DZT format
 -----------------------
 
-We provide a Python code to allow users to read GPR data in DZT format. General users cannot read DZT files if they do not have access to specific software, and there is no way to know how the NDE data is processed to get the results. The :code:`readdzt` function in our Python code :code:`GPR_locate_rebars.py` is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the :code:`save_to_csv` function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 :code:`df1` and DataFrame2 :code:`df2` from one DZT file. The :code:`df1` is for collected GPR data and :code:`df2` is for the configuration settings of GPR.
+We provide a Python code to allow users to read GPR data in DZT format. The :code:`readdzt` function in our Python code :code:`GPR_locate_rebars.py` is in charge of opening, reading, and configuring the DZT data into the Pandas DataFrame, and the :code:`save_to_csv` function exports the DataFrame into CSV format. Here the readers need to define the directory path individually to save the CSV files in your storage system. Here we are saving two CSV files for DataFrame1 :code:`df1` and DataFrame2 :code:`df2` from one DZT file. The :code:`df1` is for collected GPR data and :code:`df2` is for the configuration settings of GPR.
+
+   
+SEG-Y format
+-----------------------
+
+SEG-Y file format is a data standard created by the Society of Exploration Geophysicists (SEG) for sharing geophysical data. We use segyio package to open and read the SEG-Y format (https://github.com/equinor/segyio). In general, Proceq GPR exports multiple SEG-Y data files along with a CSV file. The CSV file contains geometrical information (coordinates x and y of the scanning area) and other important parameters, such as scans-per-meter. The SEG-Y files contain the actual GPR B-scans and their data headers.
+
+To read this data, we use two functions defined in :code:`GPR_locate_rebars.py`: :code:`readsegy` and :code:`readsegy_geometry_csv`. These functions load the data into Pandas data frames: :code:`df1` (B-scans), :code:`df2` (headers), and :code:`df_geometry` (geometry). We then save these data frames as CSV files for further processing.
 
 .. image:: ../_static/gprdataconversion.png
    :width: 1000
    :alt: gprconv
    :align: center
-   
