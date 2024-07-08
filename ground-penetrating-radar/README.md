@@ -7,7 +7,7 @@
 
 	Cover depth measurement
 
-	Rebar corrosion (Will be updated soon)
+	Rebar corrosion
 
 	Pavement thickness measurement
 
