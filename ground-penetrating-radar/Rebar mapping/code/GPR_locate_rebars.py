@@ -349,28 +349,28 @@ def dewow(df):
 
     return dewowed_df
 
-def bgr(ar, win=0):
+def bgr(data, win=0):
     '''
     Horizontal background removal. It uses the moving average method to cancel out continuous horizontal signal along size of the window. 
     
     Parameters:
-    - ar: GPR B-scan Pandas dataframe.
+    - data: GPR B-scan Pandas dataframe.
     - win: window for uniform_filter1d.
     
     Returns:
-    - ar_copy: Dataframe after background removal.
+    - data_copy: Dataframe after background removal.
     '''
     # Make a copy of the input array
-    ar_copy = ar.copy()
+    data_copy = data.copy()
 
     window = int(win)
 
     # Perform background removal on the copied array
-    ar_copy -= uniform_filter1d(ar_copy, size=window, mode='nearest')
+    data_copy -= uniform_filter1d(data_copy, size=window, mode='nearest')
 
     # Return the modified copy
-    return ar_copy
-
+    return data_copy
+    
 def Timezero_mean(df_1, rhf_position, rhf_range):
     '''
     Mean time-zero correction.
