@@ -11,7 +11,7 @@ What is CHARISMA-GPR?
 
 CHARISMA-GPR is a Python-based software designed to automatically process Ground Penetrating Radar (GPR) data for transportation asset management. It provides 2-dimensional contour maps required for the bridge inspection and pavement thickness measurement.
 
-The software features a user-friendly Graphic User Interface (GUI) where users can easily input two key items: (i) the directory path of the GPR data and (ii) the GPR scanning configurations. Once the input is provided, CHARISMA-GPR generates results that include both raw data and the intermediate processing steps.
+The software features a user-friendly Graphic User Interface (GUI) where users can easily input two key items: (i) the directory path of the GPR data and (ii) the GPR scanning configurations. Once the input is provided, CHARISMA-GPR outputs the contour maps, along with the raw data and the intermediate processing steps.
 
 Users don’t need to understand the underlying code or have prior knowledge of GPR data processing—simply clicking a button gives asset owners the insights they need to make critical decisions about the maintenance and upkeep of infrastructure. 
 
@@ -22,7 +22,7 @@ How it works?
 
 CHARISMA-GPR creates a 2-dimensional grid space based on the user input and fill up this space with the multiple GPR scans. In our software, you have the flexibility to define the x and y directions of the 2D contour map based on your perspective of the scan area. Since the orientation may vary depending on where you stand, you can choose which direction corresponds to the x and y axes. For example, if you are standing on the north side looking south, you might decide that the x-axis runs west to east, and the y-axis runs north to south. However, if you change your position—say, standing on the south side looking north—your definition of the x and y axes will flip. This shift in perspective can cause confusion if the directionalities aren’t clearly defined based on your view. To avoid this, we’ve made the configuration flexible, allowing you to set the axes according to your unique viewpoint, ensuring a user-friendly experience and enhanced accessibility regardless of your orientation in the field.
 
-After defining these axes, you'll select the scan origin, which is the starting point for filling the grid. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you'll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour map accordingly, ensuring that the output matches your defined setup and perspective.
+After defining these axes, you'll select the scan origin, which is the starting point for the GPR scans. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you'll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour map accordingly, ensuring that the output matches your defined setup and perspective.
 
 Assumptions
 ------------------------------------------
@@ -31,7 +31,7 @@ Assumptions
 
 2.	**Grid Space Assumptions**: The software assumes a rectangular grid layout with linear GPR scans to generate a contour map. It accepts multiple GPR scan files, each representing a linear scan taken at regular intervals. These files fill the grid and create a contour map through interpolation. If the scanning area is not rectangular (e.g., trapezoidal or parallelogram), the contour map may become distorted.
 
-3.	**Single Channel Requirement**: Currently, CHARISMA-GPR does not support multiple-channel DZT files. It only accepts a series of DZT files containing single linear scans. Although DZT files can hold multiple scan lines, only those with one scan per file are accepted.
+3.	**Single Channel Requirement**: Currently, CHARISMA-GPR does not support multiple-channel DZT files. It only accepts a series of DZT files containing single linear scans.
 
 4.	**Rebar Mapping Algorithm**: The software employs the F-K migration algorithm for rebar mapping, which assumes that the dielectric constant of the subsurface materials remains constant throughout the entire area.
 
@@ -56,6 +56,12 @@ https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/C
 3. You will see two screens: one displaying the GUI and the other showing the Python logger.
 
 4. Choose the application you want (Bridge or Pavement).
+
+5. You may want to test out the software with our sample data:
+
+https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/CHARISMA-GPR/data
+
+
 
 Bridge Inspection
 ------------------------------------------------
@@ -124,7 +130,7 @@ Bridge Inspection
        
        <br>   
        
-5. To manually set the dielectric constant, uncheck **Automatic Dielectric Constant Characterization**. The automatic algorithm will still run for reference, but your manual value will be used for data processing.
+5. To manually set the dielectric constant, uncheck **Automatic Dielectric Constant Characterization** and enter your value. The automatic algorithm will still run for the reference, but your manual value will be used for data processing.
 
 6. Choose the scanning space unit: Meters, Inches, or Feet.
 
@@ -216,7 +222,7 @@ Pavement Thickness
 
 5.	Enter the GPR antenna frequency, estimated dielectric constant, and bits per sample according to your GPR settings.
 
-6.	Enter the expected pavement thickness. This value sets the midpoint of the contour colorbar, indicating with some colors if the pavement thickness is above or below your expectations.
+6.	Enter the expected pavement thickness. This value sets the midpoint of the contour colorbar, indicating with some colors if the pavement thickness is above or below your expectations. Note that this value is used only for the colorbar reference, so it will not affect the data processing.
 
 7.	Choose the scanning space unit: Meters, Inches, or Feet.
 

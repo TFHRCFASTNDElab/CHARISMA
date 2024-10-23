@@ -115,21 +115,21 @@
 <section id="what-is-charisma-gpr">
 <h2>What is CHARISMA-GPR?<a class="headerlink" href="#what-is-charisma-gpr" title="Link to this heading"></a></h2>
 <p>CHARISMA-GPR is a Python-based software designed to automatically process Ground Penetrating Radar (GPR) data for transportation asset management. It provides 2-dimensional contour maps required for the bridge inspection and pavement thickness measurement.</p>
-<p>The software features a user-friendly Graphic User Interface (GUI) where users can easily input two key items: (i) the directory path of the GPR data and (ii) the GPR scanning configurations. Once the input is provided, CHARISMA-GPR generates results that include both raw data and the intermediate processing steps.</p>
+<p>The software features a user-friendly Graphic User Interface (GUI) where users can easily input two key items: (i) the directory path of the GPR data and (ii) the GPR scanning configurations. Once the input is provided, CHARISMA-GPR outputs the contour maps, along with the raw data and the intermediate processing steps.</p>
 <p>Users don’t need to understand the underlying code or have prior knowledge of GPR data processing—simply clicking a button gives asset owners the insights they need to make critical decisions about the maintenance and upkeep of infrastructure.</p>
 <p>Each algorithm is validated through lab specimens and testing fields. The research team welcomes the community to use, test, and improve the software through the CHARISMA project. All data and code are available at the GitHub repository of CHARISMA. Future work will expand to other common NDE technologies for highway infrastructure inspection.</p>
 </section>
 <section id="how-it-works">
 <h2>How it works?<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h2>
 <p>CHARISMA-GPR creates a 2-dimensional grid space based on the user input and fill up this space with the multiple GPR scans. In our software, you have the flexibility to define the x and y directions of the 2D contour map based on your perspective of the scan area. Since the orientation may vary depending on where you stand, you can choose which direction corresponds to the x and y axes. For example, if you are standing on the north side looking south, you might decide that the x-axis runs west to east, and the y-axis runs north to south. However, if you change your position—say, standing on the south side looking north—your definition of the x and y axes will flip. This shift in perspective can cause confusion if the directionalities aren’t clearly defined based on your view. To avoid this, we’ve made the configuration flexible, allowing you to set the axes according to your unique viewpoint, ensuring a user-friendly experience and enhanced accessibility regardless of your orientation in the field.</p>
-<p>After defining these axes, you’ll select the scan origin, which is the starting point for filling the grid. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you’ll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour map accordingly, ensuring that the output matches your defined setup and perspective.</p>
+<p>After defining these axes, you’ll select the scan origin, which is the starting point for the GPR scans. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you’ll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour map accordingly, ensuring that the output matches your defined setup and perspective.</p>
 </section>
 <section id="assumptions">
 <h2>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p><strong>File Format Support</strong>: CHARISMA-GPR currently supports only the <code class="code docutils literal notranslate"><span class="pre">.DZT</span></code> file format. Support for other formats, such as <code class="code docutils literal notranslate"><span class="pre">.SGY</span></code> and <code class="code docutils literal notranslate"><span class="pre">.CSV</span></code>, will be added soon.</p></li>
 <li><p><strong>Grid Space Assumptions</strong>: The software assumes a rectangular grid layout with linear GPR scans to generate a contour map. It accepts multiple GPR scan files, each representing a linear scan taken at regular intervals. These files fill the grid and create a contour map through interpolation. If the scanning area is not rectangular (e.g., trapezoidal or parallelogram), the contour map may become distorted.</p></li>
-<li><p><strong>Single Channel Requirement</strong>: Currently, CHARISMA-GPR does not support multiple-channel DZT files. It only accepts a series of DZT files containing single linear scans. Although DZT files can hold multiple scan lines, only those with one scan per file are accepted.</p></li>
+<li><p><strong>Single Channel Requirement</strong>: Currently, CHARISMA-GPR does not support multiple-channel DZT files. It only accepts a series of DZT files containing single linear scans.</p></li>
 <li><p><strong>Rebar Mapping Algorithm</strong>: The software employs the F-K migration algorithm for rebar mapping, which assumes that the dielectric constant of the subsurface materials remains constant throughout the entire area.</p></li>
 </ol>
 </section>
@@ -151,7 +151,9 @@
 <li><p>Unzip the directory and run the <code class="code docutils literal notranslate"><span class="pre">CHARISMA_GPR.exe</span></code> file. (The <code class="code docutils literal notranslate"><span class="pre">_internal</span></code> directory is necessary to run the executable file.)</p></li>
 <li><p>You will see two screens: one displaying the GUI and the other showing the Python logger.</p></li>
 <li><p>Choose the application you want (Bridge or Pavement).</p></li>
+<li><p>You may want to test out the software with our sample data:</p></li>
 </ol>
+<p><a class="reference external" href="https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/CHARISMA-GPR/data">https://github.com/TFHRCFASTNDElab/CHARISMA/tree/main/ground-penetrating-radar/CHARISMA-GPR/data</a></p>
 </section>
 <section id="bridge-inspection">
 <h2>Bridge Inspection<a class="headerlink" href="#bridge-inspection" title="Link to this heading"></a></h2>
@@ -198,7 +200,7 @@
 </figure>
 <br></div></blockquote>
 </li>
-<li><p>To manually set the dielectric constant, uncheck <strong>Automatic Dielectric Constant Characterization</strong>. The automatic algorithm will still run for reference, but your manual value will be used for data processing.</p></li>
+<li><p>To manually set the dielectric constant, uncheck <strong>Automatic Dielectric Constant Characterization</strong> and enter your value. The automatic algorithm will still run for the reference, but your manual value will be used for data processing.</p></li>
 <li><p>Choose the scanning space unit: Meters, Inches, or Feet.</p></li>
 <li><p>Enter the x and y distance values for your scanning area. Imagine the scanned space as a rectangle, with x as the base and y as the height.</p></li>
 <li><p>Select the origin based on the vertex from where you began scanning.</p></li>
@@ -257,7 +259,7 @@
 <br></div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Enter the GPR antenna frequency, estimated dielectric constant, and bits per sample according to your GPR settings.</p></li>
-<li><p>Enter the expected pavement thickness. This value sets the midpoint of the contour colorbar, indicating with some colors if the pavement thickness is above or below your expectations.</p></li>
+<li><p>Enter the expected pavement thickness. This value sets the midpoint of the contour colorbar, indicating with some colors if the pavement thickness is above or below your expectations. Note that this value is used only for the colorbar reference, so it will not affect the data processing.</p></li>
 <li><p>Choose the scanning space unit: Meters, Inches, or Feet.</p></li>
 <li><p>Enter the x and y distance values for your scanning area. Imagine the scanned space as a rectangle, with x as the base and y as the height.</p></li>
 <li><p>Select the origin based on the vertex where you began scanning.</p></li>
