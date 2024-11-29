@@ -121,14 +121,16 @@
 </section>
 <section id="how-it-works">
 <h2>How it works?<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h2>
-<p>CHARISMA-GPR creates a 2-dimensional grid space based on the user input and fill up this space with the multiple GPR scans. In our software, you have the flexibility to define the x and y directions of the 2D contour map based on your perspective of the scan area. Since the orientation may vary depending on where you stand, you can choose which direction corresponds to the x and y axes. For example, if you are standing on the north side looking south, you might decide that the x-axis runs west to east, and the y-axis runs north to south. However, if you change your position—say, standing on the south side looking north—your definition of the x and y axes will flip. This shift in perspective can cause confusion if the directionalities aren’t clearly defined based on your view. To avoid this, we’ve made the configuration flexible, allowing you to set the axes according to your unique viewpoint, ensuring a user-friendly experience and enhanced accessibility regardless of your orientation in the field.</p>
-<p>After defining these axes, you’ll select the scan origin, which is the starting point for the GPR scans. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you’ll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour map accordingly, ensuring that the output matches your defined setup and perspective.</p>
+<p>CHARISMA-GPR assumes a rectangular grid layout with linear GPR scans to generate a contour map. It accepts multiple GPR scan files in one directory, each representing a linear scan taken at regular intervals. These files will be processed to fill the grid space and create a contour map through interpolation.</p>
+<p>We follow standard frameworks developed by ASTM and AASHTO. The data collection methods and device settings are well established in the documents. However, still, there are some unclear or vague statements in the data processing part, that lead to subjective interpretation. To address this, we conducted a comprehensive literature review on GPR data processing and selected only the most widely accepted and commonly used steps. Our software achieves full automation by following the necessary framework (time-zero, background removal, migration, dielectric constant characterization, and rebar mapping). Each step will use a fixed algorithm to output a consistent result.</p>
+<p>CHARISMA-GPR creates a 2-dimensional grid space based on the user input and fills up this space with multiple GPR scans. In our software, you have the flexibility to define the x and y directions of the 2D contour map based on your perspective of the scan area. Since the orientation may vary depending on where you stand, you can choose which direction corresponds to the x and y axes. For example, if you are standing on the north side looking south, you might decide that the x-axis runs west to east, and the y-axis runs north to south. However, if you change your position—say, standing on the south side looking north—your definition of the x and y axes will flip. This shift in perspective can cause confusion if the directionalities aren’t clearly defined based on your view. To avoid this, we’ve made the configuration flexible, allowing you to set the axes according to your unique viewpoint, ensuring a user-friendly experience regardless of your orientation in the field.</p>
+<p>After defining these axes, you’ll select the scan origin, which is the starting point for filling the grid. The origin can be any of the four corners of the rectangular area, depending on your setup. Once the axes and origin are set, you’ll choose the scan direction, which can either follow the x-axis or y-axis. Since there are four possible origins and two scan directions for each, there are eight potential configurations for how the grid is filled. Based on your selections, the software will process the GPR data and generate the 2D contour maps accordingly, ensuring that the output matches your perspective.</p>
 </section>
 <section id="assumptions">
 <h2>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p><strong>File Format Support</strong>: CHARISMA-GPR currently supports only the <code class="code docutils literal notranslate"><span class="pre">.DZT</span></code> file format. Support for other formats, such as <code class="code docutils literal notranslate"><span class="pre">.SGY</span></code> and <code class="code docutils literal notranslate"><span class="pre">.CSV</span></code>, will be added soon.</p></li>
-<li><p><strong>Grid Space Assumptions</strong>: The software assumes a rectangular grid layout with linear GPR scans to generate a contour map. It accepts multiple GPR scan files, each representing a linear scan taken at regular intervals. These files fill the grid and create a contour map through interpolation. If the scanning area is not rectangular (e.g., trapezoidal or parallelogram), the contour map may become distorted.</p></li>
+<li><p><strong>Grid Space Assumptions</strong>: If the scanning area is not rectangular (e.g., trapezoidal or parallelogram), the contour map may show white spaces (no data to interpolate).</p></li>
 <li><p><strong>Single Channel Requirement</strong>: Currently, CHARISMA-GPR does not support multiple-channel DZT files. It only accepts a series of DZT files containing single linear scans.</p></li>
 <li><p><strong>Rebar Mapping Algorithm</strong>: The software employs the F-K migration algorithm for rebar mapping, which assumes that the dielectric constant of the subsurface materials remains constant throughout the entire area.</p></li>
 </ol>
@@ -144,7 +146,7 @@
 <section id="how-to-use">
 <h2>How to use?<a class="headerlink" href="#how-to-use" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>Download the <code class="code docutils literal notranslate"><span class="pre">CHARISMA-GPR.zip</span></code>:</p></li>
+<li><p>Download the <code class="code docutils literal notranslate"><span class="pre">CHARISMA_GPR.zip</span></code>:</p></li>
 </ol>
 <p><a class="reference external" href="https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/CHARISMA-GPR/CHARISMA-GPR.zip">https://github.com/TFHRCFASTNDElab/CHARISMA/blob/main/ground-penetrating-radar/CHARISMA-GPR/CHARISMA-GPR.zip</a></p>
 <ol class="arabic simple" start="2">
@@ -190,12 +192,22 @@
 </figure>
 <br></div></blockquote>
 </li>
-<li><p>A new window for GPR scan configuration settings will open.</p>
+<li><p>Click <strong>Confirm</strong> to finalize the directory selection. A message will confirm the number of files detected.</p>
 <blockquote>
 <div><figure class="align-center" id="id5">
-<a class="reference internal image-reference" href="../_images/Fig5.png"><img alt="figure 5" src="../_images/Fig5.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../_images/Fig7.png"><img alt="figure 5" src="../_images/Fig7.png" style="width: 700px;" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 5: GPR Scan Configuration Settings window</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 5: Final confirmation with the green message that the GPR scan files are detected.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br></div></blockquote>
+</li>
+<li><p>A new window for GPR scan configuration settings will open.</p>
+<blockquote>
+<div><figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/Fig5.png"><img alt="figure 6" src="../_images/Fig5.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 6: GPR Scan Configuration Settings window</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <br></div></blockquote>
@@ -206,22 +218,14 @@
 <li><p>Select the origin based on the vertex from where you began scanning.</p></li>
 <li><p>Choose the scanning direction: either along the x or y axis from your selected origin.</p></li>
 <li><p>Click <strong>Visualize</strong> to verify your scanning configuration. If the schematic is not matching with what you expected, select other configurations and click <strong>Visualize</strong> again.</p>
-<figure class="align-center" id="id6">
-<a class="reference internal image-reference" href="../_images/Fig6.png"><img alt="figure 6" src="../_images/Fig6.png" style="width: 800px;" /></a>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/Fig6.png"><img alt="figure 7" src="../_images/Fig6.png" style="width: 800px;" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 6: Clicking Visualization will show a schematic figure of your GPR scanning configuration.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 7: Clicking Visualization will show a schematic figure of your GPR scanning configuration.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <br></li>
 <li><p>Click <strong>Confirm</strong> to close the GPR Scan Configuration window.</p></li>
-<li><p>Click <strong>Confirm</strong> again to finalize the directory selection. A message will confirm the number of files detected.</p>
-<figure class="align-center" id="id7">
-<a class="reference internal image-reference" href="../_images/Fig7.png"><img alt="figure 7" src="../_images/Fig7.png" style="width: 700px;" /></a>
-<figcaption>
-<p><span class="caption-text">Figure 7: Final confirmation with the green message that the GPR scan files are detected.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<br></li>
 <li><p>The Python logger will display the progress of data processing. Once complete, a new window will appear.</p>
 <figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="../_images/Fig8.png"><img alt="figure 8" src="../_images/Fig8.png" style="width: 700px;" /></a>
@@ -247,6 +251,7 @@
 <li><p>Click <strong>Pavement Thickness</strong> in the GUI.</p></li>
 <li><p>Choose the data format and click <strong>Select Data Directory</strong>.</p></li>
 <li><p>A file browser will appear. Select the directory containing your GPR scan files.</p></li>
+<li><p>Click <strong>Confirm</strong> to finalize the directory selection. A message will confirm the number of detected files.</p></li>
 <li><p>A new window for parameters and GPR scan configuration settings will open.</p></li>
 </ol>
 <blockquote>
@@ -257,7 +262,7 @@
 </figcaption>
 </figure>
 <br></div></blockquote>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple" start="6">
 <li><p>Enter the GPR antenna frequency, estimated dielectric constant, and bits per sample according to your GPR settings.</p></li>
 <li><p>Enter the expected pavement thickness. This value sets the midpoint of the contour colorbar, indicating with some colors if the pavement thickness is above or below your expectations. Note that this value is used only for the colorbar reference, so it will not affect the data processing.</p></li>
 <li><p>Choose the scanning space unit: Meters, Inches, or Feet.</p></li>
@@ -266,7 +271,6 @@
 <li><p>Choose the scanning direction: either along the x or y axis from your selected origin.</p></li>
 <li><p>Click <strong>Visualize</strong> to verify your scanning configuration. If the schematic is not matching with what you expected, select other configurations and click <strong>Visualize</strong> again.</p></li>
 <li><p>Click <strong>Confirm</strong> to close the GPR scanning configuration window.</p></li>
-<li><p>Click <strong>Confirm</strong> again to finalize the directory selection. A message will confirm the number of detected files.</p></li>
 <li><p>The Python logger will display the progress of data processing. Once complete, a new window will appear.</p></li>
 </ol>
 <blockquote>
